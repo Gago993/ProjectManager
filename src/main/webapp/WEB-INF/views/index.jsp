@@ -4,20 +4,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Spring 4 MVC -HelloWorld</title>
-<script type="text/javascript" src="app/scripts/angular.min.js"></script>
 </head>
-<body ng-app="">
-	<center>
-		<h2>Spring - ok</h2>
-		<p>
-			Web Model - ${message}
-		</p>
-		<p>
-		Name: <input ng-model="name"><br />
-        Hello {{name}}!<br /><br />
-        
-        AngularJS - ok
-        </p>
-	</center>
+<body ng-app="projectManagerApp">
+   <div class="container">
+        <!--
+                  ng-view is directive that declares that the element will be
+                  place holder for the partial files included through the router
+               -->
+        <div ng-view></div>
+
+    </div>
+
+<!-- Project StyleSheet -->
+<link rel="stylesheet" href="app/css/bootstrap.min.css"></link>
+<link rel="stylesheet" href="app/css/login.css"></link>
+
+
+
+<!-- AngularJs scripts -->
+<script src="app/components/angular.min.js"></script>
+<script src="app/components/angular-route.min.js"></script>
+<script src="app/components/angular-resource.min.js"></script>
+
+
+
+<!-- The definition and the configuration of the application module -->
+<script src="app/scripts/app.js"></script>
+<script src="app/scripts/router.js"></script>
+
+
+<!-- controllers -->
+<script src="app/scripts/controllers/main.js"></script>
+<script src="app/scripts/controllers/login.js"></script>
+
+<!-- services -->
+<script src="app/scripts/services/services.js"></script>
+
+
+
 </body>
 </html>
+
