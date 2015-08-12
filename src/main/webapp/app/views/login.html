@@ -1,7 +1,6 @@
 	<!-- Login panel -->
 	<div id="login" class="loginpanel" ng-if="showLogin">
 	
-	  <form ng-submit="login()">
 		  <div class="txt">
 		    <input id="user" type="text" placeholder="Username" ng-model="user.username" />
 		    <label for="user" class="entypo-user"></label>
@@ -11,12 +10,11 @@
 		    <label for="pwd" class="entypo-lock"></label>
 		  </div>
 		  <div class="buttons">
-		    <input type="button" value="Login" />
+		    <input type="button" value="Login" ng-click="login()" />
 		    <span>
 		      <a ng-click="showRegister()" class="entypo-user-add register">Register</a>
 		    </span>
 		  </div>
-	  </form>
 	  
 	  <div class="hr">
 	    <div></div>
@@ -33,30 +31,33 @@
 
 	<!-- Register panel -->
 	<div id="register" class="loginpanel" ng-if="!showLogin" >
-	  <form ng-submit="register()">
 		  <div class="txt">
 		    <input id="user" type="text" placeholder="Username" ng-model="newUser.username" />
 		    <label for="user" class="entypo-user"></label>
 		  </div>
 		  <div class="txt">
-		    <input id="user" type="text" placeholder="First Name" ng-model="newUser.firstname" />
-		    <label for="user" class="entypo-user"></label>
+		    <input id="firstname" type="text" placeholder="First Name" ng-model="newUser.firstname" />
+		    <label for="firstname" class="entypo-user"></label>
 		  </div>
 		  <div class="txt">
-		    <input id="user" type="text" placeholder="Username" ng-model="newUser.lastname" />
-		    <label for="user" class="entypo-user"></label>
+		    <input id="lastname" type="text" placeholder="Last Name" ng-model="newUser.lastname" />
+		    <label for="lastname" class="entypo-user"></label>
 		  </div>
 		  <div class="txt">
 		    <input id="pwd" type="password" placeholder="Password" ng-model="newUser.password"/>
 		    <label for="pwd" class="entypo-lock"></label>
 		  </div>
+		  <div class="txt">
+		    <input id="cpwd" type="password" placeholder="Repeat Password" ng-model="repeatPassword"/>
+		    <label for="cpwd" class="entypo-lock"></label>
+		  </div>
+		  
 		  <div class="buttons">
-		    <input type="button" value="Login" />
+		    <input type="button" value="Register" ng-click="register()" />
 		    <span>
 		      <a ng-click="showRegister()"  class="entypo-user-add register">Sign In</a>
 		    </span>
 		  </div>
-	  </form>
 	  
 	  <div class="hr">
 	    <div></div>

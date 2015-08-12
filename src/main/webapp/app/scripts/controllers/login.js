@@ -10,21 +10,31 @@
  * @description # MainCtrl Controller of the avAngularStartupApp
  */
 
-ProjecManagerApp.controller('LoginCtrl', ['$scope',
+ProjecManagerApp.controller('LoginCtrl', ['CompanyData', '$scope',
                                           
-    function ($scope) {
+    function (CompanyData, $scope) {
         console.log("Login Controller reporting for duty.");
-        $scope.awesomeThings = ['HTML5 Boilerplate', 'AngularJS', 'Karma'];
         
-        $scope.showLogin = false;
+        $scope.showLogin = true;
+        $scope.user = {};
+        $scope.newUser = {};
         
         $scope.showRegister = showRegister;
+        $scope.login = login;
+        $scope.register = register;
         
         
         function showRegister(){
         	$scope.showLogin = !$scope.showLogin;
         }
         
+        function login(){
+        	console.log("login",$scope.user);
+        }
+        
+        function register(){
+        	console.log("register",$scope.newUser);
+        }
         
     }]);
 
