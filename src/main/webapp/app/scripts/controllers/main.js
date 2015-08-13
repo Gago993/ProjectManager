@@ -10,11 +10,11 @@
  * @description # MainCtrl Controller of the avAngularStartupApp
  */
 
-ProjecManagerApp.controller('MainCtrl', ['$scope','Service',
-    function ($scope,Service/* $scope, $location, $http */) {
+ProjecManagerApp.controller('MainCtrl', ['$scope',
+    function ($scope) {
         console.log("Main Controller reporting for duty.");
-        $scope.awesomeThings = ['HTML5 Boilerplate', 'AngularJS', 'Karma'];
-        $scope.content = Service.get();
+       
+        
     }]);
 
 

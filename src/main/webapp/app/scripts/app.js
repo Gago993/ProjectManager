@@ -14,5 +14,6 @@
  * @description # avAngularStartupApp Main module of the application.
  */
 var ProjecManagerApp = angular.module('projectManagerApp', 
-		['ngResource','ngRoute','ui.router','angular-md5']);
+		['ngResource','ngRoute','ui.router','angular-md5',
+		 'uiRouterStyles']);
 

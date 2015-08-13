@@ -10,21 +10,45 @@
  *        through the $scope.
  * @see https://docs.angularjs.org/guide/di
  */
-ProjecManagerApp.config([ '$stateProvider', function($stateProvider) {
+ProjecManagerApp.config([ '$stateProvider', '$urlRouterProvider', 
+  function($stateProvider, $urlRouterProvider) {
+	
+	$urlRouterProvider.otherwise("/");
 	
 	$stateProvider
-    .state('loginView', {
-      url: "/",
+    .state('login', {
+      url: "/login",
       templateUrl: "app/views/login.html",
-	  controller: "LoginCtrl"
+	  controller: "LoginCtrl",
+	  data: {
+		  css: "app/css/login.css"
+	  }  
     })
     
-    .state('mainView', {
+    .state('pm', {
+      url: "/",
+      templateUrl: "app/views/index.html",
+      controller: "MainCtrl",
+	  data: {
+		  css: ["app/css/index.css"]
+	  }  
+    })
+    
+    .state('pm.main', {
       url: "/main",
       templateUrl: "app/views/main.html",
       controller: "MainCtrl"
+    })
+    
+    
+	.state('pm.dashboard', {
+      url: "/dashboard",
+      templateUrl: "app/views/dashboard.html",
+      controller: "MainCtrl",
+      data: {
+		  css: ["app/css/dashboard.css"]
+	  }  
     });
-	
 	
 	
 } ]);

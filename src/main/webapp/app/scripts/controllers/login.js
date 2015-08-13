@@ -10,9 +10,9 @@
  * @description # MainCtrl Controller of the avAngularStartupApp
  */
 
-ProjecManagerApp.controller('LoginCtrl', ['$http', '$scope', 'md5',
+ProjecManagerApp.controller('LoginCtrl', ['$http', '$scope', '$state', 'md5',
                                           
-    function ($http, $scope, md5) {
+    function ($http, $scope, $state, md5) {
         console.log("Login Controller reporting for duty.");
         
         $scope.showLogin = true;
@@ -49,6 +49,8 @@ ProjecManagerApp.controller('LoginCtrl', ['$http', '$scope', 'md5',
         	    // this callback will be called asynchronously
         	    // when the response is available
         		  console.log(response);
+        		  $state.go('pm.main');
+        		  
         	  }, function(response) {
         	    // called asynchronously if an error occurs
         	    // or server returns response with an error status.
@@ -57,7 +59,32 @@ ProjecManagerApp.controller('LoginCtrl', ['$http', '$scope', 'md5',
         }
         
         function register(){
+        	$scope.newUser.password = md5.createHash($scope.newUser.password);
         	console.log("register",$scope.newUser);
+        	
+        	var req = {
+        		    method: 'POST',
+        		    url: 'register',
+        		    data: $scope.newUser,
+        		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        		    transformRequest: function(obj) {
+        		      var str = [];
+        		      for(var p in obj)
+        		      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        		      return str.join("&");
+        		    }
+        		  }
+        	$http(req).
+        	  then(function(response) {
+        	    // this callback will be called asynchronously
+        	    // when the response is available
+        		  console.log(response);
+        		  $state.go('pm.main');
+        	  }, function(response) {
+        	    // called asynchronously if an error occurs
+        	    // or server returns response with an error status.
+        		  console.log(response);
+        	  });
         }
         
     }]);

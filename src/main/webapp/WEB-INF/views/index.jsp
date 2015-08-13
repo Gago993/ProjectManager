@@ -17,8 +17,6 @@
 
 <!-- Project StyleSheet -->
 <link rel="stylesheet" href="app/css/bootstrap.min.css"></link>
-<link rel="stylesheet" href="app/css/login.css"></link>
-
 
 
 <!-- AngularJs scripts -->
@@ -27,6 +25,9 @@
 <script src="app/components/angular-resource.min.js"></script>
 <script src="app/components/angular-ui-router.min.js"></script>
 <script src="app/components/angular-md5.min.js"></script>
+<script src="app/components/ui-router-styles.js"></script>
+
+
 
 <!-- The definition and the configuration of the application module -->
 <script src="app/scripts/app.js"></script>
