@@ -10,9 +10,9 @@
  * @description # MainCtrl Controller of the avAngularStartupApp
  */
 
-ProjecManagerApp.controller('LoginCtrl', ['CompanyData', '$scope',
+ProjecManagerApp.controller('LoginCtrl', ['$http', '$scope', 'md5',
                                           
-    function (CompanyData, $scope) {
+    function ($http, $scope, md5) {
         console.log("Login Controller reporting for duty.");
         
         $scope.showLogin = true;
@@ -29,7 +29,31 @@ ProjecManagerApp.controller('LoginCtrl', ['CompanyData', '$scope',
         }
         
         function login(){
+        	$scope.user.password = md5.createHash($scope.user.password);
         	console.log("login",$scope.user);
+        	
+        	 var req = {
+        		    method: 'POST',
+        		    url: 'login',
+        		    data: $scope.user,
+        		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        		    transformRequest: function(obj) {
+        		      var str = [];
+        		      for(var p in obj)
+        		      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        		      return str.join("&");
+        		    }
+        		  }
+        	$http(req).
+        	  then(function(response) {
+        	    // this callback will be called asynchronously
+        	    // when the response is available
+        		  console.log(response);
+        	  }, function(response) {
+        	    // called asynchronously if an error occurs
+        	    // or server returns response with an error status.
+        		  console.log(response);
+        	  });
         }
         
         function register(){

@@ -11,7 +11,7 @@
                   ng-view is directive that declares that the element will be
                   place holder for the partial files included through the router
                -->
-        <div ng-view></div>
+        <div ui-view></div>
 
     </div>
 
@@ -25,8 +25,8 @@
 <script src="app/components/angular.min.js"></script>
 <script src="app/components/angular-route.min.js"></script>
 <script src="app/components/angular-resource.min.js"></script>
-
-
+<script src="app/components/angular-ui-router.min.js"></script>
+<script src="app/components/angular-md5.min.js"></script>
 
 <!-- The definition and the configuration of the application module -->
 <script src="app/scripts/app.js"></script>

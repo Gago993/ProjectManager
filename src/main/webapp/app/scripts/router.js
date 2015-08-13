@@ -10,18 +10,21 @@
  *        through the $scope.
  * @see https://docs.angularjs.org/guide/di
  */
-ProjecManagerApp.config([ '$routeProvider', function($routeProvider) {
-	$routeProvider.when('/', {
-		templateUrl : 'app/views/login.html',
-		controller : 'LoginCtrl'
-	});
-
-	$routeProvider.when('/main', {
-		templateUrl : 'app/views/main.html',
-		controller : 'MainCtrl'
-	});
-
-	$routeProvider.otherwise({
-		redirectTo : '/'
-	});
+ProjecManagerApp.config([ '$stateProvider', function($stateProvider) {
+	
+	$stateProvider
+    .state('loginView', {
+      url: "/",
+      templateUrl: "app/views/login.html",
+	  controller: "LoginCtrl"
+    })
+    
+    .state('mainView', {
+      url: "/main",
+      templateUrl: "app/views/main.html",
+      controller: "MainCtrl"
+    });
+	
+	
+	
 } ]);
