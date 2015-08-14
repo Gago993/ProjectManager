@@ -1,4 +1,4 @@
-package mk.finki.webprogramiranje.projectmanager.service.implementations;
+package mk.finki.webprogramiranje.projectmanager.service.impl;
 
 import mk.finki.webprogramiranje.projectmanager.model.Tag;
 import mk.finki.webprogramiranje.projectmanager.repository.TagRepository;
@@ -9,7 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TagServiceImplementation implements TagService {
+public class TagServiceImpl implements TagService {
 	@Autowired
 	private TagRepository repository;
 
@@ -17,7 +17,15 @@ public class TagServiceImplementation implements TagService {
 		return repository.findAll(new Sort(Sort.Direction.ASC, "id"));
 	}
 	
+	public Iterable<Tag> findAll(Iterable<String> ids) {
+		return repository.findAll(ids);
+	}
+	
 	public Tag findById(String id) {
 		return repository.findOne(id);
+	}
+	
+	public Tag findByName(String name) {
+		return repository.findByName(name);
 	}
 }

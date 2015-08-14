@@ -44,7 +44,7 @@ public class LoginController {
 			session.invalidate();
 			return new ResponseEntity<String>("ok", HttpStatus.OK);
 		}else{
-			return new ResponseEntity<String>("not-logged-in", HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<String>("not-logged-in", HttpStatus.FORBIDDEN);
 		}
 	}
 	

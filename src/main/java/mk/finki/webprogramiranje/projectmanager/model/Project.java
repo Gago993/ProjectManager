@@ -25,7 +25,7 @@ public class Project {
 	private List<CodeSnippet> codeSnippets;
 	private List<Attachment> attachments;
 
-	private List<String> comments;
+	private List<Comment> comments;
 	private List<String> tags;
 	
 	private Long timestamp;
@@ -110,11 +110,11 @@ public class Project {
 		this.attachments = attachments;
 	}
 
-	public List<String> getComments(){
+	public List<Comment> getComments(){
 		return comments;
 	}
 	
-	public void setComments(List<String> comments){
+	public void setComments(List<Comment> comments){
 		this.comments = comments;
 	}
 	
@@ -135,7 +135,7 @@ public class Project {
 	}
 	
 	@PersistenceConstructor
-	public Project(String id, String name, String description, String icon, List<String> managers, List<String> employees, Long dateDue, List<Task> tasks, List<CodeSnippet> codeSnippets, List<Attachment> attachments, List<String> comments, List<String> tags, Long timestamp){
+	public Project(String id, String name, String description, String icon, List<String> managers, List<String> employees, Long dateDue, List<Task> tasks, List<CodeSnippet> codeSnippets, List<Attachment> attachments, List<Comment> comments, List<String> tags, Long timestamp){
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -161,7 +161,7 @@ public class Project {
 		this.tasks = new ArrayList<Task>();
 		this.codeSnippets = new ArrayList<CodeSnippet>();
 		this.attachments = new ArrayList<Attachment>();
-		this.comments = new ArrayList<String>();
+		this.comments = new ArrayList<Comment>();
 		this.tags = new ArrayList<String>();
 		
 		this.timestamp = System.currentTimeMillis() / 1000L;
@@ -183,7 +183,7 @@ class Task {
 	private List<CodeSnippet> codeSnippets;
 	private List<Attachment> attachments;
 	
-	private List<String> comments;
+	private List<Comment> comments;
 	
 	private Boolean finished;
 	
@@ -253,11 +253,11 @@ class Task {
 		this.attachments = attachments;
 	}
 	
-	public List<String> getComments(){
+	public List<Comment> getComments(){
 		return comments;
 	}
 	
-	public void setComments(List<String> comments){
+	public void setComments(List<Comment> comments){
 		this.comments = comments;
 	}
 	
@@ -278,7 +278,7 @@ class Task {
 	}
 	
 	@PersistenceConstructor
-	public Task(String id, String name, String description, List<String> assignedTo, Long dateDue, List<Subtask> subtasks, List<CodeSnippet> codeSnippets, List<Attachment> attachments, List<String> comments, Boolean finished, Long timestamp){
+	public Task(String id, String name, String description, List<String> assignedTo, Long dateDue, List<Subtask> subtasks, List<CodeSnippet> codeSnippets, List<Attachment> attachments, List<Comment> comments, Boolean finished, Long timestamp){
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -300,7 +300,7 @@ class Task {
 		this.subtasks = new ArrayList<Subtask>();
 		this.codeSnippets = new ArrayList<CodeSnippet>();
 		this.attachments = new ArrayList<Attachment>();
-		this.comments = new ArrayList<String>();
+		this.comments = new ArrayList<Comment>();
 		this.finished = false;
 		
 		this.timestamp = System.currentTimeMillis() / 1000L;
@@ -446,5 +446,50 @@ class Attachment extends ProjectResource {
 	
 	public Attachment(String author, String name, String description, String fileLocation){
 		super(author, name, description, fileLocation);
+	}
+}
+
+class Comment {
+	private String author;	//members.id
+	private String body;
+	
+	private Long timestamp;
+	
+	public String getAuthor(){
+		return author;
+	}
+	
+	public void setAuthor(String author){
+		this.author = author;
+	}
+	
+	public String getBody(){
+		return body;
+	}
+	
+	public void setBody(String body){
+		this.body = body;
+	}
+	
+	public Long getTimestamp(){
+		return timestamp;
+	}
+	
+	public void setTimestamp(Long timestamp){
+		this.timestamp = timestamp;
+	}
+	
+	@PersistenceConstructor
+	public Comment(String author, String body, Long timestamp){
+		this.author = author;
+		this.body = body;
+		this.timestamp = timestamp;
+	}
+	
+	public Comment(String author, String body){
+		this.author = author;
+		this.body = body;
+		
+		this.timestamp = System.currentTimeMillis() / 1000L;
 	}
 }

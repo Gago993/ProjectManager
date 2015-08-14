@@ -7,6 +7,8 @@ public interface MemberService {
 	public Member save(Member member);
 
 	public Iterable<Member> findAll();
+	
+	public Iterable<Member> findAll(Iterable<String> ids);
 
 	public Member findById(String id);
 	
