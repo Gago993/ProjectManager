@@ -32,11 +32,13 @@ public class ProjectController {
 		}
 	}
 	
-	@RequestMapping(value="/member/{id}", method=RequestMethod.GET, produces="application/json")
-	public ResponseEntity<List<Project>> getProjectsForMember(@PathVariable String id){
-		List<Project> project = service.findProjectsForMember(id);
-		if(project != null){
-			return new ResponseEntity<List<Project>>(project, HttpStatus.OK);
+	@RequestMapping(value="/member", method=RequestMethod.GET, produces="application/json")
+	public ResponseEntity<List<Project>> getProjectsForMember(HttpSession session){
+		String sessionId = (String)session.getAttribute("id");
+		if(sessionId != null){
+			List<Project> projects = service.findProjectsForMember(sessionId);
+			
+			return new ResponseEntity<List<Project>>(projects, HttpStatus.OK);
 		}else{
 			return new ResponseEntity<List<Project>>(HttpStatus.NOT_FOUND);
 		}
