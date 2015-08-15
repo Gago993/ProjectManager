@@ -1,11 +1,11 @@
 (function () {
     'use strict';
 
-    ProjecManagerApp.factory('CompanyData', CompanyData);
+    ProjecManagerApp.factory('DashboardData', DashboardData);
 
-    CompanyData.$inject= ['$resource'];
+    DashboardData.$inject= ['$resource'];
 
-    function CompanyData($resource) {
+    function DashboardData($resource) {
         return $resource("api do login rest", {}, {
             'update': {
                 method: 'PUT'

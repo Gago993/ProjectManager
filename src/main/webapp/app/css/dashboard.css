@@ -2,7 +2,7 @@
 #projects {
     float: left;
 }
-#create, textarea  {
+#create, .project-content  {
     float:left;
     padding:25px 25px 40px;
     margin:0 20px 20px 0;
@@ -24,13 +24,13 @@
 
 #create:hover { border-color:rgba(0,0,0,0.2); color:rgba(0,0,0,0.2); }
 
-textarea {
+.project-content {
     font:20px 'Gloria Hallelujah', cursive;
     line-height:1.5;
     border:0;
-    border-radius:3px;
+    border-radius: 15px;
     background: linear-gradient(#F9EFAF, #F7E98D);
-    background: -webkit-linear-gradient(#F9EFAF, #F7E98D);
+    background: #dfe2e4;
     box-shadow:0 4px 6px rgba(0,0,0,0.1);
     overflow:hidden;
     transition:box-shadow 0.5s ease;
@@ -39,8 +39,8 @@ textarea {
     max-width:520px;
     max-height:250px;
 }
-textarea:hover { box-shadow:0 5px 8px rgba(0,0,0,0.15); }
-textarea:focus { box-shadow:0 5px 12px rgba(0,0,0,0.2); outline:none; }
+.project-content:hover { box-shadow:0 5px 8px rgba(0,0,0,0.15); }
+.project-content:focus { box-shadow:0 5px 12px rgba(0,0,0,0.2); outline:none; }
 
 .delete-project{
     float: left;
@@ -59,3 +59,13 @@ a.delete-project {
 .clear-both {
     clear: both;
 }
+
+.project-content hr {
+	border-color: blue;
+}
+
+.project-content .project-title {
+	text-align: center;
+}
+
+

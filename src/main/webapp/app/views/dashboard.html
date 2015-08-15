@@ -2,13 +2,19 @@
 
 
 <div id="projects">
-    <div class="project">
-        <textarea >Note</textarea>
+    <div class="project" ng-repeat="pr in projects">
+        <div class="project-content">
+	        <div class="project-title">{{pr.name}}</div>
+	        <hr/>
+	        <span>Members: {{pr.employees.length}}</span>
+	        <br/>
+	        <span>Tasks: {{pr.tasks.length}}</span>
+        </div>
         <a class="delete-project">X</a>
     </div>
     
     
     
-    <div id="create" >+</div>
+    <div id="create" ng-click="createProject()" >+</div>
 
 </div>

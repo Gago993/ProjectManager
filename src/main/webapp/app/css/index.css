@@ -1,6 +1,13 @@
 html, body {
 	background: url(http://subtlepatterns.com/patterns/tweed.png);
+	background-color: #e7e7e7;
 }
+
+.container {
+    max-width: 100%;
+    padding: 0 0 0 0;
+}
+
 
 .logo {
 	width: 50px;
@@ -8,4 +15,10 @@ html, body {
 }
 
 .pm-navigation {
+}
+
+
+.navbar-default {
+    background-color: #1abc9c;
+    border-color: #169f84;
 }

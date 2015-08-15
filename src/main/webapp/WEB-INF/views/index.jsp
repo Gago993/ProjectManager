@@ -35,13 +35,14 @@
 
 
 <!-- controllers -->
-<script src="app/scripts/controllers/main.js"></script>
-<script src="app/scripts/controllers/login.js"></script>
+<script src="app/scripts/controllers/main.controller.js"></script>
+<script src="app/scripts/controllers/login.controller.js"></script>
+<script src="app/scripts/controllers/dashboard.controller.js"></script>
+
 
 <!-- services -->
 <script src="app/scripts/services/services.js"></script>
-<script src="app/scripts/services/login.data.js"></script>
-
+<script src="app/scripts/services/dashboard.data.js"></script>
 
 </body>
 </html>

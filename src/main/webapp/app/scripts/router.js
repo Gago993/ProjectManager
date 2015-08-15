@@ -25,6 +25,16 @@ ProjecManagerApp.config([ '$stateProvider', '$urlRouterProvider',
 	  }  
     })
     
+    .state('test', {
+      url: "/test",
+      templateUrl: "app/views/test.html",
+      controller: "MainCtrl",
+	  data: {
+		  css: ["app/css/test.css"]
+	  }  
+    })
+    
+    
     .state('pm', {
       url: "/",
       templateUrl: "app/views/index.html",
@@ -35,16 +45,16 @@ ProjecManagerApp.config([ '$stateProvider', '$urlRouterProvider',
     })
     
     .state('pm.main', {
-      url: "/main",
+      url: "main",
       templateUrl: "app/views/main.html",
       controller: "MainCtrl"
     })
     
     
 	.state('pm.dashboard', {
-      url: "/dashboard",
+      url: "dashboard",
       templateUrl: "app/views/dashboard.html",
-      controller: "MainCtrl",
+      controller: "DashboardCtrl",
       data: {
 		  css: ["app/css/dashboard.css"]
 	  }  

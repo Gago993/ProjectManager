@@ -5,6 +5,7 @@
 
 <!-- Login panel -->
 <div id="login" class="loginpanel" ng-if="showLogin">
+  <form ng-submit="login()">
 	  <div class="txt">
 	    <input id="user" type="text" placeholder="Email" ng-model="user.email" />
 	    <label for="user" class="entypo-user"></label>
@@ -14,11 +15,12 @@
 	    <label for="pwd" class="entypo-lock"></label>
 	  </div>
 	  <div class="buttons">
-	    <input type="button" value="Login" ng-click="login()" />
+	    <input type="submit" value="Login" />
 	    <span>
 	      <a ng-click="showRegister()" class="entypo-user-add register">Register</a>
 	    </span>
 	  </div>
+  </form>
   <div class="hr">
     <div></div>
     <div>OR</div>
@@ -34,6 +36,7 @@
 
 <!-- Register panel -->
 <div id="register" class="loginpanel" ng-if="!showLogin" >
+	<form ng-submit="register()">
 	  <div class="txt">
 	    <input id="user" type="text" placeholder="Email" ng-model="newUser.email" />
 	    <label for="user" class="entypo-user"></label>
@@ -56,12 +59,12 @@
 	  </div>
 	  
 	  <div class="buttons">
-	    <input type="button" value="Register" ng-click="register()" />
+	    <input type="submit" value="Register" />
 	    <span>
 	      <a ng-click="showRegister()"  class="entypo-user-add register">Sign In</a>
 	    </span>
 	  </div>
-  
+  </form>
   <div class="hr">
     <div></div>
     <div>OR</div>

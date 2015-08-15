@@ -132,7 +132,7 @@ div.loginpanel div.buttons span a {
   line-height: 70px;
   text-align: center;
 }
-div.loginpanel input[type="button"] {
+div.loginpanel input[type="submit"] {
   cursor: pointer;
   color: #FFF;
   text-shadow: 0 1px #27ae60;
@@ -143,12 +143,12 @@ div.loginpanel input[type="button"] {
   background-color: #2ecc71;
   box-shadow: 0 2px #27ae60, inset 0 0 #27ae60;
 }
-div.loginpanel input[type="button"]:hover,
-div.loginpanel input[type="button"]:focus {
+div.loginpanel input[type="submit"]:hover,
+div.loginpanel input[type="submit"]:focus {
   background-color: #29b765;
   box-shadow: 0 2px #229955, inset 0 0 #27ae60;
 }
-div.loginpanel input[type="button"]:active {
+div.loginpanel input[type="submit"]:active {
   box-shadow: 0 0 #229955, inset 0 1px #229955;
 }
 div.loginpanel div.social {
