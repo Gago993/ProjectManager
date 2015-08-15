@@ -1,18 +1,18 @@
-<div id="login-title" class="login-title" >
-	<span>PROJECT MANAGER</span>
-</div>
 
 
 <!-- Login panel -->
 <div id="login" class="loginpanel" ng-if="showLogin">
   <form ng-submit="login()">
-	  <div class="txt">
+  <h1>Project Manager</h1>
+  <br/>
+  <p>Please provide your details</p>
+	  <div class="input-group">
+	  	<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
 	    <input id="user" type="text" placeholder="Email" ng-model="user.email" />
-	    <label for="user" class="entypo-user"></label>
 	  </div>
-	  <div class="txt">
+	  <div class="input-group">
+	    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 	    <input id="pwd" type="password" placeholder="Password" ng-model="user.password"/>
-	    <label for="pwd" class="entypo-lock"></label>
 	  </div>
 	  <div class="buttons">
 	    <input type="submit" value="Login" />
@@ -20,42 +20,35 @@
 	      <a ng-click="showRegister()" class="entypo-user-add register">Register</a>
 	    </span>
 	  </div>
+	  
   </form>
-  <div class="hr">
-    <div></div>
-    <div>OR</div>
-    <div></div>
-  </div>
-  
-  <div class="social">
-    <a href="javascript:void(0)" class="facebook"></a>
-    <a href="javascript:void(0)" class="twitter"></a>
-    <a href="javascript:void(0)" class="googleplus"></a>
-  </div>
 </div>
 
 <!-- Register panel -->
 <div id="register" class="loginpanel" ng-if="!showLogin" >
 	<form ng-submit="register()">
-	  <div class="txt">
-	    <input id="user" type="text" placeholder="Email" ng-model="newUser.email" />
-	    <label for="user" class="entypo-user"></label>
+		<h1>Project Manager</h1>
+	  	<br/>
+	  	<p>Please provide your details</p>
+	  <div class="input-group">
+	  	<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+	    <input type="text" placeholder="Email" ng-model="newUser.email" />
 	  </div>
-	  <div class="txt">
+	  <div class="input-group">
+	    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
 	    <input id="firstname" type="text" placeholder="First Name" ng-model="newUser.firstname" />
-	    <label for="firstname" class="entypo-user"></label>
 	  </div>
-	  <div class="txt">
+	  <div class="input-group">
+		<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
 	    <input id="lastname" type="text" placeholder="Last Name" ng-model="newUser.lastname" />
-	    <label for="lastname" class="entypo-user"></label>
 	  </div>
-	  <div class="txt">
+	  <div class="input-group">
+		<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 	    <input id="pwd" type="password" placeholder="Password" ng-model="newUser.password"/>
-	    <label for="pwd" class="entypo-lock"></label>
 	  </div>
-	  <div class="txt">
+	  <div class="input-group">
+	    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 	    <input id="cpwd" type="password" placeholder="Repeat Password" ng-model="repeatPassword"/>
-	    <label for="cpwd" class="entypo-lock"></label>
 	  </div>
 	  
 	  <div class="buttons">
@@ -65,17 +58,7 @@
 	    </span>
 	  </div>
   </form>
-  <div class="hr">
-    <div></div>
-    <div>OR</div>
-    <div></div>
-  </div>
   
-  <div class="social">
-    <a href="javascript:void(0)" class="facebook"></a>
-    <a href="javascript:void(0)" class="twitter"></a>
-    <a href="javascript:void(0)" class="googleplus"></a>
-  </div>
 </div>
 
 

@@ -21,7 +21,7 @@ ProjecManagerApp.config([ '$stateProvider', '$urlRouterProvider',
       templateUrl: "app/views/login.html",
 	  controller: "LoginCtrl",
 	  data: {
-		  css: "app/css/login.css"
+		  css: ["app/css/login.css"]
 	  }  
     })
     

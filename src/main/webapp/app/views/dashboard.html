@@ -1,16 +1,13 @@
 
 
-
 <div id="projects">
     <div class="project" ng-repeat="pr in projects">
-        <div class="project-content">
-	        <div class="project-title">{{pr.name}}</div>
-	        <hr/>
-	        <span>Members: {{pr.employees.length}}</span>
-	        <br/>
-	        <span>Tasks: {{pr.tasks.length}}</span>
-        </div>
-        <a class="delete-project">X</a>
+	        <div class="panel panel-default project-content">
+			  <div class="panel-body">
+			  		<span>Members: {{pm.emploees.length}}</span>
+			  </div>
+			  <div class="panel-footer">{{pr.name}}</div>
+			</div>
     </div>
     
     
