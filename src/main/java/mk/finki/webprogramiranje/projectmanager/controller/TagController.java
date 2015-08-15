@@ -19,12 +19,12 @@ public class TagController {
 	@Autowired
 	private TagService service;
 	
-	@RequestMapping(value="/", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="", method=RequestMethod.GET)
 	public ResponseEntity<Iterable<Tag>> getAll(){
 		return new ResponseEntity<Iterable<Tag>>(service.findAll(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Tag> get(@PathVariable String id){
 		Tag tag = service.findById(id);
 		if(tag != null){
@@ -34,7 +34,7 @@ public class TagController {
 		}
 	}
 	
-	@RequestMapping(value="/name/{name}", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/name/{name}", method=RequestMethod.GET)
 	public ResponseEntity<Tag> getByName(HttpSession session, @PathVariable String name){
 		Tag tag = service.findByName(name);
 		if(tag != null){

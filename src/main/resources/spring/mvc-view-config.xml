@@ -3,11 +3,14 @@
 	xsi:schemaLocation="
 http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
- 
-	<import resource="mvc-core-config.xml" />
-	
-	<import resource="mvc-view-config.xml" />
-	
-	<import resource="datasource-config.xml" />
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
 	
 </beans>

@@ -1,7 +1,7 @@
 package mk.finki.webprogramiranje.projectmanager.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "tags")
@@ -9,7 +9,9 @@ public class Tag {
 	@Id
 	private String id;
 	
+	@Indexed(unique = true)
 	private String name;
+	
 	private String description;
 
 	public String getId(){
@@ -36,10 +38,8 @@ public class Tag {
 		this.description = description;
 	}
 	
-	@PersistenceConstructor
-	public Tag(String id, String name, String description){
-		this.id = id;
-		this.name = name;
-		this.description = description;
+	public Tag(){
+		this.name = "";
+		this.description = "";
 	}
 }

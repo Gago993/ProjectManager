@@ -3,25 +3,42 @@ package mk.finki.webprogramiranje.projectmanager.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "members")
 public class Member {
 	@Id
+	@NotNull
 	private String id;	//avoid org.bson.types.ObjectId
 	
+	@Indexed(unique = true)
 	private String email;
-	private String password;	//hash
-	private String firstname;
-	private String lastname;
-	private String biography;
-	private String avatar;
 	
+	private String password;	//hash
+	
+	@NotNull
+	private String firstname;
+	
+	@NotNull
+	private String lastname;
+	
+	@NotNull
+	private String biography;
+	
+	@NotNull
+	private String picture;
+	
+	@NotNull
 	private List<Experience> experience;
+	
+	@NotNull
 	private List<String> skills;	//tag names
 	
+	@NotNull
 	private Long timestamp;
 
 	public String getId(){
@@ -48,19 +65,19 @@ public class Member {
 		this.password = password;
 	}
 	
-	public String getFirstName(){
+	public String getFirstname(){
 		return firstname;
 	}
 	
-	public void setFirstName(String firstname){
+	public void setFirstname(String firstname){
 		this.firstname = firstname;
 	}
 	
-	public String getLastName(){
+	public String getLastname(){
 		return lastname;
 	}
 	
-	public void setLastName(String lastname){
+	public void setLastname(String lastname){
 		this.lastname = lastname;
 	}
 	
@@ -72,12 +89,12 @@ public class Member {
 		this.biography = biography;
 	}
 	
-	public String getAvatar(){
-		return avatar;
+	public String getPicture(){
+		return picture;
 	}
 	
-	public void setAvatar(String avatar){
-		this.avatar = avatar;
+	public void setPicture(String picture){
+		this.picture = picture;
 	}
 	
 	public List<Experience> getExperience(){
@@ -104,27 +121,13 @@ public class Member {
 		this.timestamp = timestamp;
 	}
 	
-	@PersistenceConstructor
-	public Member(String id, String email, String password, String firstname, String lastname, String biography, String avatar, List<Experience> experience, List<String> skills, Long timestamp){
-		this.id = id;
-		this.email = email;
-		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.biography = biography;
-		this.avatar = avatar;
-		this.experience = experience;
-		this.skills = skills;
-		this.timestamp = timestamp;
-	}
-	
-	public Member(String email, String password, String firstname, String lastname){
-		this.email = email;
-		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
+	public Member(){
+		this.email = "";
+		this.password = "";
+		this.firstname = "";
+		this.lastname = "";
 		this.biography = "";
-		this.avatar = "";
+		this.picture = "";
 		
 		this.experience = new ArrayList<Experience>();
 		this.skills = new ArrayList<String>();
@@ -134,7 +137,6 @@ public class Member {
 }
 
 class Experience {
-	
 	private String title;
 	private String type;
 	private Long dateFrom;
@@ -178,15 +180,6 @@ class Experience {
 	} 
 	
 	public void setDescription(String description){
-		this.description = description;
-	}
-	
-	@PersistenceConstructor
-	public Experience(String title, String type, Long dateFrom, Long dateTo, String description){
-		this.title = title;
-		this.type = type;
-		this.dateFrom = dateFrom;
-		this.dateTo = dateTo;
 		this.description = description;
 	}
 	

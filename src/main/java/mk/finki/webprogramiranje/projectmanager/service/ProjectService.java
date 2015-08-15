@@ -2,11 +2,15 @@ package mk.finki.webprogramiranje.projectmanager.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import mk.finki.webprogramiranje.projectmanager.model.Project;
 
 public interface ProjectService {
 
 	public Project save(Project project);
+	
+	public boolean saveLogo(Project project, MultipartFile logo);
 
 	public Iterable<Project> findAll();
 	

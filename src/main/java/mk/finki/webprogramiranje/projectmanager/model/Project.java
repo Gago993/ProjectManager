@@ -3,31 +3,50 @@ package mk.finki.webprogramiranje.projectmanager.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "projects")
 public class Project {
 	@Id
+	@NotNull
 	private String id;
 	
+	@NotNull
 	private String name;
-	private String description;
-	private String icon;
 	
+	@NotNull
+	private String description;
+	
+	@NotNull
+	private String logo;
+	
+	@NotNull
 	private List<String> managers;
+	
+	@NotNull
 	private List<String> employees;
 	
 	private Long dateDue;
 	
+	@NotNull
 	private List<Task> tasks;
+	
+	@NotNull
 	private List<CodeSnippet> codeSnippets;
+	
+	@NotNull
 	private List<Attachment> attachments;
 
+	@NotNull
 	private List<Comment> comments;
+	
+	@NotNull
 	private List<String> tags;
 	
+	@NotNull
 	private Long timestamp;
 
 	public String getId(){
@@ -54,12 +73,12 @@ public class Project {
 		this.description = description;
 	}
 	
-	public String getIcon(){
-		return icon;
+	public String getLogo(){
+		return logo;
 	}
 	
-	public void setIcon(String icon){
-		this.icon = icon;
+	public void setLogo(String logo){
+		this.logo = logo;
 	}
 	
 	public List<String> getManagers(){
@@ -134,27 +153,10 @@ public class Project {
 		this.timestamp = timestamp;
 	}
 	
-	@PersistenceConstructor
-	public Project(String id, String name, String description, String icon, List<String> managers, List<String> employees, Long dateDue, List<Task> tasks, List<CodeSnippet> codeSnippets, List<Attachment> attachments, List<Comment> comments, List<String> tags, Long timestamp){
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.icon = icon;
-		this.dateDue = dateDue;
-		this.managers = managers;
-		this.employees = employees;
-		this.tasks = tasks;
-		this.codeSnippets = codeSnippets;
-		this.attachments = attachments;
-		this.comments = comments;
-		this.tags = tags;
-		this.timestamp = timestamp;
-	}
-	
 	public Project(){
 		this.name = "";
 		this.description = "";
-		this.icon = "";
+		this.logo = "";
 		this.managers = new ArrayList<String>();
 		this.employees = new ArrayList<String>();
 		this.dateDue = null;
@@ -169,9 +171,6 @@ public class Project {
 }
 
 class Task {
-	@Id
-	private String id;
-	
 	private String name;
 	private String description;
 	
@@ -188,14 +187,6 @@ class Task {
 	private Boolean finished;
 	
 	private Long timestamp;
-
-	public String getId(){
-		return id;
-	}
-	
-	public void setId(String id){
-		this.id = id;
-	}
 	
 	public String getName(){
 		return name;
@@ -277,21 +268,6 @@ class Task {
 		this.timestamp = timestamp;
 	}
 	
-	@PersistenceConstructor
-	public Task(String id, String name, String description, List<String> assignedTo, Long dateDue, List<Subtask> subtasks, List<CodeSnippet> codeSnippets, List<Attachment> attachments, List<Comment> comments, Boolean finished, Long timestamp){
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.assignedTo = assignedTo;
-		this.dateDue = dateDue;
-		this.subtasks = subtasks;
-		this.codeSnippets = codeSnippets;
-		this.attachments = attachments;
-		this.comments = comments;
-		this.finished = finished;
-		this.timestamp = timestamp;
-	}
-	
 	public Task(){
 		this.name = "";
 		this.description = "";
@@ -342,14 +318,6 @@ class Subtask {
 	}
 	
 	public void setTimestamp(Long timestamp){
-		this.timestamp = timestamp;
-	}
-	
-	@PersistenceConstructor
-	public Subtask(String name, String description, Boolean finished, Long timestamp){
-		this.name = name;
-		this.description = description;
-		this.finished = finished;
 		this.timestamp = timestamp;
 	}
 	
@@ -409,43 +377,27 @@ abstract class ProjectResource {
 		this.timestamp = timestamp;
 	}
 	
-	public ProjectResource(String author, String name, String description, String fileLocation, Long timestamp){
-		this.author = author;
-		this.name = name;
-		this.description = description;
-		this.fileLocation = fileLocation;
-		this.timestamp = timestamp;
-	}
-	
-	public ProjectResource(String author, String name, String description, String fileLocation){
-		this.author = author;
-		this.name = name;
-		this.description = description;
-		this.fileLocation = fileLocation;
+	public ProjectResource(){
+		this.author = "";
+		this.name = "";
+		this.description = "";
+		this.fileLocation = "";
 
 		this.timestamp = System.currentTimeMillis() / 1000L;
 	}
 }
 
 class CodeSnippet extends ProjectResource {
-	@PersistenceConstructor
-	public CodeSnippet(String author, String name, String description, String fileLocation, Long timestamp){
-		super(author, name, description, fileLocation, timestamp);
-	}
 	
-	public CodeSnippet(String author, String name, String description, String fileLocation){
-		super(author, name, description, fileLocation);
+	public CodeSnippet(){
+		super();
 	}
 }
 
 class Attachment extends ProjectResource {
-	@PersistenceConstructor
-	public Attachment(String author, String name, String description, String fileLocation, Long timestamp){
-		super(author, name, description, fileLocation, timestamp);
-	}
-	
-	public Attachment(String author, String name, String description, String fileLocation){
-		super(author, name, description, fileLocation);
+
+	public Attachment(){
+		super();
 	}
 }
 
@@ -479,16 +431,9 @@ class Comment {
 		this.timestamp = timestamp;
 	}
 	
-	@PersistenceConstructor
-	public Comment(String author, String body, Long timestamp){
-		this.author = author;
-		this.body = body;
-		this.timestamp = timestamp;
-	}
-	
-	public Comment(String author, String body){
-		this.author = author;
-		this.body = body;
+	public Comment(){
+		this.author = "";
+		this.body = "";
 		
 		this.timestamp = System.currentTimeMillis() / 1000L;
 	}

@@ -19,9 +19,9 @@ public class LoginController {
 	@Autowired
 	private MemberService service;
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST, headers="content-type=application/x-www-form-urlencoded")
+	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> doLogin(HttpSession session, @RequestParam(name="email", required=true) String email, @RequestParam(name="password", required=true) String password) {
+	public ResponseEntity<String> doLogin(HttpSession session, @RequestParam String email, @RequestParam String password) {
 		//assuming 'password' is password md5 hash (not using https)
 		
 		if(LoginController.isValidEmailAddress(email) && password.length() == 32){
@@ -44,7 +44,7 @@ public class LoginController {
 			session.invalidate();
 			return new ResponseEntity<String>("ok", HttpStatus.OK);
 		}else{
-			return new ResponseEntity<String>("not-logged-in", HttpStatus.FORBIDDEN);
+			return new ResponseEntity<String>("not-logged-in", HttpStatus.UNAUTHORIZED);
 		}
 	}
 	
@@ -54,7 +54,7 @@ public class LoginController {
 	
 	public static void setUpSession(HttpSession session, Member member){
 		session.setAttribute("id", member.getId());
-		session.setAttribute("firstname", member.getFirstName());
-		session.setAttribute("avatar", member.getAvatar());
+		session.setAttribute("firstname", member.getFirstname());
+		session.setAttribute("picture", member.getPicture());
 	}
 }
