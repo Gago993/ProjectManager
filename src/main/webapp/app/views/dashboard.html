@@ -1,17 +1,30 @@
 
 
 <div id="projects">
-    <div class="project" ng-repeat="pr in projects">
+    <div class="project" ng-repeat="pr in projects | filter:search" ng-click="openProject(pr.id)">
 	        <div class="panel panel-default project-content">
 			  <div class="panel-body">
-			  		<span>Members: {{pm.emploees.length}}</span>
+	  			<span>Members: {{pr.managers.length + pr.employees.length}}</span>
+			  	<br />
+			  	<span ng-if="pr.dateDue" >Date Due: {{pr.dateDue | date:"MM/dd/yyyy 'at' h:mma"}}</span>
+				<br />
+			  	<span ng-if="pr.timestamp" >Date Due: {{pr.timestamp | date:"MM/dd/yyyy 'at' h:mma"}}</span>
+			  	<br />
+			  	<span>DESC : {{pr.description}}</span>
+			  
 			  </div>
-			  <div class="panel-footer">{{pr.name}}</div>
+			  <div class="panel-footer">
+			  	<span>{{pr.name}}</span>
+			  	<div class="project-remove" ng-click="removeProject(pr.id)" >X</div>
+			  </div>
 			</div>
     </div>
     
-    
-    
     <div id="create" ng-click="createProject()" >+</div>
 
+</div>
+
+
+<div class="project-filter">
+ <input type="text" placeholder="Filter Name & Description" ng-model="query">
 </div>

@@ -28,12 +28,12 @@ public class LoginController {
 			Member member = service.findByEmail(email);
 			if(member != null && member.getPassword().equals(password)){
 				LoginController.setUpSession(session, member);
-				return new ResponseEntity<String>("ok", HttpStatus.OK);
+				return new ResponseEntity<String>(HttpStatus.OK);
 			}else{
-				return new ResponseEntity<String>("invalid-credentials", HttpStatus.UNAUTHORIZED);
+				return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
 			}
 		}else{
-			return new ResponseEntity<String>("invalid-credentials", HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 	
@@ -42,11 +42,22 @@ public class LoginController {
 	public ResponseEntity<String> doLogout(HttpSession session){
 		if(session.getAttribute("id") != null){
 			session.invalidate();
-			return new ResponseEntity<String>("ok", HttpStatus.OK);
+			return new ResponseEntity<String>(HttpStatus.OK);
 		}else{
-			return new ResponseEntity<String>("not-logged-in", HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
 		}
 	}
+	
+	@RequestMapping(value="/logged", method=RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<String> checkLogged(HttpSession session){
+		if(session.getAttribute("id") != null){
+			return new ResponseEntity<String>(HttpStatus.OK);
+		}else{
+			return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
 	
 	public static boolean isValidEmailAddress(String email) {
 		return email.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");

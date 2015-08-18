@@ -32,6 +32,11 @@ body {
 
 }
 
+.pm-navbar-top .navbar-nav>li>a {
+	color: #c7c7c7;
+}
+
+
 
 .pm-navbar-second {
 	background: #fff;
@@ -53,16 +58,6 @@ body {
     background-color: #20aa7d;
 }
 
-
-.pozadina {
-	background: url(http://subtlepatterns.com/patterns/tweed.png);
-}
-
-.kana {
-	background-color: #272a33;
-	
-	background: #272a33;
-}
 
 
 

@@ -27,8 +27,7 @@
 <script src="app/components/angular-ui-router.min.js"></script>
 <script src="app/components/angular-md5.min.js"></script>
 <script src="app/components/ui-router-styles.js"></script>
-
-
+<script src="app/components/ui-bootstrap-tpls-0.13.3.min.js"></script>
 
 <!-- The definition and the configuration of the application module -->
 <script src="app/scripts/app.js"></script>
@@ -36,14 +35,15 @@
 
 
 <!-- controllers -->
-<script src="app/scripts/controllers/main.controller.js"></script>
+<script src="app/scripts/controllers/index.controller.js"></script>
 <script src="app/scripts/controllers/login.controller.js"></script>
 <script src="app/scripts/controllers/dashboard.controller.js"></script>
-
+<script src="app/scripts/controllers/create.project.controller.js"></script>
 
 <!-- services -->
 <script src="app/scripts/services/services.js"></script>
 <script src="app/scripts/services/dashboard.data.js"></script>
+<script src="app/scripts/services/project.data.js"></script>
 
 </body>
 </html>

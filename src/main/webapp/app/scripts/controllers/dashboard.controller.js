@@ -10,75 +10,58 @@
  * @description # MainCtrl Controller of the avAngularStartupApp
  */
 
-ProjecManagerApp.controller('DashboardCtrl', ['$scope',
+ProjecManagerApp.controller('DashboardCtrl', ['ProjectData', '$scope', '$modal',
                                           
-    function ($scope) {
+    function (ProjectData, $scope, $modal) {
         console.log("Dashboard Controller reporting for duty.");
         
+        $scope.animationsEnabled = true;
+
         $scope.createProject = createProject;
-        $scope.i = 1;
-        $scope.projects = [];
+        $scope.removeProject = removeProject;
+        $scope.openProject = openProject;
+        
+        $scope.search = search;
+        
+        $scope.projects = ProjectData.query(function(data){});
+        
         
         
         
         
         function createProject() {
-        	$scope.tmp = {};
-        	angular.copy($scope.project,$scope.tmp);
-        	$scope.tmp.id = $scope.i;
-        	$scope.i = $scope.i + 1;
-			$scope.projects.push($scope.tmp);
-		}
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'app/views/popups/newProjectDialog.html',
+                controller: 'CreateProjectCtrl',
+                resolve: {
+                }
+            });
+            modalInstance.result.then(function (retProject) {
+            	console.log("returned project",retProject);
+            	
+            	ProjectData.save(retProject,function(data){
+           		 $scope.projects.push(data);
+            	});
+            });
+		};
+        
+        function removeProject(id) {
+        	ProjectData.remove({id: id},function(data){
+        		$scope.projects.splice(id,1);
+        	});
+        };
+        
+        function openProject(id) {
+        	
+        };
         
         
-        $scope.project = 	{
-         	   id: "123456",
-         	   name: "Prv proekt",
-         	   description: "Ova e prviot proekt",
-         	   managers: [{ name: "gago" }],
-         	   employees: [{ name: "petko" }],
-         	   dateDue: "1439571420",
-         	   tasks: [{
-         		   name: "Napravi prvoto"
-         			   },
-         			   {
- 				   name: "Napravi vtoro"	   
-         			   },
-         			   {
- 				   name: "Napravi treto"		   
-         			   }],
- 			   codeSnippets: [{
-         		   name: "public function main(){dfafd; fdf df ;}"
-         			   },
-         			   {
- 				   name: "public function vtora(){//ova e vtora funkcija}"	   
-         			   }],
- 			   attachments: [{
-         		   name: ".pdf"
-         			   },
-         			   ],
- 			   comments: [{
-         		   name: "gago",
-         		   comment: "ide li?"
-         			   },
-         			   {
- 				   name: "petko",
-         		   comment: "se tera nekako"	   
-         			   },
-         			   {
- 				   name: "gago",
-         		   comment: "super pozz"		   
-         			   }],
- 			   tags: [{
-         		   name: ".NET"
-         			   },
-         			   {
- 				   name: "Android"	   
-         			   },
-         			   {
- 				   name: "Ruby"		   
-         			   }],
-				};
+        function search(row) {
+            return (angular.lowercase(row.name).indexOf($scope.query || '') !== -1 || angular.lowercase(row.description).indexOf($scope.query || '') !== -1);
+        };
+        
+        
         
         
     }]);

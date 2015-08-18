@@ -29,11 +29,13 @@
 	width:250px;
     height:80%;
 }
+.project-content .panel-body span {
+	font-size: 15px;
+}
+
 
 .project-content {
     font:20px 'Gloria Hallelujah', cursive;
-    line-height:1.5;
-    border:0;
     border-radius: 5px;
     background: linear-gradient(#F9EFAF, #F7E98D);
     background: #dfe2e4;
@@ -44,9 +46,7 @@
     font-smoothing:subpixel-antialiased;
     max-width:520px;
     max-height:250px;
-    
-    border-style: solid;
-    border-color: #1abc9c;
+
     
     width:250px;
     height:250px;
@@ -65,12 +65,51 @@
     clear: both;
 }
 
-.project-content hr {
-	border-color: blue;
-}
 
 .project-content .project-title {
 	text-align: center;
+}
+
+.project-content:hover {
+	border:1; 
+    border-color: #1abc9c;
+    cursor: pointer;
+}
+
+.project-remove {
+	float: right;
+}
+
+.project-remove:hover {
+	color: red;
+}
+
+#projects {
+	width: 70%;
+	float: left;
+	margin-left: 15%
+}
+
+.project-filter {
+	width: 15%;
+	float: right;
+}
+
+.project-filter input{
+	padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.project-filter input:focus{
+    border:1; 
+    border-color: #1abc9c;
+    outline-width: 0;
 }
 
 

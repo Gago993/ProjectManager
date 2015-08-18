@@ -15,5 +15,5 @@
  */
 var ProjecManagerApp = angular.module('projectManagerApp', 
 		['ngResource','ngRoute','ui.router','angular-md5',
-		 'uiRouterStyles']);
+		 'uiRouterStyles', 'ui.bootstrap']);
 

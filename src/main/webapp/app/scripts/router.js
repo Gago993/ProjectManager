@@ -24,21 +24,12 @@ ProjecManagerApp.config([ '$stateProvider', '$urlRouterProvider',
 		  css: ["app/css/login.css"]
 	  }  
     })
-    
-    .state('test', {
-      url: "/test",
-      templateUrl: "app/views/test.html",
-      controller: "MainCtrl",
-	  data: {
-		  css: ["app/css/test.css"]
-	  }  
-    })
-    
+  
     
     .state('pm', {
       url: "/",
       templateUrl: "app/views/index.html",
-      controller: "MainCtrl",
+      controller: "IndexCtrl",
 	  data: {
 		  css: ["app/css/index.css"]
 	  }  
@@ -47,18 +38,41 @@ ProjecManagerApp.config([ '$stateProvider', '$urlRouterProvider',
     .state('pm.main', {
       url: "main",
       templateUrl: "app/views/main.html",
-      controller: "MainCtrl"
+      controller: "IndexCtrl"
     })
     
     
 	.state('pm.dashboard', {
-      url: "dashboard",
+	  url: "dashboard",
       templateUrl: "app/views/dashboard.html",
       controller: "DashboardCtrl",
       data: {
 		  css: ["app/css/dashboard.css"]
 	  }  
+	 
     });
 	
 	
-} ]);
+} ])
+
+.run( function($rootScope, $state) {
+    // register listener to watch route changes
+	$rootScope.$on('$stateChangeStart', 
+		function(event, toState, toParams, fromState, fromParams){ 
+		    // do something
+			console.log("state change",$rootScope.user,toState);
+
+			if(toState.name == 'login'){
+				if($rootScope.user){
+					$state.go('pm.dashboard');
+				}
+			}else{
+				if(!$rootScope.user){
+					$state.go('login');
+				}
+			}
+			
+		
+		})
+		
+ });
