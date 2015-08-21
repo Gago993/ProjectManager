@@ -18,48 +18,14 @@ ProjecManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams','$modal',
         $scope.project = ProjectData.get({id: $stateParams.projectId },function(data){
         });
         
-        $scope.tasks = [
-                        {
-                        	name: "task1",
-                        	description: "tsdfdafd d fds fdasf dsfd fdf d",
-                        	assignedTo: [],
-                        	dateDue: "21323231232",
-                        	subtasks: [{sdf:"afdf"}],
-                        	codeSnippets: [],
-                        	attachments: [],
-                        	comments:[],
-                        	finished: true,
-                        	timestamp: "",
-                        	
-                        },
-                        {
-                        	name: "task2",
-                        	description: "tsdfdasdsadfdasf dsfd fdf d",
-                        	assignedTo: [],
-                        	dateDue: "3434343434343",
-                        	subtasks: [],
-                        	codeSnippets: [],
-                        	attachments: [],
-                        	comments:[],
-                        	finished: false,
-                        	timestamp: "",
-                        	
-                        }
-                        
-                        ];
-        
         
         $scope.addTag = addTag;
         $scope.removeTag = remove;
-        
         $scope.newMember = addNewMember;
-        
         $scope.createTask = createTask;
-        
         //updates model changes
         $scope.updateProject = updateProject;
         
-        console.log($stateParams);
         
         function addTag(result) {
         	console.log("project",result);

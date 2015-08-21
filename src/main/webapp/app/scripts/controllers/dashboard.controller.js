@@ -37,9 +37,10 @@ ProjecManagerApp.controller('DashboardCtrl', ['ProjectData', '$scope', '$modal',
         	
 		};
         
-        function removeProject(id) {
-        	ProjectData.remove({id: id},function(data){
-        		$scope.projects.splice(id,1);
+        function removeProject(project) {
+        	ProjectData.remove({id: project.id},function(data){
+        		 var index = $scope.projects.indexOf(project);
+        		  $scope.projects.splice(index, 1);     
         	});
         };
         

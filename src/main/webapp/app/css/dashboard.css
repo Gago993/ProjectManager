@@ -1,106 +1,164 @@
 
-#projects {
-    margin: auto;
-    width: 80%;
-}
-#create {
-    float:left;
-    padding:25px 25px 40px;
-    margin:0 20px 20px 0;
-    width:250px;
-    height:250px;
+.pm-project-container {
+	margin-left: 10%;
+	margin-right: 10%
 }
 
-#create {
-    user-select:none;
-    padding:20px;
-    border-radius:20px;
+.panel-default > .panel-heading {
+    color: #333333;
+    background-color: whitesmoke;
+    border-color: #dfe2e4;
+}
+
+
+.pm-projects {
+	background-color: transparent;
+	width: 100%;
+}
+
+.project-tags {
+	float: left;
+	width: 70%;
+}
+.project-tags input {
+	outline: 0;
+	border: 0;
+	background-color: transparent;
+}
+
+
+.project-heading {
+	margin-top: 10px;
+}
+
+.pm-create-project {
+	padding:20px;
     text-align:center;
-    border:15px solid rgba(0,0,0,0.1);
     cursor:pointer;
     color:rgba(0,0,0,0.1);
     font:220px "Helvetica", sans-serif;
     line-height:185px;
 }
-
-#create:hover { border-color:rgba(0,0,0,0.2); color:#20aa7d; }
-
-.project-content .panel-body {
-	width:250px;
-    height:80%;
+.pm-new-project:hover .pm-create-project {
+	color:#20aa7d;
 }
-.project-content .panel-body span {
-	font-size: 15px;
+.pm-new-project .panel-heading {
+	height: 40px;	
 }
-
-
-.project-content {
-    font:20px 'Gloria Hallelujah', cursive;
-    border-radius: 5px;
-    background: linear-gradient(#F9EFAF, #F7E98D);
-    background: #dfe2e4;
-    box-shadow:0 4px 6px rgba(0,0,0,0.1);
-    overflow:hidden;
-    transition:box-shadow 0.5s ease;
-    transition:-webkit-box-shadow 0.5s ease;
-    font-smoothing:subpixel-antialiased;
-    max-width:520px;
-    max-height:250px;
-
-    
-    width:250px;
-    height:250px;
-    margin:0 20px 20px 0;
-    
+.pm-new-project:hover .panel-heading {
+	background-color:#20aa7d;
+	color: #fff;
 }
-.project-content:hover { box-shadow:0 5px 8px rgba(0,0,0,0.15); }
-.project-content:focus { box-shadow:0 5px 12px rgba(0,0,0,0.2); outline:none; }
-
-
-.project{
-    float: left;
-}
-
-.clear-both {
-    clear: both;
-}
-
-
-.project-content .panel-footer {
-	height: 100%;
-}
-
-.project-content:hover {
-	border:1; 
-    border-color: #1abc9c;
-    cursor: pointer;
-}
-
-.project-remove {
-	float: right;
-}
-
-.project-remove:hover {
-	color: red;
-}
-
-#projects {
-	width: 70%;
+.pm-new-project {
+	width: 250px;
+	height: 250px;
 	float: left;
-	margin-left: 15%
+	margin-right: 10px;
+    margin-bottom: 20px;
+    background-color: whitesmoke;
+    border: 1px solid transparent;
+    border-bottom: 5px solid #20aa7d;
+	box-shadow:2px 4px 6px #20aa7d;	
 }
 
-.project-filter {
-	width: 15%;
+
+.pm-project {
+	width: 250px;
+	height: 250px;
+	float: left;
+	margin-right: 10px;
+    margin-bottom: 20px;
+    background-color: whitesmoke;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #20aa7d;
+	box-shadow:0px 1px 2px #20aa7d;
+}
+.pm-project label {
+	color: #858585;
+	font-size: 13px;
+	font-weight: normal;
+}
+.pm-project:hover {
+	box-shadow:2px 4px 6px #20aa7d;	
+}
+
+.panel-heading {
+    border-bottom: 4px solid transparent;
+}
+.pm-project .panel-heading {
+	height: 45px;
+}
+.pm-project .panel-body {
+	height: 160px;
+}
+
+.pm-project .panel-heading input {
+	background-color: transparent;
+	outline: 0;
+	border: 0;
+	margin-left: 5px;
+}
+.pm-project .panel-heading input[type="checkbox"] {
 	float: right;
 }
+.pm-project .panel-body textarea {
+	background-color: transparent;
+	outline: 0;
+	border: 0;
+	height: 80%;
+	width: 100%;
+	resize: none;
+}
+.pm-project .panel-body textarea:hover {
+	background-color: transparent;
+	outline: 0;
+	border: 1px dotted #20aa7d;
+	width: 100%;	
+}
+.pm-project .panel-body textarea:focus {
+	border: 1px dotted #20aa7d;
+	width: 100%;	
+}
+.pm-project .panel-heading input[type="text"]:hover {
+	border: 1px dotted #20aa7d;
+}
+.pm-project .panel-heading input[type="text"]:focus {
+	border: 1px dotted #20aa7d;
+}
+
+.pm-project-open {
+	background-color: #bcbcbc;
+	padding: 4px 4px 4px 4px;
+	border-radius: 5px;
+	float: left;
+}
+.pm-project-open:hover {
+	cursor: pointer;
+}
+.pm-project-remove {
+	float: right;
+}
+
+
+
+.pull-right>.dropdown-menu {
+    right: 20px; 
+}
+
+
+.pm-add-member {
+	color: #fff;
+	background-color: #20aa7d;
+}
+
+
+
 
 .project-filter input{
 	padding: 6px 12px;
     font-size: 14px;
     line-height: 1.428571429;
     color: #555;
-    vertical-align: middle;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -111,5 +169,6 @@
     border-color: #1abc9c;
     outline-width: 0;
 }
+
 
 

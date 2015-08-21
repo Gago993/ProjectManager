@@ -106,6 +106,7 @@
 	border: 0;
 	height: 80%;
 	width: 100%;
+	resize: none;
 }
 .project-task .panel-body textarea:hover {
 	background-color: transparent;
@@ -117,7 +118,9 @@
 	border: 1px dotted #20aa7d;
 	width: 100%;	
 }
-
+.project-task .panel-heading input[type="text"]:hover {
+	border: 1px dotted #20aa7d;
+}
 .project-task .panel-heading input[type="text"]:focus {
 	border: 1px dotted #20aa7d;
 }
@@ -132,3 +135,6 @@
 	color: #fff;
 	background-color: #20aa7d;
 }
+
+
+

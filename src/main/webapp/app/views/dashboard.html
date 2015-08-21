@@ -1,29 +1,62 @@
 
+<div class='pm-project-container'>
 
-<div id="projects">
-    <div class="project" ng-repeat="pr in projects | filter:search" ui-sref="pm.project({projectId : pr.id})">
-	        <div class="panel panel-default project-content">
-			  <div class="panel-body">
-	  			<span>Members: {{pr.managers.length + pr.employees.length}}</span>
-			  	<br />
-			  	<span ng-if="pr.dateDue" >Date Due: {{pr.dateDue | date:"MM/dd/yyyy 'at' h:mma"}}</span>
-				<br />
-			  	<span ng-if="pr.timestamp" >Date Due: {{pr.timestamp | date:"MM/dd/yyyy 'at' h:mma"}}</span>
-			  	<br />
-			  	<span>DESC : {{pr.description}}</span>
-			  </div>
-			  <div class="panel-footer">
-			  	<span>{{pr.name}}</span>
-			  	<div class="project-remove" ng-click="removeProject(pr.id)" >X</div>
-			  </div>
-			</div>
-    </div>
-    
-    <div id="create" ng-click="createProject()" >+</div>
+           <div class="panel panel-default pm-projects">
 
+				<div class="panel-heading" >
+					<div class="pull-right project-filter">
+						 <input type="text" placeholder="Filter Name & Description" ng-model="query">
+					</div>
+					<div class="clearfix"></div>
+				</div>
+
+              <div class="panel-body">
+	   
+                <!-- Add new Task -->
+                <div class="panel panel-default pm-new-project" ng-click="createProject()" >
+                	<div class="panel-heading">
+                         <span class="glyphicon glyphicon-tasks"></span> 
+                     </div>
+                
+	                <div class="pm-create-project">+</div>
+                 </div>      
+				<!-- Existing Task -->
+				<div class="panel panel-default pm-project" ng-repeat="project in projects | filter:search" >
+                     <div class="panel-heading">
+                        <span class="glyphicon glyphicon-tasks"></span> 
+                        <input type="text" value="{{project.name}}" ng-model="project.name" ng-blur="" />
+                  		<input type="checkbox" />
+                     </div>
+                     <div class="panel-body">
+                         <label>Description: </label>
+                         <textarea type="text" value="{{project.description}}" ng-model="project.description" ng-blur=""></textarea>
+                         <br/>
+                         <span>Members: {{pr.managers.length + pr.employees.length}}</span>
+                     	
+                     </div>
+                     <div class="panel-footer">
+                     <div class="pm-project-open" ui-sref="pm.project({projectId : project.id})">Open</div>
+                     <div class="pm-project-remove" ng-click="removeProject(project)" >X</div>
+                     </div>
+                </div>
+              </div>
+              <!-- /.panel-body -->
+           </div>
+	
+	 
+                
+	
 </div>
 
 
-<div class="project-filter">
- <input type="text" placeholder="Filter Name & Description" ng-model="query">
-</div>
+
+
+
+
+
+
+
+
+
+
+
