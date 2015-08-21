@@ -1,0 +1,56 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add New Member</h3>
+</div>
+<div class="modal-body">
+   
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Add new member:</label>
+            <div class="col-sm-8">
+            <angucomplete-alt id="members"
+              placeholder="Email..."
+              pause="400"
+              selected-object="member"
+              remote-url="http://localhost:8080/projectmanager/members/search?email="
+              title-field="firstname,lastname"
+              minlength="2"
+              image-field="picture"
+              input-class="form-control form-control-small" ></angucomplete-alt>    
+            </div>
+            <div class="col-sm-2" ng-if="member"><button class="btn pm-add-member" ng-click="addMember(member.originalObject)">+</button></div>
+        </div>
+          
+        <div class="pr-managers">
+        	<ul>
+        		<li ng-repeat="me in managers">{{me}}</li>
+        	</ul>
+        </div>
+        <div class="pr-managers">
+        	<ul>
+        		<li ng-repeat="me in result.managers">{{me}}</li>
+        	</ul>
+        </div>
+        
+        <div class="pr-employees">
+        	<ul>
+        		<li ng-repeat="em in employees">{{em}}
+        			<button>make admin</button>
+        		</li>
+        	</ul>
+        </div>
+        <div class="pr-employees">
+        	<ul>
+        		<li ng-repeat="em in result.employees">{{em}}
+        			<button>make admin</button>
+        		</li>
+        	</ul>
+        </div>
+        
+</form>
+
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="createMember()">Save</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

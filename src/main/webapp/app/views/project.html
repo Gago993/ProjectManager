@@ -33,7 +33,7 @@
 	
 	   
                 <!-- Add new Task -->
-                <div class="panel panel-default pm-new-task" >
+                <div class="panel panel-default pm-new-task" ng-click="createTask()" >
                 	<div class="panel-heading">
                          <span class="glyphicon glyphicon-tasks"></span> 
                      </div>
@@ -41,14 +41,15 @@
 	                <div class="pm-create-task">+</div>
                  </div>      
 				<!-- Existing Task -->
-				<div class="panel panel-default project-task" ng-repeat="task in tasks">
+				<div class="panel panel-default project-task" ng-repeat="task in project.tasks">
                      <div class="panel-heading">
                         <span class="glyphicon glyphicon-tasks"></span> 
                         <input type="text" value="{{task.name}}" ng-model="task.name" ng-blur="updateProject()" />
-                  		<input type="checkbox" ng-model="task.finished" />
+                  		<input type="checkbox" ng-model="task.finished" ng-change="updateProject()"/>
                      </div>
                      <div class="panel-body">
-                         <input type="text" value="{{task.description}}" ng-model="task.description" />
+                         <label>Description: </label>
+                         <textarea type="text" value="{{task.description}}" ng-model="task.description" ng-blur="updateProject()"></textarea>
                          <br/>
                          Subtasks: {{task.subtasks.length}}
                          <a href="#" class="btn btn-default btn-block">View Details</a>

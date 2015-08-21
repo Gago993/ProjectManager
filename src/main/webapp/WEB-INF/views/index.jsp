@@ -28,6 +28,8 @@
 <script src="app/components/angular-md5.min.js"></script>
 <script src="app/components/ui-router-styles.js"></script>
 <script src="app/components/ui-bootstrap-tpls-0.13.3.min.js"></script>
+<script src="app/components/angucomplete-alt.js"></script>
+
 
 <!-- The definition and the configuration of the application module -->
 <script src="app/scripts/app.js"></script>
@@ -38,13 +40,15 @@
 <script src="app/scripts/controllers/index.controller.js"></script>
 <script src="app/scripts/controllers/login.controller.js"></script>
 <script src="app/scripts/controllers/dashboard.controller.js"></script>
-<script src="app/scripts/controllers/create.project.controller.js"></script>
 <script src="app/scripts/controllers/project.controller.js"></script>
 
+<!-- popup controllers -->
+<script src="app/scripts/controllers/popups/create.member.controller.js"></script>
+
 <!-- services -->
-<script src="app/scripts/services/services.js"></script>
-<script src="app/scripts/services/dashboard.data.js"></script>
 <script src="app/scripts/services/project.data.js"></script>
+<script src="app/scripts/services/member.data.js"></script>
+
 
 <!-- directives -->
 <script src="app/directives/tags.directive.js"></script>

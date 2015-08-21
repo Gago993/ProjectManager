@@ -41,6 +41,9 @@
 .pm-new-task:hover .pm-create-task {
 	color:#20aa7d;
 }
+.pm-new-task .panel-heading {
+	height: 40px;	
+}
 .pm-new-task:hover .panel-heading {
 	background-color:#20aa7d;
 	color: #fff;
@@ -66,12 +69,26 @@
     margin-bottom: 20px;
     background-color: whitesmoke;
     border: 1px solid transparent;
-    border-bottom: 5px solid #20aa7d;
+    border-bottom: 1px solid #20aa7d;
+	box-shadow:0px 1px 2px #20aa7d;	
+}
+.project-task label {
+	color: #858585;
+	font-size: 13px;
+	font-weight: normal;
+}
+.project-task:hover {
 	box-shadow:2px 4px 6px #20aa7d;	
 }
 
 .panel-heading {
     border-bottom: 4px solid transparent;
+}
+.project-task .panel-heading {
+	height: 45px;
+}
+.project-task .panel-body {
+	height: 160px;
 }
 
 .project-task .panel-heading input {
@@ -83,28 +100,26 @@
 .project-task .panel-heading input[type="checkbox"] {
 	float: right;
 }
-.project-task .panel-body input {
+.project-task .panel-body textarea {
 	background-color: transparent;
 	outline: 0;
 	border: 0;
 	height: 80%;
+	width: 100%;
 }
-.project-task .panel-body input:hover {
+.project-task .panel-body textarea:hover {
 	background-color: transparent;
 	outline: 0;
-	border: 2px dotted #20aa7d;
-	width: 100%;
-	
+	border: 1px dotted #20aa7d;
+	width: 100%;	
 }
-.project-task .panel-heading:hover {
-	color: #fff;
-    background-color: #20aa7d;
+.project-task .panel-body textarea:focus {
+	border: 1px dotted #20aa7d;
+	width: 100%;	
 }
-.project-task .panel-heading:hover input[type="text"] {
-	color: #fff;
-    background-color: #20aa7d;
-    font-size: 15px;
-    width: 80%;
+
+.project-task .panel-heading input[type="text"]:focus {
+	border: 1px dotted #20aa7d;
 }
 
 
@@ -113,3 +128,7 @@
 }
 
 
+.pm-add-member {
+	color: #fff;
+	background-color: #20aa7d;
+}

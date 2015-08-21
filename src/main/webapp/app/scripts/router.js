@@ -58,7 +58,7 @@ ProjecManagerApp.config([ '$stateProvider', '$urlRouterProvider',
 	      templateUrl: "app/views/project.html",
 	      controller: "ProjectCtrl",
 	      data: {
-			  css: ["app/css/project.css"]
+			  css: ["app/css/project.css","app/css/angucomplete-alt.css"]
 		  }  
 		 
 	    });

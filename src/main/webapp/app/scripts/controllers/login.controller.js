@@ -7,7 +7,7 @@
  *        aware about the view that displays the information. 
  *        
  * @name avAngularStartupApp.controller:MainCtrl
- * @description # MainCtrl Controller of the avAngularStartupApp
+ * @description # MainCtrl Controller 
  */
 
 ProjecManagerApp.controller('LoginCtrl', ['$http', '$scope', '$state', 'md5',

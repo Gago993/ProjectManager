@@ -1,5 +1,7 @@
 package mk.finki.webprogramiranje.projectmanager.repository.impl;
 
+import java.util.List;
+
 import mk.finki.webprogramiranje.projectmanager.model.Member;
 import mk.finki.webprogramiranje.projectmanager.repository.MemberRepositoryCustom;
 
@@ -17,5 +19,10 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
 	
 	public Member findByEmail(String email) {
 		return mongoTemplate.findOne(new Query(Criteria.where("email").is(email)), Member.class);
+	}
+
+	public List<Member> searchByEmail(String email) {
+		// TODO Auto-generated method stub
+		return mongoTemplate.find(new Query(Criteria.where("email").regex(email)), Member.class);
 	}
 }

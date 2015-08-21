@@ -66,8 +66,8 @@
 }
 
 
-.project-content .project-title {
-	text-align: center;
+.project-content .panel-footer {
+	height: 100%;
 }
 
 .project-content:hover {

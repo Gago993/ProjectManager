@@ -57,13 +57,14 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public ResponseEntity<Project> create(HttpSession session, @Valid @RequestBody Project project){
+	public ResponseEntity<Project> create(HttpSession session){
 		String sessionId = (String)session.getAttribute("id");
 		//izgleda ke treba proverka dali veke postoi ovoj proekt
 		if(sessionId != null){
+
+			Project project = new Project();
 			project.getManagers().add(sessionId);
-			
-			project = service.save(project);
+			service.save(project);
 			
 			return new ResponseEntity<Project>(project, HttpStatus.OK);
 		}else{

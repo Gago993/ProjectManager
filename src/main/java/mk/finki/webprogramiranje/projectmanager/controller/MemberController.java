@@ -1,5 +1,7 @@
 package mk.finki.webprogramiranje.projectmanager.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -53,6 +55,38 @@ public class MemberController {
 			return new ResponseEntity<Member>(HttpStatus.UNAUTHORIZED);
 		}
 	}
+	
+	
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	public ResponseEntity<List<Member>> getSearchByEmail(HttpSession session, @RequestParam String email){
+		String sessionId = (String)session.getAttribute("id");
+		if(sessionId != null){
+			List<Member> member = service.searchByEmail(email);
+			if(member != null){
+				
+				Member rem = null;
+				for(Member m : member){
+					m.setEmail(null);
+					m.setPassword(null);
+					//test pic
+					m.setPicture("app/imgs/signin/user.png");
+					if(m.getId().equals(sessionId)){
+						rem = m;
+					}
+				}
+				if(rem != null){
+					member.remove(rem);
+				}
+				
+				return new ResponseEntity<List<Member>>(member, HttpStatus.OK);
+			}else{
+				return new ResponseEntity<List<Member>>(HttpStatus.NOT_FOUND);
+			}
+		}else{
+			return new ResponseEntity<List<Member>>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
 	
 	//logged in member:
 	@RequestMapping(value="", method=RequestMethod.GET)

@@ -19,25 +19,33 @@ public class Project {
 	@NotNull
 	private String description;
 	
+	@NotNull
 	private String logo;
 	
 	@NotNull
 	private List<String> managers;
 	
+	@NotNull
 	private List<String> employees;
 	
 	private Long dateDue;
 	
+	@NotNull
 	private List<Task> tasks;
-	
+
+	@NotNull
 	private List<CodeSnippet> codeSnippets;
 	
+	@NotNull
 	private List<Attachment> attachments;
 
+	@NotNull
 	private List<Comment> comments;
 	
+	@NotNull
 	private List<String> tags;
 	
+	@NotNull
 	private Long timestamp;
 
 	public String getId(){

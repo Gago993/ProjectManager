@@ -7,11 +7,12 @@
  *        aware about the view that displays the information. 
  *        
  * @name avAngularStartupApp.controller:MainCtrl
- * @description # MainCtrl Controller of the avAngularStartupApp
+ * @description # MainCtrl Controller
  */
 
-ProjecManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', 'ProjectData',
-    function ($scope, $stateParams, ProjectData) {
+ProjecManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams','$modal', 
+                        'ProjectData',
+    function ($scope, $stateParams, $modal, ProjectData) {
         console.log("Project Controller reporting for duty.");
        
         $scope.project = ProjectData.get({id: $stateParams.projectId },function(data){
@@ -50,9 +51,13 @@ ProjecManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', 'ProjectDa
         
         $scope.addTag = addTag;
         $scope.removeTag = remove;
-        $scope.newMember = addNewMember;
-        $scope.updateProject = updateProject;
         
+        $scope.newMember = addNewMember;
+        
+        $scope.createTask = createTask;
+        
+        //updates model changes
+        $scope.updateProject = updateProject;
         
         console.log($stateParams);
         
@@ -75,12 +80,40 @@ ProjecManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', 'ProjectDa
         }
         
         function addNewMember() {
-        	//$modal
+        	var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'app/views/popups/newMember.html',
+                controller: 'CreateMemberCtrl',
+                resolve: {
+                	employees: function () {
+                        return $scope.project.employees;
+                    },
+                    managers: function () {
+                        return $scope.project.managers;
+                    },
+                }
+            });
+            modalInstance.result.then(function (newMembers) {
+            	angular.extend($scope.project.managers, newMembers.managers);
+            	angular.extend($scope.project.employees, newMembers.employees);
+            	ProjectData.update($scope.project,function(data){
+           		 	console.log(data);
+            		$scope.project = data;
+            	});
+            });
         }
         
         function updateProject() {
         	ProjectData.update($scope.project,function(data){
         		console.log("update project",data);
+        		$scope.project = data;
+        	});
+        }
+        
+        function createTask() {
+        	$scope.project.tasks.push({});
+        	ProjectData.update($scope.project,function(data){
+        		console.log("create new task",data);
         		$scope.project = data;
         	});
         }

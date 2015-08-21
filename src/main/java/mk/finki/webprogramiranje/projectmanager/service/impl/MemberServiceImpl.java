@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
@@ -85,5 +86,10 @@ public class MemberServiceImpl implements MemberService {
 
 	public void delete(Member member) {
 		repository.delete(member);
+	}
+
+	public List<Member> searchByEmail(String email) {
+		// TODO Auto-generated method stub
+		return repository.searchByEmail(email);
 	}
 }

@@ -7,7 +7,7 @@
  *        aware about the view that displays the information. 
  *        
  * @name avAngularStartupApp.controller:MainCtrl
- * @description # MainCtrl Controller of the avAngularStartupApp
+ * @description # MainCtrl Controller 
  */
 
 ProjecManagerApp.controller('DashboardCtrl', ['ProjectData', '$scope', '$modal',
@@ -30,20 +30,11 @@ ProjecManagerApp.controller('DashboardCtrl', ['ProjectData', '$scope', '$modal',
         
         
         function createProject() {
-            var modalInstance = $modal.open({
-                animation: $scope.animationsEnabled,
-                templateUrl: 'app/views/popups/newProjectDialog.html',
-                controller: 'CreateProjectCtrl',
-                resolve: {
-                }
-            });
-            modalInstance.result.then(function (retProject) {
-            	console.log("returned project",retProject);
-            	
-            	ProjectData.save(retProject,function(data){
-           		 $scope.projects.push(data);
-            	});
-            });
+            
+        	ProjectData.save(function(data){
+        		$scope.projects.push(data);
+        	});
+        	
 		};
         
         function removeProject(id) {
