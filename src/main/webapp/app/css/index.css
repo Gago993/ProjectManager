@@ -1,5 +1,5 @@
 html, body {
-	background-color: #f9f6f1;
+	background-color: #e7e7e7;
 }
 
 body {
@@ -57,6 +57,32 @@ body {
     color: #fff;
     background-color: #20aa7d;
 }
+
+
+
+
+
+.obos-tags {
+	display: inline-block;
+}
+.obos-tag{
+    display: block;
+    float: left;
+    padding: 2px 5px;
+    text-decoration: none;
+    background: #1caf9a;
+    color: #fff;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    border-radius: 2px;
+}
+
+.obos-tag:hover {
+    color: red;
+    text-decoration: none;
+}
+
 
 
 

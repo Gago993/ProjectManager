@@ -1,0 +1,115 @@
+
+.pm-project-container {
+	margin-left: 15%;
+	margin-right: 15%
+}
+
+.panel-default > .panel-heading {
+    color: #333333;
+    background-color: whitesmoke;
+    border-color: #dfe2e4;
+}
+
+
+.pm-project-tasks {
+	background-color: transparent;
+}
+
+.project-tags {
+	float: left;
+	width: 70%;
+}
+.project-tags input {
+	outline: 0;
+	border: 0;
+	background-color: transparent;
+}
+
+
+.project-heading {
+	margin-top: 10px;
+}
+
+.pm-create-task {
+	padding:20px;
+    text-align:center;
+    cursor:pointer;
+    color:rgba(0,0,0,0.1);
+    font:220px "Helvetica", sans-serif;
+    line-height:185px;
+}
+.pm-new-task:hover .pm-create-task {
+	color:#20aa7d;
+}
+.pm-new-task:hover .panel-heading {
+	background-color:#20aa7d;
+	color: #fff;
+}
+.pm-new-task {
+	width: 250px;
+	height: 250px;
+	float: left;
+	margin-right: 10px;
+    margin-bottom: 20px;
+    background-color: whitesmoke;
+    border: 1px solid transparent;
+    border-bottom: 5px solid #20aa7d;
+	box-shadow:2px 4px 6px #20aa7d;	
+}
+
+
+.project-task {
+	width: 250px;
+	height: 250px;
+	float: left;
+	margin-right: 10px;
+    margin-bottom: 20px;
+    background-color: whitesmoke;
+    border: 1px solid transparent;
+    border-bottom: 5px solid #20aa7d;
+	box-shadow:2px 4px 6px #20aa7d;	
+}
+
+.panel-heading {
+    border-bottom: 4px solid transparent;
+}
+
+.project-task .panel-heading input {
+	background-color: transparent;
+	outline: 0;
+	border: 0;
+	margin-left: 5px;
+}
+.project-task .panel-heading input[type="checkbox"] {
+	float: right;
+}
+.project-task .panel-body input {
+	background-color: transparent;
+	outline: 0;
+	border: 0;
+	height: 80%;
+}
+.project-task .panel-body input:hover {
+	background-color: transparent;
+	outline: 0;
+	border: 2px dotted #20aa7d;
+	width: 100%;
+	
+}
+.project-task .panel-heading:hover {
+	color: #fff;
+    background-color: #20aa7d;
+}
+.project-task .panel-heading:hover input[type="text"] {
+	color: #fff;
+    background-color: #20aa7d;
+    font-size: 15px;
+    width: 80%;
+}
+
+
+.pull-right>.dropdown-menu {
+    right: 20px; 
+}
+
+

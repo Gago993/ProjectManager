@@ -1,0 +1,9 @@
+<div class="">
+    <span class="obos-tag" ng-repeat="v in initialData track by $index">
+	    <span ng-if="viewName" ng-bind="v[viewName]"></span>
+	    <span ng-if="!viewName" ng-bind="v"></span>
+	    <a class="delete-tag" ng-click="remove($index)">&times;</a>
+    </span>
+    
+    <input type="text" placeholder="Add tag" ng-model="textTag" ng-style="{width : inputWidth}" >
+</div>

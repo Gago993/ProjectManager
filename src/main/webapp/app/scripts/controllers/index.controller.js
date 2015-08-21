@@ -10,8 +10,8 @@
  * @description # MainCtrl Controller of the avAngularStartupApp
  */
 
-ProjecManagerApp.controller('IndexCtrl', ['$http', '$scope', '$state',
-    function ($http, $scope, $state) {
+ProjecManagerApp.controller('IndexCtrl', ['$http', '$scope', '$state', '$rootScope',
+    function ($http, $scope, $state, $rootScope) {
         console.log("Index Controller reporting for duty.");
        
         $scope.logout = logout;
@@ -22,6 +22,7 @@ ProjecManagerApp.controller('IndexCtrl', ['$http', '$scope', '$state',
         	    // this callback will be called asynchronously
         	    // when the response is available
         		  console.log(response);
+        		  $rootScope.user = false;
         		  $state.go('login');
         		  
         	  }, function(response) {

@@ -39,11 +39,17 @@
 <script src="app/scripts/controllers/login.controller.js"></script>
 <script src="app/scripts/controllers/dashboard.controller.js"></script>
 <script src="app/scripts/controllers/create.project.controller.js"></script>
+<script src="app/scripts/controllers/project.controller.js"></script>
 
 <!-- services -->
 <script src="app/scripts/services/services.js"></script>
 <script src="app/scripts/services/dashboard.data.js"></script>
 <script src="app/scripts/services/project.data.js"></script>
+
+<!-- directives -->
+<script src="app/directives/tags.directive.js"></script>
+<script src="app/directives/tags.input.directive.js"></script>
+
 
 </body>
 </html>

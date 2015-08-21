@@ -1,3 +1,4 @@
+
 /**
  * @ngdoc here we are configuring the module exposed through the FirstApp
  *        variable. The method receives an array that has a function as a last
@@ -50,7 +51,18 @@ ProjecManagerApp.config([ '$stateProvider', '$urlRouterProvider',
 		  css: ["app/css/dashboard.css"]
 	  }  
 	 
-    });
+    })
+	
+	.state('pm.project', {
+		  url: "project/:projectId",
+	      templateUrl: "app/views/project.html",
+	      controller: "ProjectCtrl",
+	      data: {
+			  css: ["app/css/project.css"]
+		  }  
+		 
+	    });
+	
 	
 	
 } ])
@@ -67,7 +79,7 @@ ProjecManagerApp.config([ '$stateProvider', '$urlRouterProvider',
 					$state.go('pm.dashboard');
 				}
 			}else{
-				if(!$rootScope.user){
+				if(angular.isUndefined($rootScope.user)){
 					$state.go('login');
 				}
 			}

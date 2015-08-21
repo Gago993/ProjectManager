@@ -52,7 +52,7 @@ ProjecManagerApp.controller('DashboardCtrl', ['ProjectData', '$scope', '$modal',
         	});
         };
         
-        function openProject(id) {
+        function openProject(project) {
         	
         };
         
