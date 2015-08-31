@@ -13,7 +13,7 @@
  *       directive
  * @description # avAngularStartupApp Main module of the application.
  */
-var ProjecManagerApp = angular.module('projectManagerApp', 
+var ProjectManagerApp = angular.module('projectManagerApp', 
 		['ngResource','ngRoute','ui.router','angular-md5',
 		 'uiRouterStyles', 'ui.bootstrap', 'angucomplete-alt']);
 

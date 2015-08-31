@@ -11,6 +11,8 @@ public interface ProjectService {
 	public Project save(Project project);
 	
 	public boolean saveLogo(Project project, MultipartFile logo);
+	
+	public boolean removeLogo(Project project);
 
 	public Iterable<Project> findAll();
 	

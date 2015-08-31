@@ -10,7 +10,7 @@
  * @description # MainCtrl Controller
  */
 
-ProjecManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams','$modal', 
+ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$modal', 
                         'ProjectData',
     function ($scope, $stateParams, $modal, ProjectData) {
         console.log("Project Controller reporting for duty.");

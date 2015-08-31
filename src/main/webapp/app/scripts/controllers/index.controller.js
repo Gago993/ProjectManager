@@ -10,30 +10,9 @@
  * @description # MainCtrl Controller
  */
 
-ProjecManagerApp.controller('IndexCtrl', ['$http', '$scope', '$state', '$rootScope',
+ProjectManagerApp.controller('IndexCtrl', ['$http', '$scope', '$state', '$rootScope',
     function ($http, $scope, $state, $rootScope) {
         console.log("Index Controller reporting for duty.");
-       
-        $scope.logout = logout;
         
         
-        function logout() {
-        	$http.get('logout').then(function(response) {
-        	    // this callback will be called asynchronously
-        	    // when the response is available
-        		  console.log(response);
-        		  $rootScope.user = false;
-        		  $state.go('login');
-        		  
-        	  }, function(response) {
-        	    // called asynchronously if an error occurs
-        	    // or server returns response with an error status.
-        		  console.log(status);
-        		  alert("Something went wrong " + response);
-        	  });
-        }
-        
-        
-    }]);
-
-
+	}]);

@@ -12,6 +12,8 @@ public interface MemberService {
 	public Member save(Member member);
 	
 	public boolean savePicture(Member member, MultipartFile picture);
+	
+	public boolean removePicture(Member member);
 
 	public Iterable<Member> findAll();
 	

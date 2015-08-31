@@ -21,7 +21,7 @@ public class RegisterController {
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> doRegister(HttpSession session, @RequestParam String email, @RequestParam String password, @RequestParam String firstname, @RequestParam String lastname) {
+	public ResponseEntity<Member> doRegister(HttpSession session, @RequestParam String email, @RequestParam String password, @RequestParam String firstname, @RequestParam String lastname) {
 		//assuming 'password' is password hash (not using https)
 		
 		if(LoginController.isValidEmailAddress(email) && password.length() == 32 && !firstname.isEmpty() && !lastname.isEmpty()){
@@ -31,13 +31,16 @@ public class RegisterController {
 				member.setPassword(password);
 				member.setFirstname(firstname);
 				member.setLastname(lastname);
-				LoginController.setUpSession(session, service.save(member/*new Member(email, password, firstname, lastname)*/));
-				return new ResponseEntity<String>("ok", HttpStatus.OK);
+				LoginController.setUpSession(session, service.save(member));
+				
+				member.setEmail("");
+				member.setPassword("");
+				return new ResponseEntity<Member>(member, HttpStatus.OK);
 			}else{
-				return new ResponseEntity<String>("already-registered", HttpStatus.CONFLICT);
+				return new ResponseEntity<Member>(HttpStatus.CONFLICT);
 			}
 		}else{
-			return new ResponseEntity<String>("invalid-data", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Member>(HttpStatus.BAD_REQUEST);
 		}
 	}
 }

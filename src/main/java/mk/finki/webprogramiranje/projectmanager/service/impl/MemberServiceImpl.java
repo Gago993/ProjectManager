@@ -31,6 +31,27 @@ public class MemberServiceImpl implements MemberService {
 		return repository.save(member);
 	}
 	
+	public boolean removePicture(Member member) {
+		try{
+			String oldPicture = member.getPicture();
+			if(!oldPicture.isEmpty()){
+				boolean deleted = new File(servletContext.getRealPath("/app/uploads/pictures/" + oldPicture + ".png")).delete();
+				if(!deleted){
+					throw new IOException("Can not delete previous member picture.");
+				}
+				member.setPicture("");
+				
+				this.save(member);
+				
+				return deleted;
+			}
+			
+			return true;
+		}catch(IOException exception){
+			return false;
+		}
+	}
+	
 	public boolean savePicture(Member member, MultipartFile picture) {
 		try {
 			BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(picture.getBytes()));
@@ -89,7 +110,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	public List<Member> searchByEmail(String email) {
-		// TODO Auto-generated method stub
 		return repository.searchByEmail(email);
 	}
 }

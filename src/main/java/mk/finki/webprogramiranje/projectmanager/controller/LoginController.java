@@ -21,19 +21,19 @@ public class LoginController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> doLogin(HttpSession session, @RequestParam String email, @RequestParam String password) {
+	public ResponseEntity<Member> doLogin(HttpSession session, @RequestParam String email, @RequestParam String password) {
 		//assuming 'password' is password md5 hash (not using https)
 		
 		if(LoginController.isValidEmailAddress(email) && password.length() == 32){
 			Member member = service.findByEmail(email);
 			if(member != null && member.getPassword().equals(password)){
 				LoginController.setUpSession(session, member);
-				return new ResponseEntity<String>(HttpStatus.OK);
+				return new ResponseEntity<Member>(member, HttpStatus.OK);
 			}else{
-				return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+				return new ResponseEntity<Member>(HttpStatus.UNAUTHORIZED);
 			}
 		}else{
-			return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<Member>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 	

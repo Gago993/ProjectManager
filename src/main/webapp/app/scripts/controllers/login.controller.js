@@ -10,73 +10,38 @@
  * @description # MainCtrl Controller 
  */
 
-ProjecManagerApp.controller('LoginCtrl', ['$http', '$scope', '$state', 'md5',
-                                         '$httpParamSerializer', '$rootScope',
-    function ($http, $scope, $state, md5, $httpParamSerializer, $rootScope) {
-        console.log("Login Controller reporting for duty.");
+ProjectManagerApp.controller('LoginCtrl', ['$http', '$scope', '$rootScope', '$state', 'md5', 'authentication',
+    function ($http, $scope, $rootScope, $state, md5, authentication) {
+		$scope.member = {};
+		$scope.newMember = {};
+		
+		$scope.showLogin = true;
         
-        $scope.showLogin = true;
-        $scope.user = {};
-        $scope.newUser = {};
-        
-        $scope.showRegister = showRegister;
-        $scope.login = login;
-        $scope.register = register;
-        
-        
-        function showRegister(){
+        $scope.showRegister = function(){
         	$scope.showLogin = !$scope.showLogin;
-        }
+        };
         
-        function login(){
-        	$scope.user.password = md5.createHash($scope.user.password);
-        	console.log("login",$scope.user);
-        	
-        	var req = {
-        	      url: 'login',
-        	      method: "POST",
-        	      data: $httpParamSerializer($scope.user),
-        	      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        	    }
-        	
-        	$http(req).then(function(data, status, headers, config) {
-        	    // this callback will be called asynchronously
-        	    // when the response is available
-        		  console.log(status);
-        		  $rootScope.user = true;
-        		  $state.go('pm.dashboard');
-        		  
-        	  }, function(data, status, headers, config) {
-        	    // called asynchronously if an error occurs
-        	    // or server returns response with an error status.
-        		  console.log(status);
-        	  });
-        }
+        $scope.login = function(){
+        	authentication.login($scope.member.email, md5.createHash($scope.member.password));
+        };
         
-        function register(){
-        	$scope.newUser.password = md5.createHash($scope.newUser.password);
-        	console.log("register",$scope.newUser);
-        	
-        	var req = {
-        		    method: 'POST',
-        		    url: 'register',
-        		    data: $httpParamSerializer($scope.newUser),
-        		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        		  }
-        	$http(req).
-        	  then(function(data, status, headers, config) {
-        	    // this callback will be called asynchronously
-        	    // when the response is available
-        		  console.log(status);
-        		  $rootScope.user = true;
-        		  $state.go('pm.dashboard');
-        	  }, function(data, status, headers, config) {
-        	    // called asynchronously if an error occurs
-        	    // or server returns response with an error status.
-        		  console.log(status);
-        	  });
-        }
+        $scope.register = function(){
+        	authentication.register($scope.newMember.email, md5.createHash($scope.newMember.password), $scope.newMember.firstname, $scope.newMember.lastname);
+        };
         
+        $rootScope.$on('authenticationLogin', function(){
+        	if(authentication.getMember()){
+        		$state.go('dashboard');
+        	}else{
+        		//operation failed
+        	}
+        });
+        
+        $rootScope.$on('authenticationRegister', function(){
+        	if(authentication.getMember()){
+        		$state.go('dashboard');
+        	}else{
+        		//operation failed
+        	}
+        });
     }]);
-
-

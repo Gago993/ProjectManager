@@ -10,7 +10,7 @@
  * @description # MainCtrl Controller
  */
 
-ProjecManagerApp.controller('CreateMemberCtrl',['$scope', '$modalInstance',
+ProjectManagerApp.controller('CreateMemberCtrl',['$scope', '$modalInstance',
                         'MemberData', 'managers', 'employees',
                                                 
 	function ($scope, $modalInstance, MemberData, managers, employees) {

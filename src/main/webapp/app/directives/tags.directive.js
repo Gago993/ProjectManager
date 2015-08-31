@@ -11,7 +11,7 @@
             3.  remove-tag(result) - callback function that deletes the tag when pressed on the X on the tag
     */
 
-    ProjecManagerApp
+    ProjectManagerApp
     .directive('pmTags', pmTags);
 
     pmTags.$inject = ["$stateParams"];

@@ -87,23 +87,10 @@ public class MemberController {
 		}
 	}
 	
-	
-	//logged in member:
-	@RequestMapping(value="", method=RequestMethod.GET)
-	public ResponseEntity<Member> get(HttpSession session){
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(HttpSession session, @PathVariable String id, @RequestBody @Valid Member jsonMember){
 		String sessionId = (String)session.getAttribute("id");
-		if(sessionId != null){
-			Member member = service.findById(sessionId);
-			return new ResponseEntity<Member>(member, HttpStatus.OK);
-		}else{
-			return new ResponseEntity<Member>(HttpStatus.UNAUTHORIZED);
-		}
-	}
-	
-	@RequestMapping(value="", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(HttpSession session, @RequestBody @Valid Member jsonMember){
-		String sessionId = (String)session.getAttribute("id");
-		if(sessionId != null){
+		if(sessionId != null && sessionId.equals(id)){
 			if(jsonMember.getId().equals(sessionId)){
 				service.save(jsonMember);
 				return new ResponseEntity<Void>(HttpStatus.OK);
@@ -115,22 +102,41 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping(value="/picture", method=RequestMethod.POST)
-	public ResponseEntity<Void> changePicture(HttpSession session, @RequestParam MultipartFile picture){
+	@RequestMapping(value="/{id}/add-picture", method=RequestMethod.POST)
+	public ResponseEntity<Member> changePicture(HttpSession session, @PathVariable String id, @RequestParam MultipartFile picture){
 		String sessionId = (String)session.getAttribute("id");
-		if(sessionId != null){
+		if(sessionId != null && sessionId.equals(id)){
 			if(!picture.isEmpty() && (picture.getContentType().equals("image/jpeg") || picture.getContentType().equals("image/png"))){
 				Member member = service.findById(sessionId);
 				if(service.savePicture(member, picture)){
-					return new ResponseEntity<Void>(HttpStatus.OK);
+					return new ResponseEntity<Member>(HttpStatus.OK);
 				}else{
-					return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+					return new ResponseEntity<Member>(HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 			}else{
-				return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<Member>(HttpStatus.BAD_REQUEST);
 			}
 		}else{
-			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<Member>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	@RequestMapping(value="/{id}/remove-picture", method=RequestMethod.GET)
+	public ResponseEntity<Member> removePicture(HttpSession session, @PathVariable String id){
+		String sessionId = (String)session.getAttribute("id");
+		if(sessionId != null && sessionId.equals(id)){
+			Member member = service.findById(sessionId);
+			
+			if(service.removePicture(member)){
+				member.setEmail("");
+				member.setPassword("");
+				
+				return new ResponseEntity<Member>(member, HttpStatus.OK);
+			}else{
+				return new ResponseEntity<Member>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}else{
+			return new ResponseEntity<Member>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 }

@@ -31,6 +31,27 @@ public class ProjectServiceImpl implements ProjectService {
 		return repository.save(project);
 	}
 	
+	public boolean removeLogo(Project project) {
+		try {
+			String oldLogo = project.getLogo();
+			if(!oldLogo.isEmpty()){
+				boolean deleted = new File(servletContext.getRealPath("/app/uploads/logos/" + oldLogo + ".png")).delete();
+				if(!deleted){
+					throw new IOException("Can not delete previous project logo.");
+				}
+				
+				project.setLogo("");
+				this.save(project);
+				
+				return deleted;
+			}
+			
+			return true;
+		}catch(IOException exception){
+			return false;
+		}
+	}
+	
 	public boolean saveLogo(Project project, MultipartFile logo) {
 		try {
 			BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(logo.getBytes()));

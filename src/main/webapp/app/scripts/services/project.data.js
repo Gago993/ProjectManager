@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    ProjecManagerApp.factory('ProjectData', ProjectData);
+    ProjectManagerApp.factory('ProjectData', ProjectData);
 
     ProjectData.$inject= ['$resource'];
 

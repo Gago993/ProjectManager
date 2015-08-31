@@ -1,0 +1,90 @@
+div.member-container {
+	font-family: Helvetica, sans-serif;
+	
+	margin: 50px auto;
+	width: 70%;
+}
+
+div.head-data-container {
+	position: relative;
+	width: 100%;
+}
+
+div.image-container {
+	width: 300px;
+	height: 300px;
+	
+	float: left;
+	position: relative;
+}
+
+div.image-container img {
+	display: block;
+	margin: auto;
+	
+	max-width: 300px;
+	max-height: 300px;
+	
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+div.title-description-container {
+	float: left;
+}
+
+div.title-description-container span.member-name {
+	font-family: Helvetica, sans-serif;
+	font-size: 18px;
+}
+
+div.title-description-container p.member-biography {
+	font-family: Helvetica, sans-serif;
+	font-size: 12px;
+	
+	text-align: justify;
+}
+
+div.skills-container{
+	width: 100%;
+	
+	margin-top: 20px;
+	clear: both;
+}
+
+div.skills-container span.skills-header {
+	font-size: 16px;
+}
+
+div.skills-container span.skill {
+	display: inline-block;
+	
+	border: 1px solid black;
+	background-color: #eeeeee;
+	
+	font-size: 14px;
+}
+
+div.experience-container {
+	width: 100%;
+	
+	margin-top: 20px;
+}
+
+div.experience-container span.experience-header {
+	font-size: 16px;
+}
+
+div.experience-container table.experience-table {
+	border: 0;
+}
+
+div.experience-container table.experience-table th, div.experience-container table.experience-table td {
+	font-weight: bold;
+	font-size: 14px;
+	
+	width: 100px;
+}

@@ -1,0 +1,32 @@
+<div class = "member-container">
+<div class = "head-data-container">
+<div class = "image-outer-container">
+<div class = "image-container">
+<img ng-src = "{{'app/uploads/pictures/' + (member.picture != '' ? (member.picture + '.png') : 'default.png')}}" alt="profile picture" />
+</div>
+<form>
+<button id="changeButton" ng-click="changePicture()">Change</button>
+<button id="removeButton" ng-click="removePicture()">Remove</button><br />
+<input id="fileInput" accept=".jpg,.png" type="file" name="image" />
+</form>
+</div>
+<div class = "title-description-container">
+<span class = "member-name">{{member.firstname + ' ' + member.lastname}}</span>
+<p class = "member-biography">{{member.biography}}</p>
+</div>
+</div>
+<div class = "skills-container">
+<span class = "skills-header">Skills:</span><br />
+<span class = "skill" ng-repeat="skill in member.skills">{{skill}}</span>
+<div class = "experience-container">
+<span class = "experience-header">Experience:</span>
+<table class = "experience-table">
+<tr><th>Title</th><th>Type</th><th>Date From</th><th>Date To</th><th>Description</th></tr>
+<tr ng-repeat="experience in member.experience track by $index">
+<td>experience.title</td><td>experience.type</td><td>experience.dateFrom</td><td>experience.dateTo</td><td>experience.description</td><td><button class = "button-remove" ng-click="removeExperience(experience.$index);">Remove</button></td>
+</tr>
+</table>
+<button class="button-add-experience" ng-click="addExperience();">Add Experience</button>
+</div>
+</div>
+</div>

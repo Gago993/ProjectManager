@@ -10,7 +10,7 @@
  * @description # MainCtrl Controller 
  */
 
-ProjecManagerApp.controller('DashboardCtrl', ['ProjectData', '$scope', '$modal',
+ProjectManagerApp.controller('DashboardCtrl', ['ProjectData', '$scope', '$modal',
                                           
     function (ProjectData, $scope, $modal) {
         console.log("Dashboard Controller reporting for duty.");
@@ -24,11 +24,7 @@ ProjecManagerApp.controller('DashboardCtrl', ['ProjectData', '$scope', '$modal',
         $scope.search = search;
         
         $scope.projects = ProjectData.query(function(data){});
-        
-        
-        
-        
-        
+
         function createProject() {
             
         	ProjectData.save(function(data){

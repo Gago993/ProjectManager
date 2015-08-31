@@ -11,80 +11,85 @@
  *        through the $scope.
  * @see https://docs.angularjs.org/guide/di
  */
-ProjecManagerApp.config([ '$stateProvider', '$urlRouterProvider', 
+ProjectManagerApp.config([ '$stateProvider', '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
 	
-	$urlRouterProvider.otherwise("/");
-	
 	$stateProvider
+
+    .state('index', {
+	  url: "/index",
+      templateUrl: "app/views/index.html",
+      controller: "IndexCtrl",
+      data: {
+		  css: ["app/css/index.css"]
+	  }
+    })
+    
     .state('login', {
       url: "/login",
       templateUrl: "app/views/login.html",
 	  controller: "LoginCtrl",
 	  data: {
 		  css: ["app/css/login.css"]
-	  }  
-    })
-  
-    
-    .state('pm', {
-      url: "/",
-      templateUrl: "app/views/index.html",
-      controller: "IndexCtrl",
-	  data: {
-		  css: ["app/css/index.css"]
-	  }  
+	  }
     })
     
-    .state('pm.main', {
-      url: "main",
-      templateUrl: "app/views/main.html",
-      controller: "IndexCtrl"
+    .state('member', {
+      url: "/member/:memberId",
+      templateUrl: "app/views/member.html",
+      controller: "MemberCtrl",
+      data: {
+    	  css: ["app/css/member.css"]
+      }
     })
     
-    
-	.state('pm.dashboard', {
-	  url: "dashboard",
+	.state('dashboard', {
+	  url: "/dashboard",
       templateUrl: "app/views/dashboard.html",
       controller: "DashboardCtrl",
       data: {
 		  css: ["app/css/dashboard.css"]
-	  }  
-	 
+	  }
     })
 	
-	.state('pm.project', {
+	.state('project', {
+		  url: "/project/:projectId",
+	      templateUrl: "app/views/project.html",
+	      controller: "ProjectCtrl",
+	      data: {
+			  css: ["app/css/project.css","app/css/angucomplete-alt.css"]
+		  }  
+	});
+	
+	$urlRouterProvider.when('', ['$state','$match', function ($state, $match) {
+	      $state.go('index');
+	}]).when('/', ['$state','$match', function ($state, $match) {
+	      $state.go('index');
+	}]);
+	
+	/*.state('/', {
 		  url: "project/:projectId",
 	      templateUrl: "app/views/project.html",
 	      controller: "ProjectCtrl",
 	      data: {
 			  css: ["app/css/project.css","app/css/angucomplete-alt.css"]
 		  }  
-		 
-	    });
+	})*/
 	
-	
-	
-} ])
 
-.run( function($rootScope, $state) {
+} ])
+.run(["$rootScope", "$state", "authentication", function($rootScope, $state, authentication) {
     // register listener to watch route changes
 	$rootScope.$on('$stateChangeStart', 
 		function(event, toState, toParams, fromState, fromParams){ 
-		    // do something
-			console.log("state change",$rootScope.user,toState);
-
-			if(toState.name == 'login'){
-				if($rootScope.user){
-					$state.go('pm.dashboard');
-				}
-			}else{
-				if(angular.isUndefined($rootScope.user)){
+			if(toState.name == 'dashboard' || toState.name == 'project'){
+				if(!authentication.getMember()){
 					$state.go('login');
 				}
+			}else if(toState.name == 'login'){
+				if(authentication.getMember()){
+					$state.go('dashboard');
+				}
 			}
-			
-		
-		})
-		
- });
+		});
+ }]);

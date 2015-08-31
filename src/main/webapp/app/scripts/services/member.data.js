@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    ProjecManagerApp.factory('MemberData', MemberData);
+    ProjectManagerApp.factory('MemberData', MemberData);
 
     MemberData.$inject= ['$resource'];
 
@@ -14,6 +14,14 @@
             	method: 'GET',
             	url: '/search/:email',
             	isArray: true,
+            },
+            'changePicture': {
+            	method: 'POST',
+            	url: '/change-picture'
+            },
+            'removePicture': {
+            	method: 'GET',
+            	url: '/remove-picture'
             }
         });
     }
