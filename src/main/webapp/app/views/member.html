@@ -4,10 +4,10 @@
 <div class = "image-container">
 <img ng-src = "{{'app/uploads/pictures/' + (member.picture != '' ? (member.picture + '.png') : 'default.png')}}" alt="profile picture" />
 </div>
-<form>
+<form ng-show="canEditTest()" class="image-controls">
 <button id="changeButton" ng-click="changePicture()">Change</button>
 <button id="removeButton" ng-click="removePicture()">Remove</button><br />
-<input id="fileInput" accept=".jpg,.png" type="file" name="image" />
+<input id="fileInput" accept=".jpg,.png" type="file" name="picture" />
 </form>
 </div>
 <div class = "title-description-container">
@@ -23,10 +23,10 @@
 <table class = "experience-table">
 <tr><th>Title</th><th>Type</th><th>Date From</th><th>Date To</th><th>Description</th></tr>
 <tr ng-repeat="experience in member.experience track by $index">
-<td>experience.title</td><td>experience.type</td><td>experience.dateFrom</td><td>experience.dateTo</td><td>experience.description</td><td><button class = "button-remove" ng-click="removeExperience(experience.$index);">Remove</button></td>
+<td>{{experience.title}}</td><td>{{experience.type}}</td><td>{{experience.dateFrom}}</td><td>{{experience.dateTo}}</td><td>{{experience.description}}</td><td><button ng-show="canEditTest()" class = "button-remove" ng-click="removeExperience(experience.$index);">Remove</button></td>
 </tr>
 </table>
-<button class="button-add-experience" ng-click="addExperience();">Add Experience</button>
+<button class="button-add-experience" ng-show="canEditTest()" ng-click="addExperience();">Add Experience</button>
 </div>
 </div>
 </div>

@@ -12,17 +12,21 @@
 
 ProjectManagerApp.controller('NavigationCtrl', ['$http', '$scope', '$state', '$rootScope', 'authentication',
     function ($http, $scope, $state, $rootScope, authentication) {
-        $scope.member = authentication.getMember();
+		$scope.member = null;
         
         $scope.logout = function(){
         	authentication.logout();
         };
         
+		$rootScope.$on("authenticationInit", function(){
+	    	$scope.member = authentication.getMember();
+	    });
+        
         $rootScope.$on("authenticationLogin", function(){
         	$scope.member = authentication.getMember();
         });
         
-        $rootScope.$on("authenticationRegister", function(){
+        $rootScope.$on("authenticationRegistration", function(){
         	$scope.member = authentication.getMember();
         });
         

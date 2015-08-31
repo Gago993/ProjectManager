@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import mk.finki.webprogramiranje.projectmanager.model.Member;
 import mk.finki.webprogramiranje.projectmanager.model.Project;
 import mk.finki.webprogramiranje.projectmanager.service.ProjectService;
 
@@ -115,8 +116,8 @@ public class ProjectController {
 		}
 	}
 	
-	@RequestMapping(value="/{id}/logo", method=RequestMethod.POST)
-	public ResponseEntity<Void> changeAvatar(HttpSession session, @PathVariable String id, @RequestParam MultipartFile logo){
+	@RequestMapping(value="/{id}/change-logo", method=RequestMethod.POST)
+	public ResponseEntity<Void> changeLogo(HttpSession session, @PathVariable String id, @RequestParam MultipartFile logo){
 		String sessionId = (String)session.getAttribute("id");
 		if(sessionId != null){
 			Project project = service.findById(id);
@@ -130,6 +131,29 @@ public class ProjectController {
 						}
 					}else{
 						return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+					}
+				}else{
+					return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+				}
+			}else{
+				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			}
+		}else{
+			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	@RequestMapping(value="/{id}/remove-logo", method=RequestMethod.GET)
+	public ResponseEntity<Void> removeLogo(HttpSession session, @PathVariable String id){
+		String sessionId = (String)session.getAttribute("id");
+		if(sessionId != null){
+			Project project = service.findById(id);
+			if(project != null){
+				if(project.getManagers().contains(sessionId)){
+					if(service.removeLogo(project)){
+						return new ResponseEntity<Void>(HttpStatus.OK);
+					}else{
+						return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 					}
 				}else{
 					return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);

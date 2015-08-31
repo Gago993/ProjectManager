@@ -1,7 +1,10 @@
 div.member-container {
 	font-family: Helvetica, sans-serif;
 	
-	margin: 50px auto;
+	margin-top: 70px;
+	margin-left: auto;
+	margin-right: auto;
+	
 	width: 70%;
 }
 
@@ -10,11 +13,19 @@ div.head-data-container {
 	width: 100%;
 }
 
+div.image-outer-container {
+	display: block;
+	width: 300px;
+	
+	float:left;
+	
+	text-align: center;
+}
+
 div.image-container {
 	width: 300px;
 	height: 300px;
 	
-	float: left;
 	position: relative;
 }
 
@@ -32,8 +43,22 @@ div.image-container img {
 	bottom: 0;
 }
 
+div.image-outer-container form.image-controls {
+	clear: left;
+	
+	margin-top: 10px;
+}
+
+div.image-outer-container form.image-controls input[type=file] {
+	width: 10px;
+	visibility: hidden;
+}
+
 div.title-description-container {
 	float: left;
+	width: 200px;
+	
+	margin-left: 15px;
 }
 
 div.title-description-container span.member-name {

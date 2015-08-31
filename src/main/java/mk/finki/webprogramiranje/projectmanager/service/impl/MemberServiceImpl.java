@@ -54,7 +54,10 @@ public class MemberServiceImpl implements MemberService {
 	
 	public boolean savePicture(Member member, MultipartFile picture) {
 		try {
-			BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(picture.getBytes()));
+			ByteArrayInputStream in = new ByteArrayInputStream(picture.getBytes());
+			BufferedImage originalImage = ImageIO.read(in);
+			in.close();
+			
 			BufferedImage resizedImage = ServiceUtilities.resizeBufferedImage(originalImage);
 			
 			String oldPicture = member.getPicture();
@@ -65,12 +68,7 @@ public class MemberServiceImpl implements MemberService {
 				}
 			}
 			
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-			ImageIO.write(resizedImage, "png", outputStream);
-			outputStream.flush();
-			
-			String filename = ServiceUtilities.getMD5(outputStream.toByteArray());
-			outputStream.close();
+			String filename = ServiceUtilities.getRandomString();
 			
 			File file = new File(servletContext.getRealPath("/app/uploads/pictures/" + filename + ".png"));
 			ImageIO.write(resizedImage, "png", file);

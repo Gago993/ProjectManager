@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.security.MessageDigest;
+import java.util.UUID;
 
 public class ServiceUtilities {
 	public static BufferedImage resizeBufferedImage(BufferedImage image){
@@ -36,19 +37,7 @@ public class ServiceUtilities {
 		return result;
 	}
 	
-	public static String getMD5(byte[] bytes) {
-		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] array = md.digest(bytes);
-			
-			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < array.length; ++i) {
-				sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
-			}
-			
-			return sb.toString();
-		}catch(java.security.NoSuchAlgorithmException exception){}
-		
-	    return null;
+	public static String getRandomString() {
+		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 }

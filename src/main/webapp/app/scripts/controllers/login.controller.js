@@ -37,7 +37,7 @@ ProjectManagerApp.controller('LoginCtrl', ['$http', '$scope', '$rootScope', '$st
         	}
         });
         
-        $rootScope.$on('authenticationRegister', function(){
+        $rootScope.$on('authenticationRegistration', function(){
         	if(authentication.getMember()){
         		$state.go('dashboard');
         	}else{

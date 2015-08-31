@@ -1,13 +1,32 @@
 ProjectManagerApp.factory('authentication', ['$http', '$rootScope', function($http, $rootScope){
 	var member = null;
 	
-	function requestTransformationFunction(obj){
+	var requestTransformationFunction = function(obj){
 		var str = [];
 	    for(var p in obj){
 	    	str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
 	    }
 	    return str.join("&");
-	}
+	};
+	
+	var getLoggedInMember = function(){
+		var req = {
+		      url: 'members',
+		      method: "GET"
+	    };
+		
+		$http(req).then(function(response) {
+			member = response.data;
+			
+			$rootScope.$broadcast('authenticationInit');
+		}, function(response) {
+			member = null;
+			
+			$rootScope.$broadcast('authenticationInit');
+		});
+	};
+	
+	getLoggedInMember();
 	
 	return {
 		getMember: function(){
@@ -39,10 +58,10 @@ ProjectManagerApp.factory('authentication', ['$http', '$rootScope', function($ht
 			});
 		},
 		
-		register: function(){
+		register: function(email, password, firstname, lastname){
 			var reqBody = {
 				email: email,
-				password: md5.createHash(password),
+				password: password,
 				firstname: firstname,
 				lastname: lastname
 			};

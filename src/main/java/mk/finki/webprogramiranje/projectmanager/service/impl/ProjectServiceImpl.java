@@ -54,7 +54,10 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	public boolean saveLogo(Project project, MultipartFile logo) {
 		try {
-			BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(logo.getBytes()));
+			ByteArrayInputStream in = new ByteArrayInputStream(logo.getBytes());
+			BufferedImage originalImage = ImageIO.read(in);
+			in.close();
+			
 			BufferedImage resizedImage = ServiceUtilities.resizeBufferedImage(originalImage);
 			
 			String oldLogo = project.getLogo();
@@ -65,12 +68,7 @@ public class ProjectServiceImpl implements ProjectService {
 				}
 			}
 			
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-			ImageIO.write(resizedImage, "png", outputStream);
-			outputStream.flush();
-			
-			String filename = ServiceUtilities.getMD5(outputStream.toByteArray());
-			outputStream.close();
+			String filename = ServiceUtilities.getRandomString();
 			
 			File file = new File(servletContext.getRealPath("/app/uploads/logos/" + filename + ".png"));
 			ImageIO.write(resizedImage, "png", file);

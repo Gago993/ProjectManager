@@ -17,11 +17,12 @@
             },
             'changePicture': {
             	method: 'POST',
-            	url: '/change-picture'
+            	url: 'members/:id/change-picture',
+            	headers: {'Content-Type': undefined}
             },
             'removePicture': {
             	method: 'GET',
-            	url: '/remove-picture'
+            	url: 'members/:id/remove-picture'
             }
         });
     }
