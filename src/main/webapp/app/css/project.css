@@ -30,17 +30,7 @@
 	margin-top: 10px;
 }
 
-.pm-create-task {
-	padding:20px;
-    text-align:center;
-    cursor:pointer;
-    color:rgba(0,0,0,0.1);
-    font:220px "Helvetica", sans-serif;
-    line-height:185px;
-}
-.pm-new-task:hover .pm-create-task {
-	color:#20aa7d;
-}
+
 .pm-new-task .panel-heading {
 	height: 40px;	
 }
@@ -49,11 +39,9 @@
 	color: #fff;
 }
 .pm-new-task {
-	width: 250px;
-	height: 250px;
 	float: left;
 	margin-right: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     background-color: whitesmoke;
     border: 1px solid transparent;
     border-bottom: 5px solid #20aa7d;
@@ -62,8 +50,7 @@
 
 
 .project-task {
-	width: 250px;
-	height: 250px;
+	width: 100%;
 	float: left;
 	margin-right: 10px;
     margin-bottom: 20px;
@@ -77,6 +64,13 @@
 	font-size: 13px;
 	font-weight: normal;
 }
+
+.project-task span {
+    border-right: 2px solid;
+    padding-right: 10px;
+    border-color: #20aa7d;
+}
+
 .project-task:hover {
 	box-shadow:2px 4px 6px #20aa7d;	
 }

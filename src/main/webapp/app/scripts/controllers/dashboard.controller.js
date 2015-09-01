@@ -28,7 +28,7 @@ ProjectManagerApp.controller('DashboardCtrl', ['ProjectData', '$scope', '$modal'
         function createProject() {
             
         	ProjectData.save(function(data){
-        		$scope.projects.push(data);
+        		$scope.projects.unshift(data);
         	});
         	
 		};

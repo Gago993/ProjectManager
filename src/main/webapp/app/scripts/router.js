@@ -48,7 +48,7 @@ ProjectManagerApp.config([ '$stateProvider', '$urlRouterProvider',
       templateUrl: "app/views/dashboard.html",
       controller: "DashboardCtrl",
       data: {
-		  css: ["app/css/dashboard.css"]
+		  css: ["app/css/dashboard.css","app/css/index.css"]
 	  }
     })
 	
@@ -57,9 +57,21 @@ ProjectManagerApp.config([ '$stateProvider', '$urlRouterProvider',
 	      templateUrl: "app/views/project.html",
 	      controller: "ProjectCtrl",
 	      data: {
-			  css: ["app/css/project.css","app/css/angucomplete-alt.css"]
+			  css: ["app/css/project.css","app/css/angucomplete-alt.css","app/css/index.css"]
+		  }  
+	})
+	
+	.state('task', {
+		  parent: 'project',
+		  url: "/task",
+	      templateUrl: "app/views/task.html",
+	      controller: "TaskCtrl",
+	      params: {task: null},
+	      data: {
+			  css: ["app/css/task.css"]
 		  }  
 	});
+	
 	
 	$urlRouterProvider.when('', ['$state','$match', function ($state, $match) {
 	      $state.go('index');

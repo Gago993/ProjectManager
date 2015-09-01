@@ -10,9 +10,9 @@
  * @description # MainCtrl Controller
  */
 
-ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$modal', 
+ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state', '$modal', 
                         'ProjectData',
-    function ($scope, $stateParams, $modal, ProjectData) {
+    function ($scope, $stateParams, $state, $modal, ProjectData) {
         console.log("Project Controller reporting for duty.");
        
         $scope.project = ProjectData.get({id: $stateParams.projectId },function(data){
@@ -25,6 +25,9 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$modal',
         $scope.createTask = createTask;
         //updates model changes
         $scope.updateProject = updateProject;
+        $scope.openTask = openTask;
+        
+        
         
         
         function addTag(result) {
@@ -77,12 +80,18 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$modal',
         }
         
         function createTask() {
-        	$scope.project.tasks.push({});
+        	$scope.project.tasks.unshift({});
         	ProjectData.update($scope.project,function(data){
         		console.log("create new task",data);
         		$scope.project = data;
         	});
         }
+        
+        function openTask(project,task) {
+        	console.log(project,task);
+        	$state.go("task",{task: task});
+        }
+        
         
     }]);
 

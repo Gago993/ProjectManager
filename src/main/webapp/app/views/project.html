@@ -1,6 +1,7 @@
 <div class='pm-project-container'>
 {{project}}
 
+<div ui-view>
 
 	<div class="row">
        <div class="col-lg-12">
@@ -35,23 +36,16 @@
                 <!-- Add new Task -->
                 <div class="panel panel-default pm-new-task" ng-click="createTask()" >
                 	<div class="panel-heading">
-                         <span class="glyphicon glyphicon-tasks"></span> 
-                     </div>
-                
-	                <div class="pm-create-task">+</div>
+                         <span class="glyphicon glyphicon-plus"></span> 
+                    </div>
                  </div>      
+                
 				<!-- Existing Task -->
-				<div class="panel panel-default project-task" ng-repeat="task in project.tasks">
+				<div class="panel panel-default project-task" ng-repeat="task in project.tasks" ng-dblclick="openTask(project,task)" popover="Double click to open" popover-trigger="mouseenter">
                      <div class="panel-heading">
-                        <span class="glyphicon glyphicon-tasks"></span> 
+                        <span>{{$index+1}}</span> 
                         <input type="text" value="{{task.name}}" ng-model="task.name" ng-blur="updateProject()" />
                   		<input type="checkbox" ng-model="task.finished" ng-change="updateProject()"/>
-                     </div>
-                     <div class="panel-body">
-                         <label>Description: </label>
-                         <textarea type="text" value="{{task.description}}" ng-model="task.description" ng-blur="updateProject()"></textarea>
-                         <br/>
-                         Subtasks: {{task.subtasks.length}}
                      </div>
                 </div>
 				
@@ -63,7 +57,7 @@
        <!-- /.col-lg-12 -->
 	</div>
 	
-	 
+</div>	 
 	
 </div>
 

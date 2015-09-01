@@ -44,6 +44,7 @@
 <script src="app/scripts/controllers/login.controller.js"></script>
 <script src="app/scripts/controllers/dashboard.controller.js"></script>
 <script src="app/scripts/controllers/project.controller.js"></script>
+<script src="app/scripts/controllers/task.controller.js"></script>
 
 <!-- popup controllers -->
 <script src="app/scripts/controllers/popups/create.member.controller.js"></script>
