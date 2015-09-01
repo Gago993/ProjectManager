@@ -15,5 +15,6 @@
  */
 var ProjectManagerApp = angular.module('projectManagerApp', 
 		['ngResource','ngRoute','ui.router','angular-md5',
-		 'uiRouterStyles', 'ui.bootstrap', 'angucomplete-alt']);
+		 'uiRouterStyles', 'ui.bootstrap', 'angucomplete-alt',
+		 'angularFileUpload', 'ui.ace']);
 

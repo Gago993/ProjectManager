@@ -11,8 +11,8 @@
  */
 
 ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state', '$modal', 
-                        'ProjectData',
-    function ($scope, $stateParams, $state, $modal, ProjectData) {
+                        'ProjectData', 'FileUploader',
+    function ($scope, $stateParams, $state, $modal, ProjectData, FileUploader) {
         console.log("Project Controller reporting for duty.");
        
         $scope.project = ProjectData.get({id: $stateParams.projectId },function(data){
@@ -26,7 +26,18 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state',
         //updates model changes
         $scope.updateProject = updateProject;
         $scope.openTask = openTask;
+        $scope.openCodeSnippet = openCodeSnippet;
         
+        
+        $scope.uploader = new FileUploader({
+            url: '',
+            removeAfterUpload: true,
+            autoUpload: false,
+            onCompleteItem: function (fileItem, response, status, headers) {
+                console.log(response);
+                
+            }
+        });
         
         
         
@@ -91,6 +102,28 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state',
         	console.log(index);
         	$state.go("task",{taskIndex: index});
         }
+        
+        function openCodeSnippet() {
+        	
+        	var snippet = {code: "public class HelloWorld {" +
+        			"public static void main(String[] args) {" +
+        			"System.out.println('Hello, World'); }}"};
+        	
+        	var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'app/views/popups/codeSnippet.html',
+                controller: 'CodeSnippetCtrl',
+                resolve: {
+                	codeSnippet: function () {
+                        return snippet;
+                    },
+                }
+            });
+            modalInstance.result.then(function () {
+            	
+            });
+        }
+        
         
         
     }]);

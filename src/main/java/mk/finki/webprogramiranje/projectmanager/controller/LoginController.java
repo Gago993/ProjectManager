@@ -23,7 +23,7 @@ public class LoginController {
 	@ResponseBody
 	public ResponseEntity<Member> doLogin(HttpSession session, @RequestParam String email, @RequestParam String password) {
 		//assuming 'password' is password md5 hash (not using https)
-		
+
 		if(LoginController.isValidEmailAddress(email) && password.length() == 32){
 			Member member = service.findByEmail(email);
 			if(member != null && member.getPassword().equals(password)){

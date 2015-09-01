@@ -21,6 +21,10 @@
 <script src="app/components/ui-router-styles.js"></script>
 <script src="app/components/ui-bootstrap-tpls-0.13.3.min.js"></script>
 <script src="app/components/angucomplete-alt.js"></script>
+<script src="app/components/angular-file-upload.min.js"></script>
+<script src="app/components/ace/ace.js"></script>
+<script src="app/components/ui-ace.js"></script>
+
 
 <!-- The definition and the configuration of the application module -->
 <script src="app/scripts/app.js"></script>
@@ -48,6 +52,9 @@
 
 <!-- popup controllers -->
 <script src="app/scripts/controllers/popups/create.member.controller.js"></script>
+<script src="app/scripts/controllers/popups/code.snippet.controller.js"></script>
+
+
 
 </head>
 <body ng-app="projectManagerApp">
