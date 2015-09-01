@@ -24,7 +24,6 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state',
         $scope.taskId = $stateParams.taskIndex;
 
         $scope.createSubtask = createSubtask;
-        console.log($scope.task);
         
         function createSubtask(){
         	$scope.project.tasks[$scope.taskId].subtasks.unshift({});

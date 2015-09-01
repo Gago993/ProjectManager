@@ -4,6 +4,7 @@
 	border: 0;
 	height: 80%;
 	width: 100%;
+	resize: none;
 }
 
 .project-heading textarea:hover {
@@ -16,4 +17,10 @@
 .project-heading textarea:focus {
 	border: 1px dotted #20aa7d;
 	width: 100%;	
+}
+
+
+.pm-task-description {
+	float: left;
+	width: 50%;
 }

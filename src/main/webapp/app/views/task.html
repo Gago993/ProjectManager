@@ -4,13 +4,15 @@
            <div class="panel panel-default pm-project-tasks">
                <div class="panel-heading">
                    <i class="fa fa-bar-chart-o fa-fw"></i> 
-                   <label>{{task.name}}</label>
+                   <label>{{project.tasks[taskId].name}}</label>
                    <input type="checkbox" />
              	   
              	   <div class="project-heading">
-	         			<label>Description: </label>
-    	                <textarea type="text" value="{{task.description}}" ng-model="task.description" ng-blur="updateProject()"></textarea>
-         			
+	         			
+         				<div class="pm-task-description">
+	         				<label>Description: </label>
+    	                	<textarea type="text" value="{{project.tasks[taskId].description}}" ng-model="project.tasks[taskId].description" ng-blur="updateProject()"></textarea>
+         				</div>
 	         			<div class="btn-group pull-right" dropdown is-open="status.isopen">
 							 <button id="single-button" type="button" class="btn btn-default" dropdown-toggle ng-disabled="disabled">
 						        Members <span class="caret"></span>
