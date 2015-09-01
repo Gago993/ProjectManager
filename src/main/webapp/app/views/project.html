@@ -41,7 +41,7 @@
                  </div>      
                 
 				<!-- Existing Task -->
-				<div class="panel panel-default project-task" ng-repeat="task in project.tasks" ng-dblclick="openTask(project,task)" popover="Double click to open" popover-trigger="mouseenter">
+				<div class="panel panel-default project-task" ng-repeat="task in project.tasks" ng-dblclick="openTask($index)" popover="Double click to open" popover-trigger="mouseenter">
                      <div class="panel-heading">
                         <span>{{$index+1}}</span> 
                         <input type="text" value="{{task.name}}" ng-model="task.name" ng-blur="updateProject()" />

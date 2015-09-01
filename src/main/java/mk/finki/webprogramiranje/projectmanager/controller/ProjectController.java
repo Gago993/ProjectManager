@@ -73,26 +73,26 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(HttpSession session, @Valid @RequestBody Project jsonProject){
+	public ResponseEntity<Project> update(HttpSession session, @Valid @RequestBody Project jsonProject){
 		String sessionId = (String)session.getAttribute("id");
 		if(sessionId != null){
 			Project project = service.findById(jsonProject.getId());
 			if(project != null){
 				if(project.getManagers().contains(sessionId)){
 					if(jsonProject.getManagers().size() == project.getManagers().size() || (jsonProject.getManagers().size() >= 1 && jsonProject.getManagers().size() == project.getManagers().size() - 1 && !jsonProject.getManagers().contains(sessionId))){
-						service.save(jsonProject);
-						return new ResponseEntity<Void>(HttpStatus.OK);
+						jsonProject = service.save(jsonProject);
+						return new ResponseEntity<Project>(jsonProject,HttpStatus.OK);
 					}else{
-						return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+						return new ResponseEntity<Project>(new Project(),HttpStatus.BAD_REQUEST);
 					}
 				}else{
-					return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+					return new ResponseEntity<Project>(new Project(),HttpStatus.FORBIDDEN);
 				}
 			}else{
-				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<Project>(new Project(),HttpStatus.NOT_FOUND);
 			}
 		}else{
-			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<Project>(new Project(),HttpStatus.UNAUTHORIZED);
 		}
 	}
 	

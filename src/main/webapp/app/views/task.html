@@ -1,12 +1,57 @@
-<div class='pm-project-container'>
-{{project}}
-{{task}}
 
 	<div class="row">
-       
+       <div class="col-lg-12">
+           <div class="panel panel-default pm-project-tasks">
+               <div class="panel-heading">
+                   <i class="fa fa-bar-chart-o fa-fw"></i> 
+                   <label>{{task.name}}</label>
+                   <input type="checkbox" />
+             	   
+             	   <div class="project-heading">
+	         			<label>Description: </label>
+    	                <textarea type="text" value="{{task.description}}" ng-model="task.description" ng-blur="updateProject()"></textarea>
+         			
+	         			<div class="btn-group pull-right" dropdown is-open="status.isopen">
+							 <button id="single-button" type="button" class="btn btn-default" dropdown-toggle ng-disabled="disabled">
+						        Members <span class="caret"></span>
+						      </button>
+						      <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+						        <li role="menuitem"><a ng-click="newMember()">Add new member</a></li>
+						      </ul>
+							  <button type="button" class="btn btn-default">Discussion</button>
+						</div>
+	                   
+	                   <div class="clearfix"></div>
+                   </div>
+               </div>
+               <!-- /.panel-heading -->
+               <div class="panel-body">
+	
+	   
+                <!-- Add new Task -->
+                <div class="panel panel-default pm-new-task" ng-click="createSubtask()" >
+                	<div class="panel-heading">
+                         <span class="glyphicon glyphicon-plus"></span> 
+                    </div>
+                 </div>      
+                
+				<!-- Existing Task -->
+				<div class="panel panel-default project-task" ng-repeat="subtask in project.tasks[taskId].subtasks" >
+                     <div class="panel-heading">
+                        <span>{{$index+1}}</span> 
+                        <input type="text" value="{{subtask.name}}" ng-model="subtask.name" ng-blur="updateProject()" />
+                  		<input type="checkbox" ng-model="subtask.finished" ng-change="updateProject()"/>
+                     </div>
+                </div>
+				
+               
+               </div>
+               <!-- /.panel-body -->
+           </div>
+       </div>
+       <!-- /.col-lg-12 -->
 	</div>
 	
 	 
 	
-</div>
 

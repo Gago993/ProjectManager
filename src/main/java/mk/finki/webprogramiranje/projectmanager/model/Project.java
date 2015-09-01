@@ -170,21 +170,25 @@ public class Project {
 }
 
 class Task {
+	@NotNull
 	private String name;
+	@NotNull
 	private String description;
-	
+	@NotNull
 	private List<String> assignedTo;
-	
+	@NotNull
 	private Long dateDue;
-	
+	@NotNull
 	private List<Subtask> subtasks;
+	@NotNull
 	private List<CodeSnippet> codeSnippets;
+	@NotNull
 	private List<Attachment> attachments;
-	
+	@NotNull
 	private List<Comment> comments;
-	
+	@NotNull
 	private Boolean finished;
-	
+	@NotNull
 	private Long timestamp;
 	
 	public String getName(){

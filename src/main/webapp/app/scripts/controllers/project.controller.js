@@ -87,9 +87,9 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state',
         	});
         }
         
-        function openTask(project,task) {
-        	console.log(project,task);
-        	$state.go("task",{task: task});
+        function openTask(index) {
+        	console.log(index);
+        	$state.go("task",{taskIndex: index});
         }
         
         

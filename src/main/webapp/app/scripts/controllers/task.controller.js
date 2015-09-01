@@ -11,17 +11,28 @@
  */
 
 ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state',
-    function ($scope, $stateParams, $state) {
+                      'ProjectData',
+    function ($scope, $stateParams, $state, ProjectData) {
         console.log("Task Controller reporting for duty.");
         console.log($stateParams);
 
         
-        if(!$stateParams.task){
+        if($stateParams.taskIndex == null){
         	$state.go("project",{projectId: $stateParams.projectId});
         }
         
+        $scope.taskId = $stateParams.taskIndex;
 
-        $scope.task = $stateParams.task;
+        $scope.createSubtask = createSubtask;
+        console.log($scope.task);
+        
+        function createSubtask(){
+        	$scope.project.tasks[$scope.taskId].subtasks.unshift({});
+        	ProjectData.update($scope.project,function(data){
+        		console.log("create new subtask",data);
+        		$scope.project.tasks = data.tasks;
+        	});
+        }
         
         
         

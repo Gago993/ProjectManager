@@ -66,7 +66,7 @@ ProjectManagerApp.config([ '$stateProvider', '$urlRouterProvider',
 		  url: "/task",
 	      templateUrl: "app/views/task.html",
 	      controller: "TaskCtrl",
-	      params: {task: null},
+	      params: {taskIndex: null},
 	      data: {
 			  css: ["app/css/task.css"]
 		  }  

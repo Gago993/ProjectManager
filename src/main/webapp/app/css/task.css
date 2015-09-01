@@ -1,0 +1,19 @@
+.project-heading textarea {
+	background-color: transparent;
+	outline: 0;
+	border: 0;
+	height: 80%;
+	width: 100%;
+}
+
+.project-heading textarea:hover {
+	background-color: transparent;
+	outline: 0;
+	border: 1px dotted #20aa7d;
+	width: 100%;	
+}
+
+.project-heading textarea:focus {
+	border: 1px dotted #20aa7d;
+	width: 100%;	
+}
