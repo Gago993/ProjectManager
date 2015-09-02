@@ -390,20 +390,6 @@ abstract class ProjectResource {
 	}
 }
 
-class CodeSnippet extends ProjectResource {
-	
-	public CodeSnippet(){
-		super();
-	}
-}
-
-class Attachment extends ProjectResource {
-
-	public Attachment(){
-		super();
-	}
-}
-
 class Comment {
 	private String author;	//members.id
 	private String body;

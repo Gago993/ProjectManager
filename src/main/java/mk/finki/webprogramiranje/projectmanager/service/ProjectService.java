@@ -13,6 +13,14 @@ public interface ProjectService {
 	public boolean saveLogo(Project project, MultipartFile logo);
 	
 	public boolean removeLogo(Project project);
+	
+	public boolean saveAttachment(Project project, MultipartFile attachment, String name, String description, String author);
+
+	public boolean removeAttachment(Project project, int index);
+
+	public boolean saveSnippet(Project project, String snippet, String extension, String name, String description, String author);
+
+	public boolean removeSnippet(Project project, int index);
 
 	public Iterable<Project> findAll();
 	

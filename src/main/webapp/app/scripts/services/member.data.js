@@ -21,7 +21,7 @@
             	headers: {'Content-Type': undefined}
             },
             'removePicture': {
-            	method: 'GET',
+            	method: 'DELETE',
             	url: 'members/:id/remove-picture'
             }
         });

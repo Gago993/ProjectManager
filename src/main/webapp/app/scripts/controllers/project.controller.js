@@ -14,14 +14,15 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state',
                         'ProjectData', 'FileUploader',
     function ($scope, $stateParams, $state, $modal, ProjectData, FileUploader) {
         console.log("Project Controller reporting for duty.");
-       
+        
         $scope.project = ProjectData.get({id: $stateParams.projectId },function(data){
         });
         
         
         $scope.addTag = addTag;
         $scope.removeTag = remove;
-        $scope.newMember = addNewMember;
+        $scope.projectMembers = projectMembers;
+        $scope.projectDiscussion = projectDiscussion;
         $scope.createTask = createTask;
         //updates model changes
         $scope.updateProject = updateProject;
@@ -59,11 +60,11 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state',
         	});
         }
         
-        function addNewMember() {
+        function projectMembers() {
         	var modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
-                templateUrl: 'app/views/popups/newMember.html',
-                controller: 'CreateMemberCtrl',
+                templateUrl: 'app/views/popups/projectMembers.html',
+                controller: 'ProjectMembersCtrl',
                 resolve: {
                 	employees: function () {
                         return $scope.project.employees;
@@ -73,9 +74,31 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state',
                     },
                 }
             });
-            modalInstance.result.then(function (newMembers) {
-            	angular.extend($scope.project.managers, newMembers.managers);
-            	angular.extend($scope.project.employees, newMembers.employees);
+            modalInstance.result.then(function(result) {
+            	$scope.project.managers = result.managers;
+            	$scope.project.employees = result.employees;
+            	
+            	ProjectData.update($scope.project,function(data){
+           		 	console.log(data);
+            		$scope.project = data;
+            	});
+            });
+        }
+        
+        function projectDiscussion() {
+        	var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'app/views/popups/projectDiscussion.html',
+                controller: 'ProjectDiscussionCtrl',
+                resolve: {
+                	comments: function () {
+                        return $scope.project.comments;
+                    }
+                }
+            });
+            modalInstance.result.then(function(result) {
+            	$scope.project.comments = result.comments;
+            	
             	ProjectData.update($scope.project,function(data){
            		 	console.log(data);
             		$scope.project = data;

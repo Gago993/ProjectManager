@@ -1,5 +1,6 @@
 
 .pm-project-container {
+	margin-top: 5%;
 	margin-left: 10%;
 	margin-right: 10%
 }
@@ -9,7 +10,6 @@
     background-color: whitesmoke;
     border-color: #dfe2e4;
 }
-
 
 .pm-projects {
 	background-color: transparent;
@@ -25,7 +25,6 @@
 	border: 0;
 	background-color: transparent;
 }
-
 
 .project-heading {
 	margin-top: 10px;
@@ -60,7 +59,6 @@
     border-bottom: 5px solid #20aa7d;
 	box-shadow:2px 4px 6px #20aa7d;	
 }
-
 
 .pm-project {
 	width: 250px;
@@ -97,15 +95,26 @@
 	outline: 0;
 	border: 0;
 	margin-left: 5px;
+	width: 150px;
 }
 .pm-project .panel-heading input[type="checkbox"] {
 	float: right;
+}
+.pm-project-open {
+	margin-top: -2px;
+	background-color: #bcbcbc;
+	padding: 4px 4px 4px 4px;
+	border-radius: 5px;
+	float: right;
+}
+.pm-project-open:hover {
+	cursor: pointer;
 }
 .pm-project .panel-body textarea {
 	background-color: transparent;
 	outline: 0;
 	border: 0;
-	height: 80%;
+	height: 100%;
 	width: 100%;
 	resize: none;
 }
@@ -126,7 +135,7 @@
 	border: 1px dotted #20aa7d;
 }
 
-.pm-project-open {
+/*.pm-project-open {
 	background-color: #bcbcbc;
 	padding: 4px 4px 4px 4px;
 	border-radius: 5px;
@@ -134,25 +143,27 @@
 }
 .pm-project-open:hover {
 	cursor: pointer;
-}
+}*/
 .pm-project-remove {
+	margin-top: -2px;
+	background-color: #bcbcbc;
+	padding: 4px 4px 4px 4px;
+	border-radius: 5px;
 	float: right;
 }
 
-
+.pm-project-remove:hover {
+	cursor: pointer;
+}
 
 .pull-right>.dropdown-menu {
     right: 20px; 
 }
 
-
 .pm-add-member {
 	color: #fff;
 	background-color: #20aa7d;
 }
-
-
-
 
 .project-filter input{
 	padding: 6px 12px;
@@ -170,5 +181,11 @@
     outline-width: 0;
 }
 
+.dashboard-header {
+	margin-top: 3px;
+}
 
-
+.dashboard-header h3 {
+	margin: 0;
+	padding: 0;
+}

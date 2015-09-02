@@ -4,12 +4,15 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 
+import mk.finki.webprogramiranje.projectmanager.model.Attachment;
+import mk.finki.webprogramiranje.projectmanager.model.CodeSnippet;
 import mk.finki.webprogramiranje.projectmanager.model.Project;
 import mk.finki.webprogramiranje.projectmanager.repository.ProjectRepository;
 import mk.finki.webprogramiranje.projectmanager.service.ProjectService;
@@ -43,7 +46,7 @@ public class ProjectServiceImpl implements ProjectService {
 				project.setLogo("");
 				this.save(project);
 				
-				return deleted;
+				return true;
 			}
 			
 			return true;
@@ -105,5 +108,97 @@ public class ProjectServiceImpl implements ProjectService {
 
 	public void delete(Project project) {
 		repository.delete(project);
+	}
+	
+	public boolean saveAttachment(Project project, MultipartFile attachment, String name, String description, String author) {
+		try {
+			String[] filenameParts = attachment.getOriginalFilename().split("\\.");
+			String extension = "";
+			if(filenameParts.length > 0){
+				extension = filenameParts[filenameParts.length - 1];
+			}
+			
+			String filename = ServiceUtilities.getRandomString() + (extension != "" ? "." + extension : "");
+			
+			File file = new File(servletContext.getRealPath("/app/uploads/attachments/" + filename));
+			
+			FileOutputStream out = new FileOutputStream(file);
+			out.write(attachment.getBytes());
+			out.close();
+			
+			Attachment newAttachment = new Attachment();
+
+			newAttachment.setName(name);
+			newAttachment.setDescription(description);
+			newAttachment.setAuthor(author);
+			newAttachment.setFileLocation(filename);
+			
+			project.getAttachments().add(newAttachment);
+			this.save(project);
+			
+			return true;
+		}catch(IOException exception){
+			return false;
+		}
+	}
+
+	public boolean removeAttachment(Project project, int index) {
+		try {
+			String filelocation = project.getAttachments().get(index).getFileLocation();
+			boolean deleted = new File(servletContext.getRealPath("/app/uploads/attachments/" + filelocation)).delete();
+			if(!deleted){
+				throw new IOException("Can not delete attachment.");
+			}
+			
+			project.getAttachments().remove(index);
+			this.save(project);
+			
+			return true;
+		}catch(IOException exception){
+			return false;
+		}
+	}
+
+	public boolean saveSnippet(Project project, String snippet, String extension, String name, String description, String author) {
+		try {
+			String filename = ServiceUtilities.getRandomString() + "." + extension;
+			
+			File file = new File(servletContext.getRealPath("/app/uploads/snippets/" + filename));
+			
+			FileOutputStream out = new FileOutputStream(file);
+			out.write(snippet.getBytes());
+			out.close();
+			
+			CodeSnippet newSnippet = new CodeSnippet();
+
+			newSnippet.setName(name);
+			newSnippet.setDescription(description);
+			newSnippet.setAuthor(author);
+			newSnippet.setFileLocation(filename);
+			
+			project.getCodeSnippets().add(newSnippet);
+			this.save(project);
+			
+			return true;
+		}catch(IOException exception){
+			return false;
+		}
+	}
+
+	public boolean removeSnippet(Project project, int index) {
+		try {
+			String filelocation = project.getCodeSnippets().get(index).getFileLocation();
+			boolean deleted = new File(servletContext.getRealPath("/app/uploads/snippets/" + filelocation)).delete();
+			if(!deleted){
+				throw new IOException("Can not delete snippet.");
+			}
+			
+			project.getCodeSnippets().remove(index);
+			this.save(project);
+			
+			return true;
+		}catch(IOException exception){
+			return false;
+		}
 	}
 }

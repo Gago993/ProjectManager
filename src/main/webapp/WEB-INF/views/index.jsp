@@ -51,7 +51,8 @@
 <script src="app/scripts/controllers/task.controller.js"></script>
 
 <!-- popup controllers -->
-<script src="app/scripts/controllers/popups/create.member.controller.js"></script>
+<script src="app/scripts/controllers/popups/project.members.controller.js"></script>
+<script src="app/scripts/controllers/popups/project.discussion.controller.js"></script>
 <script src="app/scripts/controllers/popups/code.snippet.controller.js"></script>
 
 

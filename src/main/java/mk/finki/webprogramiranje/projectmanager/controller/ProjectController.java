@@ -143,7 +143,7 @@ public class ProjectController {
 		}
 	}
 	
-	@RequestMapping(value="/{id}/remove-logo", method=RequestMethod.GET)
+	@RequestMapping(value="/{id}/remove-logo", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> removeLogo(HttpSession session, @PathVariable String id){
 		String sessionId = (String)session.getAttribute("id");
 		if(sessionId != null){
@@ -154,6 +154,132 @@ public class ProjectController {
 						return new ResponseEntity<Void>(HttpStatus.OK);
 					}else{
 						return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+					}
+				}else{
+					return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+				}
+			}else{
+				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			}
+		}else{
+			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	@RequestMapping(value="/{id}/attachment", method=RequestMethod.POST)
+	public ResponseEntity<Void> uploadAttachment(HttpSession session, @PathVariable String id, @RequestParam MultipartFile attachment, @RequestParam String name, @RequestParam String description){
+		String sessionId = (String)session.getAttribute("id");
+		if(sessionId != null){
+			Project project = service.findById(id);
+			if(project != null){
+				if(project.getManagers().contains(sessionId) || project.getEmployees().contains(sessionId)){
+					if(!attachment.isEmpty()){
+						if(service.saveAttachment(project, attachment, name, description, sessionId)){
+							return new ResponseEntity<Void>(HttpStatus.OK);
+						}else{
+							return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+						}
+					}else{
+						return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+					}
+				}else{
+					return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+				}
+			}else{
+				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			}
+		}else{
+			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	@RequestMapping(value="/{id}/attachment/{index}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> removeAttachment(HttpSession session, @PathVariable String id, @PathVariable String index){
+		String sessionId = (String)session.getAttribute("id");
+		if(sessionId != null){
+			Project project = service.findById(id);
+			if(project != null){
+				if(project.getManagers().contains(sessionId) || project.getEmployees().contains(sessionId)){
+					try{
+						int parsedIndex = Integer.parseInt(index);
+						if(parsedIndex >= 0 && parsedIndex < project.getAttachments().size()){
+							if(project.getManagers().contains(sessionId) || project.getCodeSnippets().get(parsedIndex).getAuthor().equals(sessionId)){
+								if(service.removeAttachment(project, parsedIndex)){
+									return new ResponseEntity<Void>(HttpStatus.OK);
+								}else{
+									return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+								}
+							}else{
+								return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+							}
+						}else{
+							return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+						}
+					}catch(NumberFormatException exception){
+						return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+					}
+				}else{
+					return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+				}
+			}else{
+				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			}
+		}else{
+			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	@RequestMapping(value="/{id}/snippet", method=RequestMethod.POST)
+	public ResponseEntity<Void> uploadCodeSnippet(HttpSession session, @PathVariable String id, @RequestParam String snippet, @RequestParam String extension, @RequestParam String name, @RequestParam String description){
+		String sessionId = (String)session.getAttribute("id");
+		if(sessionId != null){
+			Project project = service.findById(id);
+			if(project != null){
+				if(project.getManagers().contains(sessionId) || project.getEmployees().contains(sessionId)){
+					if(!snippet.isEmpty()){
+						if(service.saveSnippet(project, snippet, extension, name, description, sessionId)){
+							return new ResponseEntity<Void>(HttpStatus.OK);
+						}else{
+							return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+						}
+					}else{
+						return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+					}
+				}else{
+					return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+				}
+			}else{
+				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			}
+		}else{
+			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	@RequestMapping(value="/{id}/snippet/{index}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> removeSnippet(HttpSession session, @PathVariable String id, @PathVariable String index){
+		String sessionId = (String)session.getAttribute("id");
+		if(sessionId != null){
+			Project project = service.findById(id);
+			if(project != null){
+				if(project.getManagers().contains(sessionId) || project.getEmployees().contains(sessionId)){
+					try{
+						int parsedIndex = Integer.parseInt(index);
+						if(parsedIndex >= 0 && parsedIndex < project.getCodeSnippets().size()){
+							if(project.getManagers().contains(sessionId) || project.getCodeSnippets().get(parsedIndex).getAuthor().equals(sessionId)){
+								if(service.removeSnippet(project, parsedIndex)){
+									return new ResponseEntity<Void>(HttpStatus.OK);
+								}else{
+									return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+								}
+							}else{
+								return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+							}
+						}else{
+							return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+						}
+					}catch(NumberFormatException exception){
+						return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 					}
 				}else{
 					return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);

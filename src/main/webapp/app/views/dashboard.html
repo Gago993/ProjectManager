@@ -4,6 +4,9 @@
            <div class="panel panel-default pm-projects">
 
 				<div class="panel-heading" >
+					<div class="pull-left dashboard-header">
+						 <h3>Projects</h3>
+					</div>
 					<div class="pull-right project-filter">
 						 <input type="text" placeholder="Filter Name & Description" ng-model="query">
 					</div>
@@ -24,19 +27,22 @@
 				<div class="panel panel-default pm-project" ng-repeat="project in projects | filter:search" >
                      <div class="panel-heading">
                         <span class="glyphicon glyphicon-tasks"></span> 
-                        <input type="text" value="{{project.name}}" ng-model="project.name" ng-blur="" />
-                  		<input type="checkbox" />
+                        <input type="text" value="{{project.name}}" ng-model="project.name" ng-blur="updateProject(project)" placeholder="Name" />
+                        
+                        <div class="pm-project-open" ui-sref="project({projectId : project.id})">Open</div>
+                  		<!--
+                  			this should be on project page
+                  			<input type="checkbox" />
+                  		-->
                      </div>
                      <div class="panel-body">
-                         <label>Description: </label>
-                         <textarea type="text" value="{{project.description}}" ng-model="project.description" ng-blur=""></textarea>
-                         <br/>
-                         <span>Members: {{pr.managers.length + pr.employees.length}}</span>
-                     	
+                         <!--<label>Description: </label>-->
+                         <textarea type="text" value="{{project.description}}" ng-model="project.description" ng-blur="updateProject(project)" placeholder="Description"></textarea>
                      </div>
                      <div class="panel-footer">
-                     <div class="pm-project-open" ui-sref="project({projectId : project.id})">Open</div>
-                     <div class="pm-project-remove" ng-click="removeProject(project)" >X</div>
+                     <span class="pm-members-count">Members #: {{project.managers.length + project.employees.length}}</span>
+                     <!-- better tags here, remove on project page -->
+                     <div class="pm-project-remove" ng-click="removeProject(project)">Remove</div>
                      </div>
                 </div>
               </div>

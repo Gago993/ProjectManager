@@ -16,42 +16,27 @@ ProjectManagerApp.controller('DashboardCtrl', ['ProjectData', '$scope', '$modal'
         console.log("Dashboard Controller reporting for duty.");
         
         $scope.animationsEnabled = true;
-
-        $scope.createProject = createProject;
-        $scope.removeProject = removeProject;
-        $scope.openProject = openProject;
         
-        $scope.search = search;
-        
-        $scope.projects = ProjectData.query(function(data){});
+        $scope.projects = ProjectData.query();
 
-        function createProject() {
-            
+        $scope.createProject = function(){
         	ProjectData.save(function(data){
-        		$scope.projects.unshift(data);
+        		$scope.projects.push(data);
         	});
-        	
 		};
-        
-        function removeProject(project) {
-        	ProjectData.remove({id: project.id},function(data){
-        		 var index = $scope.projects.indexOf(project);
-        		  $scope.projects.splice(index, 1);     
-        	});
+		
+		$scope.updateProject = function(project){
+        	ProjectData.update({}, project);
+        };
+		
+        $scope.removeProject = function(project){
+        	ProjectData.remove({id: project.id}, function(data){
+	       		var index = $scope.projects.indexOf(project);
+	       		$scope.projects.splice(index, 1);     
+	    	});
         };
         
-        function openProject(project) {
-        	
-        };
-        
-        
-        function search(row) {
+        $scope.search = function(row){
             return (angular.lowercase(row.name).indexOf($scope.query || '') !== -1 || angular.lowercase(row.description).indexOf($scope.query || '') !== -1);
         };
-        
-        
-        
-        
     }]);
-
-

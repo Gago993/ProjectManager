@@ -133,7 +133,7 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping(value="/{id}/remove-picture", method=RequestMethod.GET)
+	@RequestMapping(value="/{id}/remove-picture", method=RequestMethod.DELETE)
 	public ResponseEntity<Member> removePicture(HttpSession session, @PathVariable String id){
 		String sessionId = (String)session.getAttribute("id");
 		if(sessionId != null && sessionId.equals(id)){

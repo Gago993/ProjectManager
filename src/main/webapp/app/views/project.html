@@ -13,13 +13,13 @@
              		<pm-input-tags class="project-tags" add-tag="addTag(result)" remove-tag="removeTag(index)" initial-data="project.tags" view-name="" ></pm-input-tags>
          			
          			<div class="btn-group pull-right" dropdown is-open="status.isopen">
-						 <button id="single-button" type="button" class="btn btn-default" dropdown-toggle ng-disabled="disabled">
-					        Members <span class="caret"></span>
-					      </button>
-					      <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+						 <button id="single-button" type="button" class="btn btn-default" ng-click="projectMembers()" dropdown-toggle>
+					     Members
+					     </button>
+					     <!--<ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
 					        <li role="menuitem"><a ng-click="newMember()">Add new member</a></li>
-					      </ul>
-						  <button type="button" class="btn btn-default">Discussion</button>
+					     </ul> -->
+						 <button type="button" class="btn btn-default" ng-click="projectDiscussion()">Discussion</button>
 					</div>
       
 					
