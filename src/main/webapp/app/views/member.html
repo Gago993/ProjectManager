@@ -3,7 +3,7 @@
 		<div class="image-outer-container">
 			<div class="image-container">
 				<img
-					ng-src="{{'app/uploads/pictures/' + (member.picture != '' ? (member.picture + '.png') : 'default.png')}}"
+					ng-src="{{(member.picture != '' ? (member.picture + '.png') : 'app/uploads/pictures/default.png')}}"
 					alt="profile picture" />
 			</div>
 			<form ng-show="canEditTest()" class="image-controls">
