@@ -24,6 +24,7 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state',
         $scope.taskId = $stateParams.taskIndex;
 
         $scope.createSubtask = createSubtask;
+        $scope.backToProject = backToProject;
         
         function createSubtask(){
         	$scope.project.tasks[$scope.taskId].subtasks.unshift({});
@@ -33,6 +34,10 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state',
         	});
         }
         
+        function backToProject(){
+        	console.log($stateParams.projectId);
+        	$state.go("project",{projectId: $stateParams.projectId});
+        }
         
         
     }]);

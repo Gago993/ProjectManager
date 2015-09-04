@@ -66,6 +66,7 @@
 		
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav pull-left">
+			<li>{{member}}</li>
 				<li data-ng-show="member"><a ui-sref="member({memberId: member.id})">{{member.firstname}}</a></li>
 				<li data-ng-show="member"><a ui-sref="dashboard">Dashboard</a></li>
 			</ul>

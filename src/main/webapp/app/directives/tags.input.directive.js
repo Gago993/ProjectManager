@@ -27,14 +27,14 @@
                 addTag: "&",
                 removeTag: "&",
                 viewName: '@',
-
+                addPlaceholder: "@",
             }
         };
 
         return directive;
 
         function link(scope, element, attrs) {
-            scope.inputWidth = 65;
+            scope.inputWidth = 100;
             scope.remove = remove;
 
             var callback = scope.$watch('initialData', function(newVal){

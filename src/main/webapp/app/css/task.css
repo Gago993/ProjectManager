@@ -19,8 +19,76 @@
 	width: 100%;	
 }
 
+.task-title {
+	text-transform: capitalize;
+}
 
 .pm-task-description {
 	float: left;
 	width: 50%;
 }
+
+.back-to-project-arrow {
+	font-size: 23px;
+	color: #20aa7d;
+}
+.back-to-project-arrow:hover {
+	cursor: pointer;
+	color: #35d9a4;
+}
+
+.task-subtasks {
+	width: 100%;
+	float: left;
+	margin-right: 10px;
+    margin-bottom: 20px;
+    background-color: whitesmoke;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #20aa7d;
+	box-shadow:0px 1px 2px #20aa7d;	
+}
+
+.task-subtasks:hover {
+	box-shadow:2px 4px 6px #20aa7d;	
+}
+
+.task-subtasks .panel-heading input {
+	background-color: transparent;
+	outline: 0;
+}
+
+.task-subtasks .panel-heading input[type="text"]:hover {
+	border: 1px dotted #20aa7d;
+}
+.task-subtasks .panel-heading input[type="text"]:focus {
+	border: 1px dotted #20aa7d;
+}
+
+
+.subtask-number {
+	border-right: 2px solid;
+    padding-right: 10px;
+    border-color: #20aa7d;
+}
+
+.subtask-name {
+	margin-left: 20px;
+	width: 200px;
+	border: 0;
+}
+.subtask-description {
+	margin-left: 20px;
+	border-left: 2px solid #20aa7d;
+	border-right: 0;
+	border-top: 0;
+	border-bottom: 0;
+	padding-left: 20px;
+	width: 450px;
+}
+.subtask-checkbox {
+	float: right;
+}
+
+
+
+
