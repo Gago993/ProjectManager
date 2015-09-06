@@ -10,14 +10,20 @@
  * @description # MainCtrl Controller
  */
 
-ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$rootScope', '$stateParams', 'MemberData', 'authentication', 
-    function ($http, $scope, $state, $rootScope, $stateParams, MemberData, authentication) {
+ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$filter', '$rootScope', '$stateParams', 'MemberData', 'authentication', 
+    function ($http, $scope, $state, $filter, $rootScope, $stateParams, MemberData, authentication) {
         console.log("Member Controller reporting for duty.");
         
         MemberData.get({id: $stateParams['memberId']}).$promise.then(function(member) {
             $scope.member = member;
             $scope.authenticatedMember = authentication.getMember(); 
             /*updatePicture();*/
+            $scope.opened = [];
+            
+            angular.forEach($scope.member.experience, function(value, key) {
+            	$scope.opened.push(false,false);
+            });
+            
         });
     
         
@@ -34,13 +40,37 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$rootS
         $scope.addSkill = addSkill;
         $scope.removeSkill = removeSkill;
         
-     
         
         function updateMember(){
+        	
+        	/*angular.forEach($scope.member.experience, function(value, key) {
+        		console.log(value);
+    			  if(value.dateFrom && value.dateForm != 0){
+    				  value.dateFrom = new Date(value.dateFrom).getTime();}
+    			  if(value.dateTo && value.dateForm != 0){
+    				  value.dateTo = new Date(value.dateTo).getTime();}
+        		});*/
+        	
         	MemberData.update({}, $scope.member, function(data){
         		console.log("update member");
+        	/*	angular.forEach($scope.member.experience, function(value, key) {
+      			  if(value.dateFrom){
+      				  value.dateFrom = new Date(value.dateFrom);
+      			  }
+      			  if(value.dateTo){
+      				  value.dateTo = new Date(value.dateTo);
+      			  }
+          		});*/
         	});
         }
+        
+
+        $scope.openDatePicker = function ($event,index,picker) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            console.log(2*index+picker);
+            $scope.opened[2*index+picker] = !$scope.opened[2*index+picker];
+        };
         
         
         function canEditTest(){
@@ -103,17 +133,16 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$rootS
         	updateMember();
         }
         
+       
+        $scope.formatDate = formatDate;
         
-
-
-        $scope.formatDate = function (experience,type) {
+        function formatDate(experience,type) {
         	
-        	if(type==0){
+        	if(type == 0){
         		experience.dateFrom = new Date(experience.dateFrom).getTime();
         	}else{
         		experience.dateTo = new Date(experience.dateTo).getTime();
         	}
-        	console.log(experience);
         };
 
         
