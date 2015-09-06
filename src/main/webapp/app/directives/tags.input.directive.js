@@ -37,41 +37,27 @@
             scope.inputWidth = 100;
             scope.remove = remove;
 
-            var callback = scope.$watch('initialData', function(newVal){
-                if(newVal)
-                {
-                	scope.initialData = newVal;
-                    callback();
-                }
-            });
-            
-            
-            scope.$watch('textTag', function (value) {
-                if (value != undefined) {
-                	//console.log(value);
-                }
-            });
-
 
             element.bind('keypress', function (e) {
                 var key = e.which;
 
-                if (key == 13) {
+                if (key == 13 || key == 32) {
                     e.preventDefault();
 
-                    var result = scope.textTag;
+                    var query = scope.textTag;
 
-                    if (result.length == 0) {
+                    if (query.length == 0) {
                         return;
                     }
+                    scope.addTag({ result: query });
                     scope.textTag = "";
-                    scope.addTag({ result: result });
-                                     
+                    
                 }                
             })
 
             function remove(index) {
             	console.log(index);
+            	scope.initialData.splice(index, 1);
             	scope.removeTag({ index: index });
             }
 

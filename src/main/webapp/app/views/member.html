@@ -1,6 +1,6 @@
 <div class="member-container">
 	<div class="head-data-container">
-		<div class="image-outer-container">
+		<div class="image-outer-container float-left colon-20">
 			<div class="image-container">
 				<img
 					ng-src="{{(member.picture != '' ? (member.picture + '.png') : 'app/uploads/pictures/default.png')}}"
@@ -13,12 +13,54 @@
 					name="picture" />
 			</form>
 		</div>
-		<div class="title-description-container">
+		<div class="title-description-container float-left colon-80">
 			<span class="member-name">{{member.firstname + ' ' +
 				member.lastname}}</span>
 			<p class="member-biography">{{member.biography}}</p>
 		</div>
 	</div>
+	
+	<div class="content-data-container">
+	
+	 <div class="member-boxes-container">
+
+        <div class="member-boxes-2-column">
+            <div class="member-box">
+             <div class="member-box-title">Biography</div>
+                <div class="member-box-content">
+	                <p>adfadfadsflads fdfd fd</p>
+           		</div>
+            </div>
+        </div>
+        
+        <div class="member-boxes-2-column">
+            <div class="member-box">
+             <div class="member-box-title">Skills</div>
+                <div class="member-box-content">
+	                <pm-input-tags 
+		            	class="" 
+		            	add-placeholder="Add Skill..." 
+		            	add-tag="addSkill(result)" 
+		            	remove-tag="removeSkill(index)" 
+		            	initial-data="member.skills" 
+		            	view-name="" 
+		            	>
+	           		</pm-input-tags>
+           		</div>
+            </div>
+        </div>
+        
+        <div class="member-boxes-1-column">
+            <div class="member-box">
+            agddfdsafdf
+            </div>
+        </div>
+        
+     </div>
+	
+	</div>
+	
+	
 	<div class="skills-container">
 		<span class="skills-header">Skills:</span><br /> <span class="skill"
 			ng-repeat="skill in member.skills">{{skill}}</span>
@@ -47,3 +89,5 @@
 		</div>
 	</div>
 </div>
+
+{{member}}

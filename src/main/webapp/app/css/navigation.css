@@ -40,27 +40,7 @@
 }
 
 .pm-navbar-member-image  {
-    width: 60px;
+    max-width: 60px;
+    max-height: 40px;
     margin: -11px 0px -9px 0px;
 }
-
-/*.obos-tags {
-	display: inline-block;
-}
-.obos-tag{
-    display: block;
-    float: left;
-    padding: 2px 5px;
-    text-decoration: none;
-    background: #1caf9a;
-    color: #fff;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    font-size: 13px;
-    border-radius: 2px;
-}
-
-.obos-tag:hover {
-    color: red;
-    text-decoration: none;
-}*/

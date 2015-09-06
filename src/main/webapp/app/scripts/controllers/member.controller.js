@@ -19,28 +19,33 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$rootS
             $scope.authenticatedMember = authentication.getMember(); 
             /*updatePicture();*/
         });
+    
         
-        var saveMember = function(){
+        $scope.updateMember = updateMember;
+       
+        $scope.canEditTest = canEditTest;
+        
+        $scope.changePicture = changePicture;
+        $scope.removePicture = removePicture;
+        
+        $scope.addExperience = addExperience;
+        $scope.removeExperience = removeExperience;
+        
+        $scope.addSkill = addSkill;
+        $scope.removeSkill = removeSkill;
+        
+     
+        
+        function updateMember(){
         	MemberData.update({}, $scope.member);
-        };
+        }
         
-        /*var updatePicture = function(){
-        	if($scope.member.picture != ''){
-        		$http.get('app/uploads/pictures/' + $scope.member.picture + '.png').then(function(response){
-        			angular.element("div.image-container img").attr('src', response.data);
-    		    }, function(response) {
-    		    	angular.element("div.image-container img").attr('src', 'app/uploads/pictures/default.png');
-    		    });
-        	}else{
-        		angular.element("div.image-container img").attr('src', 'app/uploads/pictures/default.png');
-        	}
-        };*/
         
-        $scope.canEditTest = function(){
+        function canEditTest(){
         	return $scope.member && $scope.authenticatedMember && $scope.member.id === $scope.authenticatedMember.id;
         }
         
-        $scope.changePicture = function(){
+        function changePicture(){
         	var fileSelector = angular.element('input[name=picture]');
         	fileSelector.unbind();
         	
@@ -62,24 +67,54 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$rootS
         	fileSelector.click();
         };
         
-        $scope.removePicture = function(){
+        
+        function removePicture(){
         	MemberData.removePicture({id: $stateParams['memberId']}).$promise.then(function(member) {
         		$scope.member = member;
         		/*updatePicture();*/
             });
         };
         
-        $scope.addExperience = function(){
+        
+        function addExperience(){
         	$scope.member.experience.push({});
         	
-        	saveMember();
+        	updateMember();
         };
         
-        $scope.removeExperience = function(index){
+        
+        function removeExperience(index){
         	$scope.member.experience.slice(index, 1);
         	
-        	saveMember();
+        	updateMember();
         };
+        
+        
+        function addSkill(result){
+        	$scope.member.skills.push(result);
+        	updateMember();
+        }
+        
+        function removeSkill(index){
+        	console.log(index);
+        	$scope.member.skills.slice(index,1);
+        	updateMember();
+        }
+        
+        
+        
+        
+        
     }]);
 
-
+/*var updatePicture = function(){
+if($scope.member.picture != ''){
+	$http.get('app/uploads/pictures/' + $scope.member.picture + '.png').then(function(response){
+		angular.element("div.image-container img").attr('src', response.data);
+    }, function(response) {
+    	angular.element("div.image-container img").attr('src', 'app/uploads/pictures/default.png');
+    });
+}else{
+	angular.element("div.image-container img").attr('src', 'app/uploads/pictures/default.png');
+}
+};*/

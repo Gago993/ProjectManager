@@ -8,6 +8,7 @@
 <!-- Project StyleSheet -->
 <link rel="stylesheet" href="app/css/bootstrap.min.css"></link>
 <link rel="stylesheet" href="app/css/navigation.css"></link>
+<link rel="stylesheet" href="app/css/tags.input.directive.css"></link>
 
 <!-- jQuery proper, Angular bootstraps it automatically -->
 <script src="app/components/jquery.min.js"></script>
@@ -35,7 +36,6 @@
 <script src="app/scripts/services/member.data.js"></script>
 
 <!-- directives -->
-<script src="app/directives/tags.directive.js"></script>
 <script src="app/directives/tags.input.directive.js"></script>
 
 <!-- routes -->
