@@ -37,7 +37,9 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$rootS
      
         
         function updateMember(){
-        	MemberData.update({}, $scope.member);
+        	MemberData.update({}, $scope.member, function(data){
+        		console.log("update member");
+        	});
         }
         
         
@@ -102,7 +104,18 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$rootS
         }
         
         
-        
+
+
+        $scope.formatDate = function (expirience,type) {
+        	
+        	if(type==0){
+        		expirience.dateFrom = new Date(expirience.dateFrom).getTime();
+        	}else{
+        		expirience.dateTo = new Date(expirience.dateTo).getTime();
+        	}
+        	console.log(expirience);
+        };
+
         
         
     }]);

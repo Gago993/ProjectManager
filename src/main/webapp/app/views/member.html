@@ -6,6 +6,7 @@
 					ng-src="{{(member.picture != '' ? (member.picture + '.png') : 'app/uploads/pictures/default.png')}}"
 					alt="profile picture" />
 			</div>
+			<hr />
 			<form ng-show="canEditTest()" class="image-controls">
 				<button id="changeButton" ng-click="changePicture()">Change</button>
 				<button id="removeButton" ng-click="removePicture()">Remove</button>
@@ -14,9 +15,17 @@
 			</form>
 		</div>
 		<div class="title-description-container float-left colon-80">
-			<span class="member-name">{{member.firstname + ' ' +
-				member.lastname}}</span>
-			<p class="member-biography">{{member.biography}}</p>
+			<div class="member-name">
+				<label>Name: </label>
+			 	<input type="text" value="{{member.firstname}}" ng-model="member.firstname" ng-blur="updateMember()" />
+			</div>
+			<div class="member-name">
+				<label>Last Name: </label> 	
+			 	<input type="text" value="{{member.lastname}}" ng-model="member.lastname" ng-blur="updateMember()" />
+			</div>
+			<div class="member-biography">
+				<textarea placeholder="Add Biography..." ng-model="member.biography" ng-blur="updateMember()">{{member.biography}}</textarea>
+			</div>
 		</div>
 	</div>
 	
@@ -24,15 +33,6 @@
 	
 	 <div class="member-boxes-container">
 
-        <div class="member-boxes-2-column">
-            <div class="member-box">
-             <div class="member-box-title">Biography</div>
-                <div class="member-box-content">
-	                <p>adfadfadsflads fdfd fd</p>
-           		</div>
-            </div>
-        </div>
-        
         <div class="member-boxes-2-column">
             <div class="member-box">
              <div class="member-box-title">Skills</div>
@@ -50,9 +50,42 @@
             </div>
         </div>
         
-        <div class="member-boxes-1-column">
+        <div class="member-boxes-2-column">
             <div class="member-box">
-            agddfdsafdf
+            <div class="member-box-title">Experience</div>
+			<div class="member-box-content">
+					<table class="experience-table">
+						<tr>
+							<th>Title</th>
+							<th>Type</th>
+							<th>Date From</th>
+							<th>Date To</th>
+							<th>Description</th>
+						</tr>
+						<tr ng-repeat="experience in member.experience track by $index">
+							<td>
+								<input type="text" ng-model="experience.title" placeholder="title"/>
+							</td>
+							<td>	
+								<input type="text" ng-model="experience.type" placeholder="type"/>
+							</td>
+							<td>
+								<input type="date" ng-change="formatDate(experience,0)" ng-model="experience.dateFrom" placeholder="yyyy-MM-dd"/>
+							</td>
+							<td>
+								<input type="date" ng-change="formatDate(experience,1)" ng-model="experience.dateTo" placeholder="yyyy-MM-dd"/>
+							</td>
+							<td>
+								<input type="text" ng-model="experience.description" placeholder="description"/>
+							</td>
+							<td><button ng-show="canEditTest()" class="button-remove"
+									ng-click="removeExperience(experience.$index);">Remove</button></td>
+						</tr>
+					</table>
+					<button class="button-add-experience" ng-show="canEditTest()"
+						ng-click="addExperience();">Add Experience</button>
+				</div>
+
             </div>
         </div>
         
@@ -61,33 +94,6 @@
 	</div>
 	
 	
-	<div class="skills-container">
-		<span class="skills-header">Skills:</span><br /> <span class="skill"
-			ng-repeat="skill in member.skills">{{skill}}</span>
-		<div class="experience-container">
-			<span class="experience-header">Experience:</span>
-			<table class="experience-table">
-				<tr>
-					<th>Title</th>
-					<th>Type</th>
-					<th>Date From</th>
-					<th>Date To</th>
-					<th>Description</th>
-				</tr>
-				<tr ng-repeat="experience in member.experience track by $index">
-					<td>{{experience.title}}</td>
-					<td>{{experience.type}}</td>
-					<td>{{experience.dateFrom}}</td>
-					<td>{{experience.dateTo}}</td>
-					<td>{{experience.description}}</td>
-					<td><button ng-show="canEditTest()" class="button-remove"
-							ng-click="removeExperience(experience.$index);">Remove</button></td>
-				</tr>
-			</table>
-			<button class="button-add-experience" ng-show="canEditTest()"
-				ng-click="addExperience();">Add Experience</button>
-		</div>
-	</div>
 </div>
 
 {{member}}

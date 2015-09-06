@@ -2,6 +2,34 @@
 	
 }
 
+.pm-tags input {
+	border-radius: 5px;
+	outline: 0;
+	border: 2px solid #20aa7d; 
+	padding-left: 2px;
+}
+
+.pm-tags .delete-tag {
+	color: red;
+}
+
 .pm-tags .delete-tag:hover {
 	cursor: pointer;
+	font-size: 16px;
+}
+
+.pm-tags .pm-tag {
+	background-color: #1ea277;
+	border-radius: 5px;
+	padding: 5px;
+	margin: 3px;
+}
+
+.pm-tags .pm-tag span {
+	color: #c7c7c7;
+	margin-right: 2px;
+}
+
+.pm-tags .pm-tag span:hover {
+	color: #fff;
 }
