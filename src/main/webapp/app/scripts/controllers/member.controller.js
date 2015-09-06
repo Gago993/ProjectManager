@@ -106,14 +106,14 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$rootS
         
 
 
-        $scope.formatDate = function (expirience,type) {
+        $scope.formatDate = function (experience,type) {
         	
         	if(type==0){
-        		expirience.dateFrom = new Date(expirience.dateFrom).getTime();
+        		experience.dateFrom = new Date(experience.dateFrom).getTime();
         	}else{
-        		expirience.dateTo = new Date(expirience.dateTo).getTime();
+        		experience.dateTo = new Date(experience.dateTo).getTime();
         	}
-        	console.log(expirience);
+        	console.log(experience);
         };
 
         
