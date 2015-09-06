@@ -101,7 +101,13 @@ public class MemberController {
 		String sessionId = (String)session.getAttribute("id");
 		if(sessionId != null){
 			if(jsonMember.getId().equals(sessionId)){
-				service.save(jsonMember);
+				Member current = service.findById(sessionId);
+				current.setBiography(jsonMember.getBiography());
+				current.setExperience(jsonMember.getExperience());
+				current.setFirstname(jsonMember.getFirstname());
+				current.setLastname(jsonMember.getLastname());
+				current.setSkills(jsonMember.getSkills());
+				service.save(current);
 				return new ResponseEntity<Void>(HttpStatus.OK);
 			}else{
 				return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
