@@ -13,10 +13,10 @@
     	                	<textarea type="text" value="{{project.tasks[taskId].description}}" ng-model="project.tasks[taskId].description" ng-blur="updateProject()"></textarea>
          				</div>
 	         			<div class="buttons-group pull-right" >
-						  	<button type="button" class="btn btn-default">Discussion</button>
-
+						  	<button type="button" class="btn btn-default" ng-click="taskDiscussion(project.tasks[taskId])" >Discussion</button>
+						  	<button type="button" class="btn btn-default">Assign Task</button>
 						 	<div class="task-calendar">
-				              <input type="date" class="form-control calendar-input" datepicker-popup ng-model="dt" is-open="status.opened"  />
+				              <input type="text" class="form-control calendar-input" ng-change="formatDate(project.tasks[taskId])" ng-blur="updateProject()" datepicker-popup ng-model="project.tasks[taskId].dateDue" is-open="status.opened"  />
 				              <span class="input-group-btn">
 				                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 				              </span>

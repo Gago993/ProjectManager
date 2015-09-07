@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3 class="modal-title">Task Discussion</h3>
+</div>
+<div class="modal-body">
+    
+    <form class="form-horizontal" role="form">
+        <div class="discussion-comment-container">
+        	<div class="discussion-comment" ng-repeat="comment in comments track by $index">
+        		<span class="discussion-comment-author">{{authors[$index].firstname + ' ' + authors[$index].lastname}}</span> says:<br /> <!-- Name -->
+        		<p class="discussion-comment-body">{{comment.body}}</p> <!-- Body -->
+        		<span class="discussion-comment-timestamp">{{printTimestamp(comment.timestamp)}}</span> <!-- Date -->
+        		<div class="discussion-comment-controls" ng-show="canEditComment(comment)">
+					<button class="btn" ng-click="editComment(comment)">Edit</button>
+					<button class="btn" ng-click="removeComment(comment)">Remove</button>
+				</div>
+			</div>
+		</div>
+		<hr />
+		<div class="discussion-new-comment">
+			<textarea ng-model="comment" placeholder="New comment"></textarea><br />
+			<button class="btn" ng-click="addComment()">Post</button>
+		</div>
+	</form>
+	
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="save()">Close</button>
+</div>

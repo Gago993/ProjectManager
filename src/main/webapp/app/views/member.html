@@ -70,7 +70,7 @@
 								<input type="text" ng-blur="updateMember()" ng-model="experience.type" placeholder="..."/>
 							</td>
 							<td>
-								<input class="experience-date" type="text" ng-change="formatDate(experience,0)" bg-blur="updateMember()" datepicker-popup="shortDate" is-open="opened[2*$index+0]" ng-model="experience.dateFrom" />
+								<input class="experience-date" type="text" ng-change="formatDate(experience,0)" ng-blur="updateMember()" datepicker-popup="shortDate" is-open="opened[2*$index+0]" ng-model="experience.dateFrom" />
                         		<span  class="glyphicon glyphicon-calendar" ng-click="openDatePicker($event,$index,0)"></span>
 							</td>
 							<td>

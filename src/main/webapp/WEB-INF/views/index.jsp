@@ -54,6 +54,8 @@
 <script src="app/scripts/controllers/popups/project.members.controller.js"></script>
 <script src="app/scripts/controllers/popups/project.discussion.controller.js"></script>
 <script src="app/scripts/controllers/popups/code.snippet.controller.js"></script>
+<script src="app/scripts/controllers/popups/task.discussion.controller.js"></script>
+
 
 
 

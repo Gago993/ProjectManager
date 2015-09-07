@@ -10,9 +10,9 @@
  * @description # MainCtrl Controller
  */
 
-ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state',
+ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state', '$modal',
                       'ProjectData',
-    function ($scope, $stateParams, $state, ProjectData) {
+    function ($scope, $stateParams, $state, $modal, ProjectData) {
         console.log("Task Controller reporting for duty.");
         console.log($stateParams);
 
@@ -26,6 +26,12 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state',
         $scope.createSubtask = createSubtask;
         $scope.backToProject = backToProject;
         
+        $scope.open = open;
+        $scope.formatDate = formatDate;
+        
+        $scope.animationsEnabled=true;
+        $scope.taskDiscussion = taskDiscussion;
+
         function createSubtask(){
         	$scope.project.tasks[$scope.taskId].subtasks.unshift({});
         	ProjectData.update($scope.project,function(data){
@@ -39,11 +45,39 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state',
         	$state.go("project",{projectId: $stateParams.projectId});
         }
         
-        
-        $scope.open = function($event) {
-            $scope.status.opened = true;
-          };
+	    
+	    function open($event) {
+	        $scope.status.opened = true;
+	      };
 
+      
+        function formatDate(task) {
+      	  task.dateDue = new Date(task.dateDue).getTime();
+        };
+        
+        
+        
+        function taskDiscussion(task) {
+        	var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'app/views/popups/taskDiscussion.html',
+                controller: 'TaskDiscussionCtrl',
+                resolve: {
+                	comments: function () {
+                        return task.comments;
+                    }
+                }
+            });
+            modalInstance.result.then(function(result) {
+            	task.comments = result.comments;
+            	
+            	ProjectData.update($scope.project,function(data){
+           		 	console.log(data);
+           		    $scope.project.tasks = data.tasks;
+            	});
+            });
+        }
+          
         
     }]);
 
