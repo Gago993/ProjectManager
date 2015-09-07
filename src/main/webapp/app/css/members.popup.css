@@ -1,0 +1,99 @@
+.modal-content {
+	border: 2px solid #1ea277;
+}
+.modal-footer {
+	border-top-color: #1ea277;
+}
+
+.modal-footer .btn-cancel{
+	background-color: #dddddd; 
+}
+
+.modal-header {
+	border-bottom-color: #1ea277;
+}
+
+.form-horizontal .form-group {
+	margin-top: 20px;
+}
+
+
+.member-list li img{
+	max-height: 30px;
+	max-width: 30px;
+	
+	margin-right: 7px;
+}
+
+.member-list li span{
+	font-size: 14px;
+}
+
+.member-list li button{
+	margin-left: 4px;
+}
+
+
+
+.pr-managers h3, .pr-employees h3 {
+	font-size: 18px;
+}
+
+.member-list {
+	min-height: 20px;
+	list-style: none;
+}
+
+
+.member-list li {
+	margin-top: 9px;
+	display: inline-block;
+	width: 100%;
+}
+.member-list li img {
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+
+
+.pr-employees {
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.pr-employees .pr-employee-buttons {
+	float: left;
+}
+
+.pr-employees .pr-employee-buttons button {
+	width: 51%;
+	border-radius: 5px;
+	border: 0;
+	font-size: 10px;
+}
+
+.pr-employee-buttons .btn-promote {
+	background-color: #1ea277; 
+	margin-bottom: 4px;
+}
+.pr-employee-buttons .btn-remove {
+	background-color: #ddd; 
+}
+
+
+.pr-employee {
+	float: left;
+	margin-right: 19px;
+	padding-top: 4px;
+}
+
+
+
+
+
+.control-label {
+	font-weight: normal;
+}

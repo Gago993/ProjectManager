@@ -70,11 +70,10 @@
 			<ul class="nav navbar-nav pull-left">
 				<li data-ng-show="member"><a ui-sref="dashboard">Dashboard</a></li>
 			</ul>
-			
 			<ul class="nav navbar-nav pull-right">
 				<li data-ng-show="member">
 					<a ui-sref="member({memberId: member.id})">
-						<img class="pm-navbar-member-image" ng-src="{{member.picture + '.png'}}" />
+						<img class="pm-navbar-member-image" ng-src="{{(member.picture != '' ? (member.picture + '.png') : 'app/uploads/pictures/default.png')}}"  />
 					</a>
 				</li>
 				<li data-ng-show="member"><a ng-click="logout()">Logout</a></li>

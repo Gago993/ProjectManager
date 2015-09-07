@@ -31,7 +31,8 @@ public class MemberController {
 		if(member != null){
 			member.setEmail("");
 			member.setPassword("");
-			member.setPicture("app/uploads/pictures/"+member.getPicture());
+			if(!member.getPicture().equals(""))
+				member.setPicture("app/uploads/pictures/"+member.getPicture());
 			return new ResponseEntity<Member>(member, HttpStatus.OK);
 		}else{
 			return new ResponseEntity<Member>(HttpStatus.NOT_FOUND);
@@ -89,7 +90,8 @@ public class MemberController {
 		String sessionId = (String)session.getAttribute("id");
 		if(sessionId != null){
 			Member member = service.findById(sessionId);
-			member.setPicture("app/uploads/pictures/"+member.getPicture());
+			if(!member.getPicture().equals(""))
+				member.setPicture("app/uploads/pictures/"+member.getPicture());
 			return new ResponseEntity<Member>(member, HttpStatus.OK);
 		}else{
 			return new ResponseEntity<Member>(HttpStatus.UNAUTHORIZED);

@@ -1,0 +1,49 @@
+
+div.discussion-comment-container {
+	margin: 0 auto;
+}
+
+div.discussion-comment {
+	width: 350px;
+	
+	margin: 0 auto 20px auto;
+	
+	padding: 7px;
+	
+	background-color: whitesmoke;
+	border: 1px solid #bbb;
+}
+
+div.discussion-comment span.discussion-comment-author {
+	font-weight: bold !IMPORTANT;
+}
+
+div.discussion-comment span.discussion-comment-timestamp {
+	font-size: 10px;
+	font-style: italic;
+}
+
+div.discussion-comment div.discussion-comment-controls {
+	text-align: center;
+}
+
+div.discussion-new-comment {
+	width: 350px;
+	
+	margin: 0 auto;
+}
+
+div.discussion-new-comment textarea {
+	width: 350px;
+	height: 125px;
+	
+	resize: none;
+	
+	margin: 0 auto;
+}
+
+div.discussion-new-comment button {
+	display: block;
+	
+	margin: 10px auto 0 auto;
+}
