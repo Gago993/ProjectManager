@@ -57,7 +57,9 @@ ProjectManagerApp.config([ '$stateProvider', '$urlRouterProvider',
 	      templateUrl: "app/views/project.html",
 	      controller: "ProjectCtrl",
 	      data: {
-			  css: ["app/css/project.css","app/css/angucomplete-alt.css","app/css/index.css"]
+			  css: ["app/css/project.css","app/css/angucomplete-alt.css",
+			        "app/css/index.css", "app/css/discussion.popup.css",
+			        "app/css/members.popup.css"]
 		  }  
 	})
 	

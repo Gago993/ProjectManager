@@ -7,7 +7,7 @@
         <div class="pr-managers">
         	<h3>Managers:</h3>
         	<ul class="member-list">
-        		<li ng-repeat="manager in managers track by $index"><img ng-src="{{'app/uploads/pictures/' + (manager.picture != '' ? (manager.picture + '.png') : 'default.png')}}" alt="" /><span>{{manager.firstname + ' ' + manager.lastname}}</span></li>
+        		<li ng-repeat="manager in managers track by $index"><img ng-src="{{(manager.picture != '' ? (manager.picture + '.png') : 'app/uploads/pictures/default.png')}}" alt="" /><span>{{manager.firstname + ' ' + manager.lastname}}</span></li>
         	</ul>
         </div>
         
