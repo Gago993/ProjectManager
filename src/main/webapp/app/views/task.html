@@ -12,14 +12,15 @@
 	         				<label>Description: </label>
     	                	<textarea type="text" value="{{project.tasks[taskId].description}}" ng-model="project.tasks[taskId].description" ng-blur="updateProject()"></textarea>
          				</div>
-	         			<div class="btn-group pull-right" dropdown is-open="status.isopen">
-							 <button id="single-button" type="button" class="btn btn-default" dropdown-toggle ng-disabled="disabled">
-						        Members <span class="caret"></span>
-						      </button>
-						      <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-						        <li role="menuitem"><a ng-click="newMember()">Add new member</a></li>
-						      </ul>
-							  <button type="button" class="btn btn-default">Discussion</button>
+	         			<div class="buttons-group pull-right" >
+						  	<button type="button" class="btn btn-default">Discussion</button>
+
+						 	<div class="task-calendar">
+				              <input type="date" class="form-control calendar-input" datepicker-popup ng-model="dt" is-open="status.opened"  />
+				              <span class="input-group-btn">
+				                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+				              </span>
+				            </div>
 						</div>
 	                   
 	                   <div class="clearfix"></div>

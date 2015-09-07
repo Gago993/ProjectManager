@@ -40,6 +40,11 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state',
         }
         
         
+        $scope.open = function($event) {
+            $scope.status.opened = true;
+          };
+
+        
     }]);
 
 

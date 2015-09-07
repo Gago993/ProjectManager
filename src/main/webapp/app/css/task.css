@@ -64,6 +64,25 @@
 	border: 1px dotted #20aa7d;
 }
 
+.task-calendar {
+    float: left;
+    width: 208px;
+}
+
+.task-calendar .calendar-input {
+	float: left;
+	width: 150px;
+}
+
+.task-calendar i {
+	height: 20px;
+}
+
+.buttons-group {
+	width: 34%;
+}
+
+
 
 .subtask-number {
 	border-right: 2px solid;
