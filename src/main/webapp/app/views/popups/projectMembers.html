@@ -7,23 +7,14 @@
         <div class="pr-managers">
         	<h3>Managers:</h3>
         	<ul class="member-list">
-        		<li ng-repeat="manager in managers track by $index"><img ng-src="{{(manager.picture != '' ? (manager.picture + '.png') : 'app/uploads/pictures/default.png')}}" alt="" /><span>{{manager.firstname + ' ' + manager.lastname}}</span></li>
+        		<li ng-repeat="manager in managers track by $index"><img ng-src="{{'app/uploads/pictures/' + (manager.picture != '' ? (manager.picture + '.png') : 'default.png')}}" alt="" /><span>{{manager.firstname + ' ' + manager.lastname}}</span></li>
         	</ul>
         </div>
         
         <div class="pr-employees">
         	<h3>Employees:</h3>
         	<ul class="member-list">
-        		<li ng-repeat="employee in employees track by $index">
-        			<div class="pr-employee">
-        				<img ng-src="{{'app/uploads/pictures/' + (employee.picture != '' ? (employee.picture + '.png') : 'default.png')}}" alt="" />
-        				<span>{{employee.firstname + ' ' + employee.lastname}}</span>
-        			</div>
-        			<div class="pr-employee-buttons">
-        				<button class="btn-promote" ng-click="promoteEmployee(employee)">Promote</button>
-        				<button class="btn-remove" ng-click="removeEmployee(employee)">Remove</button>
-       				</div>
-       			</li>
+        		<li ng-repeat="employee in employees track by $index"><img ng-src="{{'app/uploads/pictures/' + (employee.picture != '' ? (employee.picture + '.png') : 'default.png')}}" alt="" /><span>{{employee.firstname + ' ' + employee.lastname}}</span><button class="btn" ng-click="removeEmployee(employee)">Remove</button><button class="btn" ng-click="promoteEmployee(employee)">Promote</button></li>
         	</ul>
         </div>
         

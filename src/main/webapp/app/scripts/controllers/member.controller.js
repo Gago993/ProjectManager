@@ -82,18 +82,20 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$filte
         	fileSelector.unbind();
         	
         	fileSelector.change(function(){
-        		var file = this.files[0];
-            	var filetype = file.type;
-            	if(filetype === "image/jpg" || filetype === "image/jpeg" || filetype === "image/png"){
-            		var formData = new FormData();
-            		formData.append('picture', file);
-        			
-            		MemberData.changePicture({id: $stateParams['memberId']}, formData).$promise.then(function(member) {
-            			$scope.member = member;
-                        /*updatePicture();*/
-                    });
-            		fileSelector.replaceWith(fileSelector.clone(true));
-    			}
+        		if(this.files && this.files[0]){
+	        		var file = this.files[0];
+	            	var filetype = file.type;
+	            	if(filetype === "image/jpg" || filetype === "image/jpeg" || filetype === "image/png"){
+	            		var formData = new FormData();
+	            		formData.append('picture', file);
+	        			
+	            		MemberData.changePicture({id: $stateParams['memberId']}, formData).$promise.then(function(member) {
+	            			$scope.member = member;
+	            			fileSelector.replaceWith(fileSelector.clone(true));
+	                        /*updatePicture();*/
+	                    });
+	    			}
+        		}
         	});
         	
         	fileSelector.click();
@@ -137,15 +139,12 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$filte
         $scope.formatDate = formatDate;
         
         function formatDate(experience,type) {
-        	
         	if(type == 0){
         		experience.dateFrom = new Date(experience.dateFrom).getTime();
         	}else{
         		experience.dateTo = new Date(experience.dateTo).getTime();
         	}
         };
-
-        
         
     }]);
 

@@ -8,7 +8,7 @@
            <div class="panel panel-default pm-project-tasks">
                <div class="panel-heading">
                    <i class="fa fa-bar-chart-o fa-fw"></i> 
-                   <label>{{project.name}}</label>
+                   <h3>{{project.name}}</h3>
              		<div class="project-heading">
              		<pm-input-tags class="project-tags" add-placeholder="Add Tags..." add-tag="addTag(result)" remove-tag="removeTag(index)" initial-data="project.tags" view-name="" ></pm-input-tags>
          			
@@ -30,15 +30,7 @@
                    </div>
                </div>
                <!-- /.panel-heading -->
-               <div class="panel-body">
-	
-	   
-                <!-- Add new Task -->
-                <div class="panel panel-default pm-new-task" ng-click="createTask()" >
-                	<div class="panel-heading">
-                         <span class="glyphicon glyphicon-plus"></span> 
-                    </div>
-                 </div>      
+               <div class="panel-body">    
                 
 				<!-- Existing Task -->
 				<div class="panel panel-default project-task" ng-repeat="task in project.tasks" ng-dblclick="openTask($index)" popover="Double click to open" popover-trigger="mouseenter">
@@ -49,18 +41,26 @@
                      </div>
                 </div>
 				
+                <!-- Add new Task -->
+                <div class="panel panel-default pm-new-task" ng-click="createTask()" >
+                	<div class="panel-heading">
+                         <span class="glyphicon glyphicon-plus"></span> 
+                    </div>
+                </div>  
                
-               <div>
-               		Attachments:
-               		<input nv-file-select uploader="uploader" multiple type="file" class="form-control" id="imgFile" ng-model="vm.image" />
+               <div class = "attachments">
+               		<h3>Attachments:</h3>
+               		<ul>
+               		<li ng-repeat="attachment in project.attachments track by $index"><a ng-href = "app/uploads/attachments/{{attachment.fileLocation}}" target="_blank">{{attachment.name}}</a><button ng-show="canRemoveAttachment($index)" ng-click="removeAttachment($index)">X</button></li>
+               		</ul>
+               		<button class="btn" ng-click="uploadAttachment()">Upload Attachment</button>
+               		<input type="file" name="fu-attachment"></input>
                </div>
                
-               
-               <div>
-               		Snippet:
+               <div class = "snippets">
+               		Code Snippets:
                		<a ng-click="openCodeSnippet()">snippet</a>
                </div>
-               
                
                </div>
                <!-- /.panel-body -->

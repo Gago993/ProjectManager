@@ -11,10 +11,10 @@
  */
 
 ProjectManagerApp.controller('TaskDiscussionCtrl',['$scope', '$modalInstance',
-                        'MemberData', 'authentication', 'comments',
+                        'MemberData', 'authentication', 'managers', 'comments',
                                                 
-	function ($scope, $modalInstance, MemberData, authentication, comments) {
-		console.log("Project Discussion Controller reporting for duty.");
+	function ($scope, $modalInstance, MemberData, authentication, managers, comments) {
+		console.log("Task Discussion Controller reporting for duty.");
 		
 		var editingComment = null;
 		
@@ -44,11 +44,16 @@ ProjectManagerApp.controller('TaskDiscussionCtrl',['$scope', '$modalInstance',
 					$scope.comments.push({
 						author: $scope.member.id,
 						body: $scope.comment,
-						timestamp: new Date().getTime() / 1000
+						timestamp: Math.floor(new Date().getTime() / 1000)
 					});
+					
+					$scope.authors[$scope.comments.length - 1] = $scope.member;
+					
 					$scope.comment = "";
 				}else{
 					var index = $scope.comments.indexOf(editingComment);
+					
+					$scope.comments[index].author = $scope.member.id;
 					$scope.comments[index].body = $scope.comment;
 					
 					$scope.comment = "";
@@ -68,7 +73,7 @@ ProjectManagerApp.controller('TaskDiscussionCtrl',['$scope', '$modalInstance',
 		};
 		
 		$scope.canEditComment = function(comment){
-			return comment.author === $scope.member.id; 
+			return comment.author === $scope.member.id || managers.indexOf($scope.member.id) != -1; 
 		};
 		
 		$scope.printTimestamp = function(timestamp){

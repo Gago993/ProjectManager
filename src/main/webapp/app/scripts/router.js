@@ -57,7 +57,7 @@ ProjectManagerApp.config([ '$stateProvider', '$urlRouterProvider',
 	      templateUrl: "app/views/project.html",
 	      controller: "ProjectCtrl",
 	      data: {
-			  css: ["app/css/project.css","app/css/angucomplete-alt.css",
+	    	  css: ["app/css/project.css","app/css/angucomplete-alt.css",
 			        "app/css/index.css", "app/css/discussion.popup.css",
 			        "app/css/members.popup.css"]
 		  }  
@@ -95,15 +95,18 @@ ProjectManagerApp.config([ '$stateProvider', '$urlRouterProvider',
 .run(["$rootScope", "$state", "authentication", function($rootScope, $state, authentication) {
     // register listener to watch route changes
 	$rootScope.$on('$stateChangeStart', 
-		function(event, toState, toParams, fromState, fromParams){ 
+		function(event, toState, toParams, fromState, fromParams){
+			//TODO: fix this
 			if(toState.name == 'dashboard' || toState.name == 'project'){
-				if(!authentication.getMember()){
+				/*if(authentication.getMember()){
+					event.preventDefault();
 					$state.go('login');
-				}
+				}*/
 			}else if(toState.name == 'login'){
-				if(authentication.getMember()){
+				/*if(authentication.getMember()){
+					event.preventDefault();
 					$state.go('dashboard');
-				}
+				}*/
 			}
 		});
  }]);

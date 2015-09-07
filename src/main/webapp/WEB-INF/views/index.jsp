@@ -55,8 +55,7 @@
 <script src="app/scripts/controllers/popups/project.discussion.controller.js"></script>
 <script src="app/scripts/controllers/popups/code.snippet.controller.js"></script>
 <script src="app/scripts/controllers/popups/task.discussion.controller.js"></script>
-
-
+<script src="app/scripts/controllers/popups/task.assigned.to.controller.js"></script>
 
 
 </head>
@@ -68,14 +67,16 @@
 		
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav pull-left">
-				<li data-ng-show="member"><a ui-sref="dashboard">Dashboard</a></li>
-			</ul>
-			<ul class="nav navbar-nav pull-right">
 				<li data-ng-show="member">
 					<a ui-sref="member({memberId: member.id})">
-						<img class="pm-navbar-member-image" ng-src="{{(member.picture != '' ? (member.picture + '.png') : 'app/uploads/pictures/default.png')}}"  />
+						<img class="pm-navbar-member-image" ng-src="{{'app/uploads/pictures/' + (member.picture != '' ? (member.picture + '.png') : 'default.png')}}" />
+						{{member.firstname + " " + member.lastname}}
 					</a>
 				</li>
+				<li data-ng-show="member"><a ui-sref="dashboard">Dashboard</a></li>
+			</ul>
+			
+			<ul class="nav navbar-nav pull-right">
 				<li data-ng-show="member"><a ng-click="logout()">Logout</a></li>
 				<li data-ng-show="!member"><a ui-sref="login">Login</a></li>
 			</ul>

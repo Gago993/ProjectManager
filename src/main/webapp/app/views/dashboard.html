@@ -14,16 +14,8 @@
 				</div>
 
               <div class="panel-body">
-	   
-                <!-- Add new Task -->
-                <div class="panel panel-default pm-new-project" ng-click="createProject()" >
-                	<div class="panel-heading">
-                         <span class="glyphicon glyphicon-tasks"></span> 
-                     </div>
-                
-	                <div class="pm-create-project">+</div>
-                 </div>      
-				<!-- Existing Task -->
+	   			
+				<!-- Existing Projects -->
 				<div class="panel panel-default pm-project" ng-repeat="project in projects | filter:search" >
                      <div class="panel-heading">
                         <span class="glyphicon glyphicon-tasks"></span> 
@@ -45,6 +37,14 @@
                      <div class="pm-project-remove" ng-click="removeProject(project)">Remove</div>
                      </div>
                 </div>
+                <!-- Add new Project -->
+                <div class="panel panel-default pm-new-project" ng-click="createProject()" >
+                	<div class="panel-heading">
+                         <span class="glyphicon glyphicon-tasks"></span> 
+                     </div>
+                
+	                <div class="pm-create-project">+</div>
+                 </div>   
               </div>
               <!-- /.panel-body -->
            </div>

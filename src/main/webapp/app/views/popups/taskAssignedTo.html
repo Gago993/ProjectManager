@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h3 class="modal-title">Working on Task</h3>
+</div>
+<div class="modal-body">
+   
+    <form class="form-horizontal" role="form">
+        <div class="pr-employees">
+        	<h3>Working on Task:</h3>
+        	<ul class="member-list">
+        		<li ng-repeat="assignedTo in assignedTos track by $index"><img ng-src="{{'app/uploads/pictures/' + (assignedTo.picture != '' ? (assignedTo.picture + '.png') : 'default.png')}}" alt="" /><span>{{assignedTo.firstname + ' ' + assignedTo.lastname}}</span><button class="btn" ng-show="canRemoveEmployee(assignedTo)" ng-click="removeEmployee(assignedTo)">Remove</button></li>
+        	</ul>
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label col-sm-3">Add employee:</label>
+            <div class="col-sm-8">
+            <angucomplete-alt id="assignees"
+              placeholder="Name / Lastname..."
+              pause="400"
+              local-data="allOtherEmployees"
+              title-field="firstname,lastname"
+              search-fields="firstname,lastname"
+              minlength="2"
+              input-class="form-control form-control-small"
+			  selected-object="addEmployee"></angucomplete-alt>
+              <!--image-field="picture"--> <!-- this won't work, url is built manually -->    
+            </div>
+        </div>
+</form>
+
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="save()">Save</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

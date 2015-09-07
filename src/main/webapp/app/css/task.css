@@ -19,13 +19,18 @@
 	width: 100%;	
 }
 
-.task-title {
-	text-transform: capitalize;
+.panel-heading h3 {
+	display: inline;
+	font-weight: normal;
 }
 
 .pm-task-description {
 	float: left;
 	width: 50%;
+}
+
+.pm-task-description label {
+	font-weight: normal;
 }
 
 .back-to-project-arrow {

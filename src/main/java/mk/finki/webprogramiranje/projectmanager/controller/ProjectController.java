@@ -78,21 +78,17 @@ public class ProjectController {
 		if(sessionId != null){
 			Project project = service.findById(jsonProject.getId());
 			if(project != null){
-				if(project.getManagers().contains(sessionId)){
-					if(jsonProject.getManagers().size() == project.getManagers().size() || (jsonProject.getManagers().size() >= 1 && jsonProject.getManagers().size() == project.getManagers().size() - 1 && !jsonProject.getManagers().contains(sessionId))){
-						jsonProject = service.save(jsonProject);
-						return new ResponseEntity<Project>(jsonProject,HttpStatus.OK);
-					}else{
-						return new ResponseEntity<Project>(new Project(),HttpStatus.BAD_REQUEST);
-					}
+				if(project.getManagers().contains(sessionId) || project.getEmployees().contains(sessionId)){
+					jsonProject = service.save(jsonProject);
+					return new ResponseEntity<Project>(jsonProject, HttpStatus.OK);
 				}else{
-					return new ResponseEntity<Project>(new Project(),HttpStatus.FORBIDDEN);
+					return new ResponseEntity<Project>(HttpStatus.FORBIDDEN);
 				}
 			}else{
-				return new ResponseEntity<Project>(new Project(),HttpStatus.NOT_FOUND);
+				return new ResponseEntity<Project>(HttpStatus.NOT_FOUND);
 			}
 		}else{
-			return new ResponseEntity<Project>(new Project(),HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<Project>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 	
@@ -167,7 +163,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/{id}/attachment", method=RequestMethod.POST)
-	public ResponseEntity<Void> uploadAttachment(HttpSession session, @PathVariable String id, @RequestParam MultipartFile attachment, @RequestParam String name, @RequestParam String description){
+	public ResponseEntity<Project> uploadAttachment(HttpSession session, @PathVariable String id, @RequestParam MultipartFile attachment, @RequestParam String name, @RequestParam String description){
 		String sessionId = (String)session.getAttribute("id");
 		if(sessionId != null){
 			Project project = service.findById(id);
@@ -175,21 +171,21 @@ public class ProjectController {
 				if(project.getManagers().contains(sessionId) || project.getEmployees().contains(sessionId)){
 					if(!attachment.isEmpty()){
 						if(service.saveAttachment(project, attachment, name, description, sessionId)){
-							return new ResponseEntity<Void>(HttpStatus.OK);
+							return new ResponseEntity<Project>(project, HttpStatus.OK);
 						}else{
-							return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+							return new ResponseEntity<Project>(HttpStatus.INTERNAL_SERVER_ERROR);
 						}
 					}else{
-						return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+						return new ResponseEntity<Project>(HttpStatus.BAD_REQUEST);
 					}
 				}else{
-					return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+					return new ResponseEntity<Project>(HttpStatus.FORBIDDEN);
 				}
 			}else{
-				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<Project>(HttpStatus.NOT_FOUND);
 			}
 		}else{
-			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<Project>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 	
@@ -230,7 +226,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/{id}/snippet", method=RequestMethod.POST)
-	public ResponseEntity<Void> uploadCodeSnippet(HttpSession session, @PathVariable String id, @RequestParam String snippet, @RequestParam String extension, @RequestParam String name, @RequestParam String description){
+	public ResponseEntity<Project> uploadCodeSnippet(HttpSession session, @PathVariable String id, @RequestParam String snippet, @RequestParam String extension, @RequestParam String name, @RequestParam String description){
 		String sessionId = (String)session.getAttribute("id");
 		if(sessionId != null){
 			Project project = service.findById(id);
@@ -238,21 +234,21 @@ public class ProjectController {
 				if(project.getManagers().contains(sessionId) || project.getEmployees().contains(sessionId)){
 					if(!snippet.isEmpty()){
 						if(service.saveSnippet(project, snippet, extension, name, description, sessionId)){
-							return new ResponseEntity<Void>(HttpStatus.OK);
+							return new ResponseEntity<Project>(project, HttpStatus.OK);
 						}else{
-							return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+							return new ResponseEntity<Project>(HttpStatus.INTERNAL_SERVER_ERROR);
 						}
 					}else{
-						return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+						return new ResponseEntity<Project>(HttpStatus.BAD_REQUEST);
 					}
 				}else{
-					return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+					return new ResponseEntity<Project>(HttpStatus.FORBIDDEN);
 				}
 			}else{
-				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<Project>(HttpStatus.NOT_FOUND);
 			}
 		}else{
-			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<Project>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 	

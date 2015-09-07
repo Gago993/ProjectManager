@@ -79,6 +79,11 @@
 .panel-heading {
     border-bottom: 4px solid transparent;
 }
+
+.panel-heading h3 {
+    margin-top: 15px;
+}
+
 .project-task .panel-heading {
 	height: 45px;
 }
@@ -131,4 +136,38 @@
 	background-color: #20aa7d;
 }
 
+div.attachments {
+	clear: both;
+}
 
+div.attachments h3 {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+div.attachments ul li a {
+	display: inline-block;
+	
+	padding: 5px 8px;
+	
+	margin-top: 7px;
+	
+	background-color: whitesmoke;
+	border-radius: 5px;
+	
+	color: black;
+}
+
+div.attachments ul li a:hover {
+	text-decoration: underline;
+}
+
+div.attachments ul li button {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+div.attachments input {
+	width: 40px;
+	visibility: hidden;
+}

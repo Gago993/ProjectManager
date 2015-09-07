@@ -3,7 +3,7 @@
 		<div class="image-outer-container float-left colon-20">
 			<div class="image-container">
 				<img
-					ng-src="{{(member.picture != '' ? (member.picture + '.png') : 'app/uploads/pictures/default.png')}}"
+					ng-src="{{'app/uploads/pictures/' + (member.picture != '' ? (member.picture + '.png') : 'default.png')}}"
 					alt="profile picture" />
 			</div>
 			<hr />
@@ -39,7 +39,7 @@
                 <div class="member-box-content">
 	                <pm-input-tags 
 		            	class="" 
-		            	add-placeholder="Add Skill..." 
+		            	add-placeholder="Add Skill..."
 		            	add-tag="addSkill(result)" 
 		            	remove-tag="removeSkill(index)" 
 		            	initial-data="member.skills" 

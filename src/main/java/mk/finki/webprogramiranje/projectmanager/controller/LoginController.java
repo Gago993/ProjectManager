@@ -28,8 +28,6 @@ public class LoginController {
 			Member member = service.findByEmail(email);
 			if(member != null && member.getPassword().equals(password)){
 				LoginController.setUpSession(session, member);
-				if(!member.getPicture().equals(""))
-					member.setPicture("app/uploads/pictures/"+member.getPicture());
 				return new ResponseEntity<Member>(member, HttpStatus.OK);
 			}else{
 				return new ResponseEntity<Member>(HttpStatus.UNAUTHORIZED);

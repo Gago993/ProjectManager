@@ -31,8 +31,6 @@ public class MemberController {
 		if(member != null){
 			member.setEmail("");
 			member.setPassword("");
-			if(!member.getPicture().equals(""))
-				member.setPicture("app/uploads/pictures/"+member.getPicture());
 			return new ResponseEntity<Member>(member, HttpStatus.OK);
 		}else{
 			return new ResponseEntity<Member>(HttpStatus.NOT_FOUND);
@@ -90,8 +88,6 @@ public class MemberController {
 		String sessionId = (String)session.getAttribute("id");
 		if(sessionId != null){
 			Member member = service.findById(sessionId);
-			if(!member.getPicture().equals(""))
-				member.setPicture("app/uploads/pictures/"+member.getPicture());
 			return new ResponseEntity<Member>(member, HttpStatus.OK);
 		}else{
 			return new ResponseEntity<Member>(HttpStatus.UNAUTHORIZED);
@@ -104,11 +100,13 @@ public class MemberController {
 		if(sessionId != null){
 			if(jsonMember.getId().equals(sessionId)){
 				Member current = service.findById(sessionId);
-				current.setBiography(jsonMember.getBiography());
-				current.setExperience(jsonMember.getExperience());
+				
 				current.setFirstname(jsonMember.getFirstname());
 				current.setLastname(jsonMember.getLastname());
+				current.setBiography(jsonMember.getBiography());
+				current.setExperience(jsonMember.getExperience());
 				current.setSkills(jsonMember.getSkills());
+				
 				service.save(current);
 				return new ResponseEntity<Void>(HttpStatus.OK);
 			}else{

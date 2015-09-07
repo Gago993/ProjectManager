@@ -11,7 +11,7 @@
         		<span class="discussion-comment-timestamp">{{printTimestamp(comment.timestamp)}}</span> <!-- Date -->
         		<div class="discussion-comment-controls" ng-show="canEditComment(comment)">
 					<button class="btn" ng-click="editComment(comment)">Edit</button>
-					<button class="btn" ng-click="removeComment(comment)">Remove</button>
+					<button class="btn" ng-click="removeComment($index)">Remove</button>
 				</div>
 			</div>
 		</div>
