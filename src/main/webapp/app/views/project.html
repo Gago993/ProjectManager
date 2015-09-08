@@ -21,11 +21,6 @@
 					     </ul> -->
 						 <button type="button" class="btn btn-default" ng-click="projectDiscussion()">Discussion</button>
 					</div>
-      
-					
-					
-					
-					
                    <div class="clearfix"></div>
                    </div>
                </div>
@@ -47,21 +42,28 @@
                          <span class="glyphicon glyphicon-plus"></span> 
                     </div>
                 </div>  
-               
-               <div class = "attachments">
-               		<h3>Attachments:</h3>
-               		<ul>
-               		<li ng-repeat="attachment in project.attachments track by $index"><a ng-href = "app/uploads/attachments/{{attachment.fileLocation}}" target="_blank">{{attachment.name}}</a><button ng-show="canRemoveAttachment($index)" ng-click="removeAttachment($index)">X</button></li>
-               		</ul>
-               		<button class="btn" ng-click="uploadAttachment()">Upload Attachment</button>
-               		<input type="file" name="fu-attachment"></input>
+                
+               <div class="pm-attachments">
+	               <div class = "attachments">
+	               		<h3>Attachments:</h3>
+	               		<ul>
+	               		<li ng-repeat="attachment in project.attachments track by $index"><a ng-href = "app/uploads/attachments/{{attachment.fileLocation}}" target="_blank">{{attachment.name}}</a><button ng-show="canRemoveAttachment($index)" ng-click="removeAttachment($index)">X</button></li>
+	               		</ul>
+	               		<button class="btn" ng-click="uploadAttachment()">Upload Attachment</button>
+	               		<input type="file" name="fu-attachment"></input>
+	               </div>
+	               
+	               <div class = "snippets">
+	               		<h3>Code Snippets:</h3>
+	               		<ul>
+	               		<li ng-repeat="snippet in project.codeSnippets track by $index">
+	               			<a ng-href = "app/uploads/snippets/{{snippet.fileLocation}}" target="_blank">{{snippet.name}}</a>
+	               			<button ng-show="canRemoveAttachment($index)" ng-click="removeCodeSnippet($index)">X</button>
+	               		</li>
+	               		</ul>
+	               		<button class="btn" ng-click="createCodeSnippet()">Create Code Snippet</button>
+	               </div>
                </div>
-               
-               <div class = "snippets">
-               		Code Snippets:
-               		<a ng-click="openCodeSnippet()">snippet</a>
-               </div>
-               
                </div>
                <!-- /.panel-body -->
            </div>

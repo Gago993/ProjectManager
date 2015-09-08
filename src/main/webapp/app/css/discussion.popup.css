@@ -1,5 +1,6 @@
 div.discussion-comment-container {
 	margin: 0 auto;
+	display: inline-block;
 }
 
 div.discussion-comment {
@@ -7,11 +8,20 @@ div.discussion-comment {
 	
 	margin: 0 auto 20px auto;
 	
-	padding: 7px;
+	padding: 10px;
 	
 	background-color: whitesmoke;
 	border: 1px solid #bbb;
+	border-radius: 15px;
+	
+	float: left;
+	
 }
+
+div.discussion-comment-me {
+	float:right;
+}
+
 
 div.discussion-comment span.discussion-comment-author {
 	font-weight: bold !IMPORTANT;
@@ -38,7 +48,10 @@ div.discussion-new-comment textarea {
 	
 	resize: none;
 	
+	padding: 10px;
 	margin: 0 auto;
+	
+	border-radius: 15px;
 }
 
 div.discussion-new-comment button {

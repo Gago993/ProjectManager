@@ -1,0 +1,87 @@
+.modal-header {
+	font-size: 17px;
+}
+
+.snippet-body {
+	padding-top: 0;	
+}
+
+.snippet-code-lang {
+	margin-bottom: 20px;
+	margin-top: 10px;
+	display: inline-block;
+	width: 100%;
+}
+
+.snippet-code-lang select {
+	padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.snippet-code-lang select:focus {
+    border:1; 
+    border-color: #1abc9c;
+    outline-width: 0;
+}
+
+
+.snippet-code-lang select {
+	float: right;
+}
+
+.snippet-name {
+	
+}
+
+.snippet-name label {
+	
+}
+
+.snippet-name input {
+	border: 1px solid #ddd;
+	border-radius: 15px;
+	resize: none;
+	padding: 10px;
+}
+
+.snippet-name input:hover {
+	outline: 0;
+	border: 1px solid #20aa7d;
+}
+
+.snippet-name input:focus {
+	outline: 0;
+	border: 1px solid #20aa7d;
+}
+
+
+.snippet-description label {
+	
+}
+
+.snippet-description textarea {
+	border: 1px solid #ddd;
+	border-radius: 15px;
+	resize: none;
+	width: 100%;
+	padding: 10px;
+}
+
+.snippet-description textarea:hover {
+	outline: 0;
+	border: 1px solid #20aa7d;
+}
+
+.snippet-description textarea:focus {
+	outline: 0;
+	border: 1px solid #20aa7d;
+}
+
+
+
+

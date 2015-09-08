@@ -136,8 +136,15 @@
 	background-color: #20aa7d;
 }
 
+.pm-attachments {
+	display: block;
+}
+
+
 div.attachments {
 	clear: both;
+	float: left;
+	width: 49%;
 }
 
 div.attachments h3 {
@@ -165,9 +172,53 @@ div.attachments ul li a:hover {
 div.attachments ul li button {
 	display: inline-block;
 	margin-left: 10px;
+	border-radius: 13px;
 }
 
 div.attachments input {
 	width: 40px;
 	visibility: hidden;
 }
+
+
+
+div.snippets {
+	float: left;
+	width: 49%;
+}
+
+
+div.snippets h3 {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+div.snippets ul li a {
+	display: inline-block;
+	
+	padding: 5px 8px;
+	
+	margin-top: 7px;
+	
+	background-color: whitesmoke;
+	border-radius: 5px;
+	
+	color: black;
+}
+
+div.snippets ul li a:hover {
+	text-decoration: underline;
+}
+
+div.snippets ul li button {
+	display: inline-block;
+	margin-left: 10px;
+	border-radius: 13px;
+}
+
+div.snippets input {
+	width: 40px;
+	visibility: hidden;
+}
+
+

@@ -1,16 +1,32 @@
 <div class="modal-header">
-    <h3 class="modal-title">Code Snippet</h3>
+	<div class="snippet-name">
+	    <label>Name: </label>
+	    <input type="text" ng-model="codeSnippet.name" />
+	</div>
+	<div class="snippet-description">
+	    <label>Description: </label>
+	    <textarea type="text" ng-model="codeSnippet.description" ></textarea>
+	</div>
 </div>
-<div class="modal-body">
+<div class="modal-body snippet-body">
+   <div class="snippet-code-lang">
+   		<select
+     		ng-model="codeSnippet.extension" 
+   			ng-change="modeChanged()"
+   			>
+   			<option ng-repeat="(key, m) in modes" value="{{key}}">{{m.mode}}</option>
+	 </select>
+   </div>
    
-   <div ui-ace="aceOption" style="height:200px;" ng-model="codeSnippet.code"></div>
+     	 
    
+   <div ui-ace="aceOption" style="height:350px;" ng-model="codeSnippet.code"></div>
    
 
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="">Save</button>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="createSnippet()">Save</button>
+    <button class="btn btn-cancel" ng-click="cancel()">Cancel</button>
 </div>
 
 <style>

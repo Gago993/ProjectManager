@@ -30,7 +30,8 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state',
         //updates model changes
         $scope.updateProject = updateProject;
         $scope.openTask = openTask;
-        $scope.openCodeSnippet = openCodeSnippet;
+        $scope.createCodeSnippet = openCodeSnippet;
+        $scope.removeCodeSnippet = removeSnippet;
         $scope.uploadAttachment = uploadAttachment;
         $scope.canRemoveAttachment = canRemoveAttachment;
         $scope.removeAttachment = removeAttachment;
@@ -134,24 +135,33 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state',
         	}
         }
         
+        
+        
         function openCodeSnippet() {
-        	
-        	var snippet = {code: "public class HelloWorld {" +
-        			"public static void main(String[] args) {" +
-        			"System.out.println('Hello, World'); }}"};
         	
         	var modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'app/views/popups/codeSnippet.html',
                 controller: 'CodeSnippetCtrl',
                 resolve: {
-                	codeSnippet: function () {
-                        return snippet;
-                    },
                 }
             });
-            modalInstance.result.then(function () {
-            	
+            modalInstance.result.then(function (codeSnippet) {
+            	var formData = new FormData();
+            	formData.append('snippet', codeSnippet.code);
+        		formData.append('extension', codeSnippet.extension);
+        		formData.append('name', codeSnippet.name);
+        		formData.append('description', codeSnippet.description);
+        		
+        		ProjectData.uploadSnippet({id: $stateParams['projectId']}, formData).$promise.then(function(project) {
+        			$scope.project = project;
+                });
+            });
+        }
+        
+        function removeSnippet(index){
+        	ProjectData.removeSnippet({id: $stateParams['projectId'], index: index}).$promise.then(function() {
+    			$scope.project.codeSnippets.splice(index, 1);
             });
         }
         

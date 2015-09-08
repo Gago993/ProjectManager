@@ -18,6 +18,15 @@
             'removeAttachment': {
             	method: 'DELETE',
             	url: 'projects/:id/attachment/:index'
+            },
+            'uploadSnippet': {
+            	method: 'POST',
+            	url: 'projects/:id/snippet',
+            	headers: {'Content-Type': undefined}
+            },
+            'removeSnippet': {
+            	method: 'DELETE',
+            	url: 'projects/:id/snippet/:index'
             }
         });
     }

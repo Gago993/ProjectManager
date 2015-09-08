@@ -11,20 +11,33 @@
  */
 
 ProjectManagerApp.controller('CodeSnippetCtrl',['$scope', '$modalInstance',
-                    'codeSnippet',                             
-	function ($scope, $modalInstance, codeSnippet) {
+                                         
+	function ($scope, $modalInstance ) {
 		console.log("Code Snippet Controller reporting for duty.");
-				
-		$scope.mode = "java";
+			
+		$scope.codeSnippet = {extension : "java"};
 		
-		$scope.codeSnippet = codeSnippet;
+		$scope.modes = { java: {mode:'Java',extension:'java'},
+				javascript: {mode:'JavaScript',extension:'js'},
+				c_cpp: {mode:'C++',extension:'cpp'},
+				csharp: {mode:'C#',extension:'cs'},
+				objectivec: {mode:'objective C',extension:'m'},
+				php: {mode:'PHP',extension:'php'},
+				html: {mode:'HTML',extension:'html'},
+				css: {mode:'CSS',extension:'css'},
+				mysql: {mode:'MySQL',extension:'sql'},
+				sql: {mode:'SQL',extension:'sql'},
+		};
+		
+		
+		console.log($scope.codeSnippet);
 		$scope.aceOption = {
-			    mode: $scope.mode.toLowerCase(),
+			    mode: $scope.codeSnippet.extension.toLowerCase(),
 			    onLoad: function (_ace) {
 			 
 			      // HACK to have the ace instance in the scope...
 			      $scope.modeChanged = function () {
-			        _ace.getSession().setMode("ace/mode/" + $scope.mode.toLowerCase());
+			        _ace.getSession().setMode("ace/mode/" + $scope.codeSnippet.extension.toLowerCase());
 			      };
 			 
 			    }
@@ -33,8 +46,9 @@ ProjectManagerApp.controller('CodeSnippetCtrl',['$scope', '$modalInstance',
 		
 		
 		
-		$scope.createMember = function () {
-		    $modalInstance.close($scope.result);
+		$scope.createSnippet = function () {
+			$scope.codeSnippet.extension = $scope.modes[$scope.codeSnippet.extension].extension;
+		    $modalInstance.close($scope.codeSnippet);
 		};
 		
 		$scope.cancel = function () {
