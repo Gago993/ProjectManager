@@ -10,27 +10,23 @@
  * @description # MainCtrl Controller
  */
 
-ProjectManagerApp.controller('CodeSnippetCtrl',['$scope', '$modalInstance',
+ProjectManagerApp.controller('CodeSnippetCtrl',['$scope', '$modalInstance', 'snippet',
                                          
-	function ($scope, $modalInstance ) {
-		console.log("Code Snippet Controller reporting for duty.");
-			
-		$scope.codeSnippet = {extension : "java"};
+	function ($scope, $modalInstance, snippet) {
+		$scope.codeSnippet = snippet;
 		
 		$scope.modes = { java: {mode:'Java',extension:'java'},
 				javascript: {mode:'JavaScript',extension:'js'},
 				c_cpp: {mode:'C++',extension:'cpp'},
 				csharp: {mode:'C#',extension:'cs'},
-				objectivec: {mode:'objective C',extension:'m'},
+				objectivec: {mode:'Objective C',extension:'m'},
 				php: {mode:'PHP',extension:'php'},
 				html: {mode:'HTML',extension:'html'},
 				css: {mode:'CSS',extension:'css'},
 				mysql: {mode:'MySQL',extension:'sql'},
 				sql: {mode:'SQL',extension:'sql'},
 		};
-		
-		
-		console.log($scope.codeSnippet);
+
 		$scope.aceOption = {
 			    mode: $scope.codeSnippet.extension.toLowerCase(),
 			    onLoad: function (_ace) {
@@ -42,9 +38,6 @@ ProjectManagerApp.controller('CodeSnippetCtrl',['$scope', '$modalInstance',
 			 
 			    }
 			  };
-			
-		
-		
 		
 		$scope.createSnippet = function () {
 			$scope.codeSnippet.extension = $scope.modes[$scope.codeSnippet.extension].extension;

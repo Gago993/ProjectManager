@@ -27,57 +27,17 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$filte
         });
     
         
-        $scope.updateMember = updateMember;
-       
-        $scope.canEditTest = canEditTest;
-        
-        $scope.changePicture = changePicture;
-        $scope.removePicture = removePicture;
-        
-        $scope.addExperience = addExperience;
-        $scope.removeExperience = removeExperience;
-        
-        $scope.addSkill = addSkill;
-        $scope.removeSkill = removeSkill;
-        
-        
-        function updateMember(){
-        	
-        	/*angular.forEach($scope.member.experience, function(value, key) {
-        		console.log(value);
-    			  if(value.dateFrom && value.dateForm != 0){
-    				  value.dateFrom = new Date(value.dateFrom).getTime();}
-    			  if(value.dateTo && value.dateForm != 0){
-    				  value.dateTo = new Date(value.dateTo).getTime();}
-        		});*/
-        	
-        	MemberData.update({}, $scope.member, function(data){
-        		console.log("update member");
-        	/*	angular.forEach($scope.member.experience, function(value, key) {
-      			  if(value.dateFrom){
-      				  value.dateFrom = new Date(value.dateFrom);
-      			  }
-      			  if(value.dateTo){
-      				  value.dateTo = new Date(value.dateTo);
-      			  }
-          		});*/
+        $scope.updateMember = function(){
+        	MemberData.update({}, $scope.member, function(member){
+        		$scope.member = member;
         	});
-        }
-        
-
-        $scope.openDatePicker = function ($event,index,picker) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            console.log(2*index+picker);
-            $scope.opened[2*index+picker] = !$scope.opened[2*index+picker];
+        };
+       
+        $scope.canEditTest = function(){
+        	return $scope.member && $scope.authenticatedMember && $scope.member.id === $scope.authenticatedMember.id;
         };
         
-        
-        function canEditTest(){
-        	return $scope.member && $scope.authenticatedMember && $scope.member.id === $scope.authenticatedMember.id;
-        }
-        
-        function changePicture(){
+        $scope.changePicture = function(){
         	var fileSelector = angular.element('input[name=picture]');
         	fileSelector.unbind();
         	
@@ -101,44 +61,44 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$filte
         	fileSelector.click();
         };
         
-        
-        function removePicture(){
+        $scope.removePicture = function(){
         	MemberData.removePicture({id: $stateParams['memberId']}).$promise.then(function(member) {
         		$scope.member = member;
         		/*updatePicture();*/
             });
         };
         
-        
-        function addExperience(){
+        $scope.addExperience = function(){
         	$scope.member.experience.push({});
         	
         	updateMember();
         };
         
-        
-        function removeExperience(index){
+        $scope.removeExperience = function(index){
         	$scope.member.experience.slice(index, 1);
         	
         	updateMember();
         };
         
-        
-        function addSkill(result){
+        $scope.addSkill = function(result){
         	$scope.member.skills.push(result);
         	updateMember();
-        }
+        };
         
-        function removeSkill(index){
+        $scope.removeSkill =  function(index){
         	console.log(index);
         	$scope.member.skills.slice(index,1);
         	updateMember();
-        }
+        };
         
+        $scope.openDatePicker = function ($event,index,picker) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            console.log(2*index+picker);
+            $scope.opened[2*index+picker] = !$scope.opened[2*index+picker];
+        };
        
-        $scope.formatDate = formatDate;
-        
-        function formatDate(experience,type) {
+        $scope.formatDate = function(experience,type) {
         	if(type == 0){
         		experience.dateFrom = new Date(experience.dateFrom).getTime();
         	}else{
@@ -146,16 +106,15 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$filte
         	}
         };
         
+        /*var updatePicture = function(){
+	        if($scope.member.picture != ''){
+	        	$http.get('app/uploads/pictures/' + $scope.member.picture + '.png').then(function(response){
+	        		angular.element("div.image-container img").attr('src', response.data);
+	            }, function(response) {
+	            	angular.element("div.image-container img").attr('src', 'app/uploads/pictures/default.png');
+	            });
+	        }else{
+	        	angular.element("div.image-container img").attr('src', 'app/uploads/pictures/default.png');
+	        }
+    	};*/
     }]);
-
-/*var updatePicture = function(){
-if($scope.member.picture != ''){
-	$http.get('app/uploads/pictures/' + $scope.member.picture + '.png').then(function(response){
-		angular.element("div.image-container img").attr('src', response.data);
-    }, function(response) {
-    	angular.element("div.image-container img").attr('src', 'app/uploads/pictures/default.png');
-    });
-}else{
-	angular.element("div.image-container img").attr('src', 'app/uploads/pictures/default.png');
-}
-};*/

@@ -11,60 +11,27 @@
  */
 
 ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state', '$modal', 
-                        'ProjectData', 'FileUploader', 'authentication',
-    function ($scope, $stateParams, $state, $modal, ProjectData, FileUploader, authentication) {
-        console.log("Project Controller reporting for duty.");
-        
+                        'ProjectData', 'authentication',
+    function ($scope, $stateParams, $state, $modal, ProjectData, authentication) {
         $scope.member = authentication.getMember();
         
-        $scope.project = ProjectData.get({id: $stateParams.projectId },function(data){
-        	console.log('refresh');
-        });
+        $scope.project = ProjectData.get({id: $stateParams.projectId },function(data){});
         
-        
-        $scope.addTag = addTag;
-        $scope.removeTag = remove;
-        $scope.projectMembers = projectMembers;
-        $scope.projectDiscussion = projectDiscussion;
-        $scope.createTask = createTask;
-        //updates model changes
-        $scope.updateProject = updateProject;
-        $scope.openTask = openTask;
-        $scope.createCodeSnippet = openCodeSnippet;
-        $scope.removeCodeSnippet = removeSnippet;
-        $scope.uploadAttachment = uploadAttachment;
-        $scope.canRemoveAttachment = canRemoveAttachment;
-        $scope.removeAttachment = removeAttachment;
-        
-        $scope.uploader = new FileUploader({
-            url: '',
-            removeAfterUpload: true,
-            autoUpload: false,
-            onCompleteItem: function (fileItem, response, status, headers) {
-                console.log(response);
-                
-            }
-        });
-        
-        function addTag(result) {
-        	console.log("project",result);
+        $scope.addTag = function(result) {
         	$scope.project.tags.push(result);
         	ProjectData.update($scope.project,function(data){
-        		console.log(data);
         		$scope.project.tags = data.tags;
         	});
-        }
+        };
         
-        function remove(index) {
-        	console.log("remove",index);
+        $scope.removeTag = function(index) {
         	$scope.project.tags.splice(index, 1);
-        	ProjectData.update($scope.project,function(data){
-        		console.log(data);
-        		$scope.project.tags = data.tags;
+        	ProjectData.update($scope.project,function(project){
+        		$scope.project = project;
         	});
-        }
+        };
         
-        function projectMembers() {
+        $scope.projectMembers = function() {
         	var modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'app/views/popups/projectMembers.html',
@@ -87,9 +54,9 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state',
             		$scope.project = data;
             	});
             });
-        }
+        };
         
-        function projectDiscussion() {
+        $scope.projectDiscussion = function(){
         	var modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'app/views/popups/projectDiscussion.html',
@@ -111,61 +78,76 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state',
             		$scope.project = data;
             	});
             });
-        }
+        };
         
-        function updateProject() {
-        	ProjectData.update($scope.project,function(data){
-        		console.log("update project",data);
-        		$scope.project = data;
-        	});
-        }
-        
-        function createTask() {
+        $scope.createTask = function() {
         	var newTask = {assignedTo: [$scope.member.id]};
         	$scope.project.tasks.push(newTask);
         	ProjectData.update($scope.project,function(data){
-        		console.log("create new task",data);
         		$scope.project = data;
         	});
-        }
+        };
         
-        function openTask(index) {
-        	if($scope.project.managers.indexOf($scope.member.id) != -1 || $scope.project.tasks[index].assignedTo.indexOf($scope.member.id) != -1){
+        //updates model changes
+        $scope.updateProject = function() {
+        	ProjectData.update($scope.project,function(data){
+        		$scope.project = data;
+        	});
+        };
+        
+        $scope.openTask = function(index) {
+        	if($scope.canRemoveTask(index)){
         		$state.go("task", {taskIndex: index});
         	}
-        }
+        };
         
+        $scope.canRemoveTask = function(index) {
+        	return $scope.project.managers.indexOf($scope.member.id) != -1 || $scope.project.tasks[index].assignedTo.indexOf($scope.member.id) != -1;
+        };
         
+        $scope.removeTask = function(index) {
+        	$scope.project.tasks.splice(index, 1);
+        	ProjectData.update($scope.project, function(project){        		
+        		$scope.project = project;
+        	});
+        };
         
-        function openCodeSnippet() {
-        	
+        $scope.openCodeSnippet = function openCodeSnippet(index){
         	var modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'app/views/popups/codeSnippet.html',
                 controller: 'CodeSnippetCtrl',
                 resolve: {
+                	snippet: function(){
+                		return $scope.project.codeSnippets[index];
+                	}
                 }
             });
-            modalInstance.result.then(function (codeSnippet) {
-            	var formData = new FormData();
-            	formData.append('snippet', codeSnippet.code);
-        		formData.append('extension', codeSnippet.extension);
-        		formData.append('name', codeSnippet.name);
-        		formData.append('description', codeSnippet.description);
-        		
-        		ProjectData.uploadSnippet({id: $stateParams['projectId']}, formData).$promise.then(function(project) {
-        			$scope.project = project;
-                });
+            modalInstance.result.then(function(codeSnippet){
+            	$scope.project.codeSnippets[index] = codeSnippet;
+        		ProjectData.update($scope.project, function(project){
+            		$scope.project = project;
+            	});
             });
-        }
+        };
         
-        function removeSnippet(index){
-        	ProjectData.removeSnippet({id: $stateParams['projectId'], index: index}).$promise.then(function() {
-    			$scope.project.codeSnippets.splice(index, 1);
-            });
-        }
+        $scope.createCodeSnippet = function(){
+        	$scope.project.codeSnippets.push({extension: 'java', name: '', code: ''});
+        	$scope.openCodeSnippet($scope.project.codeSnippets.length - 1);
+        };
         
-        function uploadAttachment() {
+        $scope.canRemoveCodeSnippet = function(index){
+        	return $scope.project.managers.indexOf($scope.member.id) != -1 || $scope.project.codeSnippets[index].author == $scope.member.id; 
+        };
+        
+        $scope.removeCodeSnippet = function(index){
+    		$scope.project.codeSnippets.splice(index, 1);
+    		ProjectData.update($scope.project, function(project){
+        		$scope.project = project;
+        	});
+        };
+        
+        $scope.uploadAttachment = function() {
         	var fileSelector = angular.element('input[name=fu-attachment]');
         	fileSelector.unbind();
         	
@@ -186,18 +168,18 @@ ProjectManagerApp.controller('ProjectCtrl', ['$scope', '$stateParams', '$state',
         	});
         	
         	fileSelector.click();
-        }
+        };
         
-        function canRemoveAttachment(index){
+        $scope.canRemoveAttachment = function(index){
         	return $scope.project.managers.indexOf($scope.member.id) != -1 || $scope.project.attachments[index].author == $scope.member.id; 
-        }
+        };
         
-        function removeAttachment(index){
+        $scope.removeAttachment = function(index){
         	ProjectData.removeAttachment({id: $stateParams['projectId'], index: index}).$promise.then(function() {
     			$scope.project.attachments.splice(index, 1);
             });
-        }
-        
+        };
+
     }]);
 
 

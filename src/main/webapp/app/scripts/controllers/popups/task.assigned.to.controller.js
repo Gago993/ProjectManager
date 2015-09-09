@@ -14,8 +14,6 @@ ProjectManagerApp.controller('TaskAssignedToCtrl', ['$scope', '$modalInstance',
                         'MemberData', 'authentication', 'assignedTo', 'managers', 'employees',
                         
 	function ($scope, $modalInstance, MemberData, authentication, assignedTo, managers, employees) {
-		console.log("Task Assigned To Controller reporting for duty.");
-		
 		$scope.currentMember = authentication.getMember();
 		
 		$scope.assignedTos = new Array(assignedTo.length);

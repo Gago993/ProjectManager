@@ -14,8 +14,6 @@ ProjectManagerApp.controller('ProjectDiscussionCtrl',['$scope', '$modalInstance'
                         'MemberData', 'authentication', 'managers', 'comments',
                                                 
 	function ($scope, $modalInstance, MemberData, authentication, managers, comments) {
-		console.log("Project Discussion Controller reporting for duty.");
-		
 		var editingComment = null;
 		
 		$scope.comment = "";

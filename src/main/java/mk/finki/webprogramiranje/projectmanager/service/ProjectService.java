@@ -18,10 +18,6 @@ public interface ProjectService {
 
 	public boolean removeAttachment(Project project, int index);
 
-	public boolean saveSnippet(Project project, String snippet, String extension, String name, String description, String author);
-
-	public boolean removeSnippet(Project project, int index);
-
 	public Iterable<Project> findAll();
 	
 	public Iterable<Project> findAll(Iterable<String> ids);

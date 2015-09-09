@@ -59,7 +59,7 @@ ProjectManagerApp.config([ '$stateProvider', '$urlRouterProvider',
 	      data: {
 	    	  css: ["app/css/project.css","app/css/angucomplete-alt.css",
 			        "app/css/index.css", "app/css/discussion.popup.css",
-			        "app/css/members.popup.css", "app/css/snippet.popup.css"]
+			        "app/css/members.popup.css"]
 		  }  
 	})
 	

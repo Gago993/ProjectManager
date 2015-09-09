@@ -13,8 +13,6 @@
 ProjectManagerApp.controller('DashboardCtrl', ['ProjectData', '$scope', '$modal',
                                           
     function (ProjectData, $scope, $modal) {
-        console.log("Dashboard Controller reporting for duty.");
-        
         $scope.animationsEnabled = true;
         
         $scope.projects = ProjectData.query();

@@ -14,8 +14,6 @@ ProjectManagerApp.controller('ProjectMembersCtrl',['$scope', '$modalInstance',
                         'MemberData', 'managers', 'employees',
                                                 
 	function ($scope, $modalInstance, MemberData, managers, employees) {
-		console.log("Create Member Controller reporting for duty.");
-				
 		$scope.managers = new Array(managers.length);
 		$scope.employees = new Array(employees.length);
 		

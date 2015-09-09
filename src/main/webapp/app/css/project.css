@@ -66,10 +66,16 @@
 	font-weight: normal;
 }
 
-.project-task span {
-    border-right: 2px solid;
+.project-task .checkbox-container {
+	border-right: 2px solid;
     padding-right: 10px;
     border-color: #20aa7d;
+}
+
+.project-task button {
+	display: block;
+	float: right;
+	margin-top: -5px;
 }
 
 .project-task:hover {
@@ -97,9 +103,9 @@
 	border: 0;
 	margin-left: 5px;
 }
-.project-task .panel-heading input[type="checkbox"] {
+/*.project-task .panel-heading input[type="checkbox"] {
 	float: right;
-}
+}*/
 .project-task .panel-body textarea {
 	background-color: transparent;
 	outline: 0;
@@ -143,8 +149,6 @@
 
 div.attachments {
 	clear: both;
-	float: left;
-	width: 49%;
 }
 
 div.attachments h3 {
@@ -180,11 +184,10 @@ div.attachments input {
 	visibility: hidden;
 }
 
-
-
 div.snippets {
-	float: left;
-	width: 49%;
+	clear: both;
+	/*float: left;
+	width: 49%;*/
 }
 
 

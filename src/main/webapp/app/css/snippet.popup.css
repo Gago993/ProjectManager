@@ -21,6 +21,8 @@
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
+    width: 210px;
+    float: right;
 }
 
 .snippet-code-lang select:focus {
@@ -29,10 +31,6 @@
     outline-width: 0;
 }
 
-
-.snippet-code-lang select {
-	float: right;
-}
 
 .snippet-name {
 	
@@ -47,6 +45,8 @@
 	border-radius: 15px;
 	resize: none;
 	padding: 10px;
+	width: 210px;
+	margin-bottom: 15px;
 }
 
 .snippet-name input:hover {
@@ -59,8 +59,7 @@
 	border: 1px solid #20aa7d;
 }
 
-
-.snippet-description label {
+/*.snippet-description label {
 	
 }
 
@@ -80,8 +79,4 @@
 .snippet-description textarea:focus {
 	outline: 0;
 	border: 1px solid #20aa7d;
-}
-
-
-
-
+}*/

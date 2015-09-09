@@ -13,50 +13,42 @@
 ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state', '$modal',
                       'ProjectData',
     function ($scope, $stateParams, $state, $modal, ProjectData) {
-        console.log("Task Controller reporting for duty.");
-        console.log($stateParams);
-
         if($stateParams.taskIndex == null){
         	$state.go("project",{projectId: $stateParams.projectId});
         }
 
         $scope.taskId = $stateParams.taskIndex;
         
-        $scope.createSubtask = createSubtask;
-        $scope.backToProject = backToProject;
-        
-        $scope.open = open;
-        $scope.formatDate = formatDate;
-        
-        $scope.animationsEnabled=true;
-        $scope.taskDiscussion = taskDiscussion;
-        
-        $scope.assignedTo = assignedTo;
-        
-        $scope.formatDate = formatDate;
-        
-        function createSubtask(){
+        $scope.createSubtask = function(){
         	$scope.project.tasks[$scope.taskId].subtasks.push({});
-        	ProjectData.update($scope.project,function(data){
-        		console.log("create new subtask",data);
-        		$scope.project.tasks = data.tasks;
+        	ProjectData.update($scope.project, function(project){
+        		$scope.project = project;
         	});
-        }
-        
-        function backToProject(){
-        	console.log($stateParams.projectId);
-        	$state.go("project", {projectId: $stateParams.projectId});
-        }
-        
-	    function open($event) {
-	    	$scope.status.opened = true;
-	    };
-      
-        function formatDate(task) {
-      	  task.dateDue = new Date(task.dateDue).getTime();
         };
         
-        function taskDiscussion() {
+        $scope.backToProject = function(){
+        	console.log($stateParams.projectId);
+        	$state.go("project", {projectId: $stateParams.projectId});
+        };
+        
+        $scope.removeSubtask = function removeSubtask(index){
+        	$scope.project.tasks[$scope.taskId].subtasks.splice(index, 1);
+        	ProjectData.update($scope.project, function(project){
+        		$scope.project = project;
+        	});
+        };
+        
+        $scope.open = function($event) {
+	    	$scope.status.opened = true;
+	    };
+	    
+        $scope.formatDate = function(task) {
+      		task.dateDue = new Date(task.dateDue).getTime();
+        };
+        
+        $scope.animationsEnabled = true;
+        
+        $scope.taskDiscussion = function() {
         	var modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'app/views/popups/taskDiscussion.html',
@@ -77,9 +69,9 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state', '$
            		    $scope.project = project;
             	});
             });
-        }
+        };
         
-        function assignedTo(){
+        $scope.assignedTo = function(){
         	var modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'app/views/popups/taskAssignedTo.html',
@@ -102,11 +94,12 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state', '$
            		    $scope.project = project;
             	});
             });
-        }
+        };
         
-        function formatDate() {
+        $scope.formatDate = function() {
         	$scope.project.tasks[$scope.taskId].dateDue = Math.floor(new Date($scope.project.tasks[$scope.taskId].dateDue).getTime()); 
         };
+        
     }]);
 
 

@@ -19,6 +19,14 @@
 	width: 100%;	
 }
 
+.task-header {
+	margin-top: 10px;
+}
+
+.task-header .checkbox-container {
+	padding-right: 10px;
+}
+
 .panel-heading h3 {
 	display: inline;
 	font-weight: normal;
@@ -109,10 +117,13 @@
 	padding-left: 20px;
 	width: 450px;
 }
-.subtask-checkbox {
-	float: right;
+.subtask-checkbox-container {
+	border-right: 2px solid;
+    padding-right: 10px;
+    border-color: #20aa7d;
 }
 
-
-
-
+button.subtask-remove {
+	float: right;
+	margin-top: -5px;
+}

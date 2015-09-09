@@ -12,7 +12,5 @@
 
 ProjectManagerApp.controller('IndexCtrl', ['$http', '$scope', '$state', '$rootScope',
     function ($http, $scope, $state, $rootScope) {
-        console.log("Index Controller reporting for duty.");
-        
-        
+
 	}]);

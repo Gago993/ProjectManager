@@ -28,11 +28,12 @@
                <div class="panel-body">    
                 
 				<!-- Existing Task -->
-				<div class="panel panel-default project-task" ng-repeat="task in project.tasks" ng-dblclick="openTask($index)" popover="Double click to open" popover-trigger="mouseenter">
+				<div class="panel panel-default project-task" ng-repeat="task in project.tasks track by $index" ng-dblclick="openTask($index)" popover="Double click to open" popover-trigger="mouseenter">
                      <div class="panel-heading">
-                        <span>{{$index+1}}</span> 
+                        <!--<span>{{$index+1}}</span>-->
+                        <span class="checkbox-container"><input type="checkbox" ng-model="task.finished" ng-change="updateProject()"/></span> 
                         <input type="text" value="{{task.name}}" ng-model="task.name" ng-blur="updateProject()" />
-                  		<input type="checkbox" ng-model="task.finished" ng-change="updateProject()"/>
+                        <button class = "btn" ng-show="canRemoveTask($index)" ng-click="removeTask($index)">Remove</button>
                      </div>
                 </div>
 				
@@ -57,8 +58,8 @@
 	               		<h3>Code Snippets:</h3>
 	               		<ul>
 	               		<li ng-repeat="snippet in project.codeSnippets track by $index">
-	               			<a ng-href = "app/uploads/snippets/{{snippet.fileLocation}}" target="_blank">{{snippet.name}}</a>
-	               			<button ng-show="canRemoveAttachment($index)" ng-click="removeCodeSnippet($index)">X</button>
+	               			<a ng-click="openCodeSnippet($index)">{{snippet.name}}</a>
+	               			<button ng-show="canRemoveCodeSnippet($index)" ng-click="removeCodeSnippet($index)">X</button>
 	               		</li>
 	               		</ul>
 	               		<button class="btn" ng-click="createCodeSnippet()">Create Code Snippet</button>

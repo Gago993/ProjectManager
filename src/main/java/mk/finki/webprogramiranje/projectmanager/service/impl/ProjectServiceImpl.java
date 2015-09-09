@@ -158,47 +158,4 @@ public class ProjectServiceImpl implements ProjectService {
 			return false;
 		}
 	}
-
-	public boolean saveSnippet(Project project, String snippet, String extension, String name, String description, String author) {
-		try {
-			String filename = ServiceUtilities.getRandomString() + "." + extension;
-			
-			File file = new File(servletContext.getRealPath("/app/uploads/snippets/" + filename));
-			
-			FileOutputStream out = new FileOutputStream(file);
-			out.write(snippet.getBytes());
-			out.close();
-			
-			CodeSnippet newSnippet = new CodeSnippet();
-
-			newSnippet.setName(name);
-			newSnippet.setDescription(description);
-			newSnippet.setAuthor(author);
-			newSnippet.setFileLocation(filename);
-			
-			project.getCodeSnippets().add(newSnippet);
-			this.save(project);
-			
-			return true;
-		}catch(IOException exception){
-			return false;
-		}
-	}
-
-	public boolean removeSnippet(Project project, int index) {
-		try {
-			String filelocation = project.getCodeSnippets().get(index).getFileLocation();
-			boolean deleted = new File(servletContext.getRealPath("/app/uploads/snippets/" + filelocation)).delete();
-			if(!deleted){
-				throw new IOException("Can not delete snippet.");
-			}
-			
-			project.getCodeSnippets().remove(index);
-			this.save(project);
-			
-			return true;
-		}catch(IOException exception){
-			return false;
-		}
-	}
 }
