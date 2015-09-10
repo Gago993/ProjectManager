@@ -12,8 +12,6 @@
 
 ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$filter', '$rootScope', '$stateParams', 'MemberData', 'authentication', 
     function ($http, $scope, $state, $filter, $rootScope, $stateParams, MemberData, authentication) {
-        console.log("Member Controller reporting for duty.");
-        
         MemberData.get({id: $stateParams['memberId']}).$promise.then(function(member) {
             $scope.member = member;
             $scope.authenticatedMember = authentication.getMember(); 
@@ -21,100 +19,96 @@ ProjectManagerApp.controller('MemberCtrl', ['$http', '$scope', '$state', '$filte
             $scope.opened = [];
             
             angular.forEach($scope.member.experience, function(value, key) {
-            	$scope.opened.push(false,false);
+            	$scope.opened.push(false, false);
             });
             
+            $scope.updateMember = function(){
+            	MemberData.update({}, $scope.member, function(member){
+            		$scope.member = member;
+            	});
+            };
+           
+            $scope.canEditTest = function(){
+            	return $scope.member && $scope.authenticatedMember && $scope.member.id === $scope.authenticatedMember.id;
+            };
+            
+            $scope.changePicture = function(){
+            	var fileSelector = angular.element('input[name=picture]');
+            	fileSelector.unbind();
+            	
+            	fileSelector.change(function(){
+            		if(this.files && this.files[0]){
+    	        		var file = this.files[0];
+    	            	var filetype = file.type;
+    	            	if(filetype === "image/jpg" || filetype === "image/jpeg" || filetype === "image/png"){
+    	            		var formData = new FormData();
+    	            		formData.append('picture', file);
+    	        			
+    	            		MemberData.changePicture({id: $stateParams['memberId']}, formData).$promise.then(function(member) {
+    	            			$scope.member = member;
+    	            			fileSelector.replaceWith(fileSelector.clone(true));
+    	                        /*updatePicture();*/
+    	                    });
+    	    			}
+            		}
+            	});
+            	
+            	fileSelector.click();
+            };
+            
+            $scope.removePicture = function(){
+            	MemberData.removePicture({id: $stateParams['memberId']}).$promise.then(function(member) {
+            		$scope.member = member;
+            		/*updatePicture();*/
+                });
+            };
+            
+            $scope.addExperience = function(){
+            	$scope.member.experience.push({});
+            	
+            	$scope.updateMember();
+            };
+            
+            $scope.removeExperience = function(index){
+            	$scope.member.experience.slice(index, 1);
+            	
+            	$scope.updateMember();
+            };
+            
+            $scope.addSkill = function(result){
+            	$scope.member.skills.push(result);
+            	$scope.updateMember();
+            };
+            
+            $scope.removeSkill =  function(index){
+            	$scope.member.skills.slice(index,1);
+            	$scope.updateMember();
+            };
+            
+            $scope.openDatePicker = function ($event,index,picker) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $scope.opened[2*index+picker] = !$scope.opened[2*index+picker];
+            };
+           
+            $scope.formatDate = function(experience,type) {
+            	if(type == 0){
+            		experience.dateFrom = new Date(experience.dateFrom).getTime();
+            	}else{
+            		experience.dateTo = new Date(experience.dateTo).getTime();
+            	}
+            };
+            
+            /*var updatePicture = function(){
+    	        if($scope.member.picture != ''){
+    	        	$http.get('app/uploads/pictures/' + $scope.member.picture + '.png').then(function(response){
+    	        		angular.element("div.image-container img").attr('src', response.data);
+    	            }, function(response) {
+    	            	angular.element("div.image-container img").attr('src', 'app/uploads/pictures/default.png');
+    	            });
+    	        }else{
+    	        	angular.element("div.image-container img").attr('src', 'app/uploads/pictures/default.png');
+    	        }
+        	};*/
         });
-    
-        
-        $scope.updateMember = function(){
-        	MemberData.update({}, $scope.member, function(member){
-        		$scope.member = member;
-        	});
-        };
-       
-        $scope.canEditTest = function(){
-        	return $scope.member && $scope.authenticatedMember && $scope.member.id === $scope.authenticatedMember.id;
-        };
-        
-        $scope.changePicture = function(){
-        	var fileSelector = angular.element('input[name=picture]');
-        	fileSelector.unbind();
-        	
-        	fileSelector.change(function(){
-        		if(this.files && this.files[0]){
-	        		var file = this.files[0];
-	            	var filetype = file.type;
-	            	if(filetype === "image/jpg" || filetype === "image/jpeg" || filetype === "image/png"){
-	            		var formData = new FormData();
-	            		formData.append('picture', file);
-	        			
-	            		MemberData.changePicture({id: $stateParams['memberId']}, formData).$promise.then(function(member) {
-	            			$scope.member = member;
-	            			fileSelector.replaceWith(fileSelector.clone(true));
-	                        /*updatePicture();*/
-	                    });
-	    			}
-        		}
-        	});
-        	
-        	fileSelector.click();
-        };
-        
-        $scope.removePicture = function(){
-        	MemberData.removePicture({id: $stateParams['memberId']}).$promise.then(function(member) {
-        		$scope.member = member;
-        		/*updatePicture();*/
-            });
-        };
-        
-        $scope.addExperience = function(){
-        	$scope.member.experience.push({});
-        	
-        	updateMember();
-        };
-        
-        $scope.removeExperience = function(index){
-        	$scope.member.experience.slice(index, 1);
-        	
-        	updateMember();
-        };
-        
-        $scope.addSkill = function(result){
-        	$scope.member.skills.push(result);
-        	updateMember();
-        };
-        
-        $scope.removeSkill =  function(index){
-        	console.log(index);
-        	$scope.member.skills.slice(index,1);
-        	updateMember();
-        };
-        
-        $scope.openDatePicker = function ($event,index,picker) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            console.log(2*index+picker);
-            $scope.opened[2*index+picker] = !$scope.opened[2*index+picker];
-        };
-       
-        $scope.formatDate = function(experience,type) {
-        	if(type == 0){
-        		experience.dateFrom = new Date(experience.dateFrom).getTime();
-        	}else{
-        		experience.dateTo = new Date(experience.dateTo).getTime();
-        	}
-        };
-        
-        /*var updatePicture = function(){
-	        if($scope.member.picture != ''){
-	        	$http.get('app/uploads/pictures/' + $scope.member.picture + '.png').then(function(response){
-	        		angular.element("div.image-container img").attr('src', response.data);
-	            }, function(response) {
-	            	angular.element("div.image-container img").attr('src', 'app/uploads/pictures/default.png');
-	            });
-	        }else{
-	        	angular.element("div.image-container img").attr('src', 'app/uploads/pictures/default.png');
-	        }
-    	};*/
     }]);

@@ -4,17 +4,17 @@
                <div class="panel-heading">
 				   <span class="back-to-project-arrow glyphicon glyphicon-circle-arrow-left" ng-click="backToProject()"></span><br />
 				   <div class="task-header">
-                   		<span class="checkbox-container"><input type="checkbox" /></span><h3>{{project.tasks[taskId].name}}</h3>
+                   		<span class="checkbox-container"><input type="checkbox" ng-model="task.finished" ng-change="updateProject()" /></span><h3>{{task.name}}</h3>
                    </div>
              	   <div class="project-heading">
          				<div class="pm-task-description">
-    	                	<textarea type="text" value="{{project.tasks[taskId].description}}" ng-model="project.tasks[taskId].description" ng-blur="updateProject()"></textarea>
+    	                	<textarea type="text" value="{{task.description}}" ng-model="task.description" ng-blur="updateProject()"></textarea>
          				</div>
 	         			<div class="btn-group pull-right" >
 	         				<button type="button" class="btn btn-default" ng-click="assignedTo()">Members</button>
 						  	<button type="button" class="btn btn-default" ng-click="taskDiscussion()">Discussion</button>
 						 	<div class="task-calendar">
-				              <input type="text" class="form-control calendar-input" ng-change="formatDate()" ng-blur="updateProject()" datepicker-popup="shortDate" ng-model="project.tasks[taskId].dateDue" is-open="status.opened" />
+				              <input type="text" class="form-control calendar-input" ng-change="formatDate()" ng-blur="updateProject()" datepicker-popup="shortDate" ng-model="task.dateDue" is-open="status.opened" />
 				              <span class="input-group-btn">
 				                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 				              </span>
@@ -28,9 +28,9 @@
                <div class="panel-body">
 	            
 				<!-- Existing Subtask -->
-				<div class="panel panel-default task-subtasks" ng-repeat="subtask in project.tasks[taskId].subtasks" >
+				<div class="panel panel-default task-subtasks" ng-repeat="subtask in task.subtasks" >
                      <div class="panel-heading">
-                        <span class="subtask-checkbox-container"><input class="subtask-checkbox" type="checkbox" ng-model="subtask.finished" ng-change="updateProject()"/></span>
+                        <span class="subtask-checkbox-container"><input class="subtask-checkbox" type="checkbox" ng-model="subtask.finished" ng-change="updateProject()" /></span>
                         <input class="subtask-name" placeholder="Subtask Name" type="text" value="{{subtask.name}}" ng-model="subtask.name" ng-blur="updateProject()" />
                   		<input class="subtask-description" placeholder="Subtask Description" type="text" value="{{subtask.description}}" ng-model="subtask.description" ng-blur="updateProject()" />
                   		<button class = "btn subtask-remove" ng-click="removeSubtask($index)">Remove</button>

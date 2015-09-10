@@ -6,7 +6,15 @@
 	<div class="snippet-code-lang">
 		<label>Language:</label>
    		<select ng-model="codeSnippet.extension" ng-change="modeChanged()">
-   			<option ng-repeat="(key, m) in modes" value="{{key}}">{{m.mode}}</option>
+   			<option value = "java" ng-attr-selected = "{{codeSnippet.extension == key}}">Java</option>
+   			<option value = "javascript" ng-attr-selected = "{{codeSnippet.extension == 'javascript'}}">JavaScript</option>
+   			<option value = "c_cpp" ng-attr-selected = "{{codeSnippet.extension == 'c_cpp'}}">C++</option>
+   			<option value = "csharp" ng-attr-selected = "{{codeSnippet.extension == 'csharp'}}">C#</option>
+   			<option value = "objectivec" ng-attr-selected = "{{codeSnippet.extension == 'objectivec'}}">Objective C</option>
+   			<option value = "php" ng-attr-selected = "{{codeSnippet.extension == 'php'}}">PHP</option>
+   			<option value = "html" ng-attr-selected = "{{codeSnippet.extension == 'html'}}">HTML</option>
+   			<option value = "css" ng-attr-selected = "{{codeSnippet.extension == 'css'}}">CSS</option>
+   			<option value = "sql" ng-attr-selected = "{{codeSnippet.extension == 'sql'}}">SQL</option>
 		</select>
     </div>
 </div>

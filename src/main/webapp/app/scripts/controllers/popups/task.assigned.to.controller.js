@@ -18,28 +18,25 @@ ProjectManagerApp.controller('TaskAssignedToCtrl', ['$scope', '$modalInstance',
 		
 		$scope.assignedTos = new Array(assignedTo.length);
 		$scope.allOtherEmployees = new Array(managers.length + employees.length - assignedTo.length);
+
+		for(var i = 0, len = assignedTo.length; i < len; i++){
+			(function(i){
+				MemberData.get({id: assignedTo[i]}).$promise.then(function(member){
+		            $scope.assignedTos[i] = member;
+		        });
+			})(i);
+		}
 		
-		var init = function(){
-			for(var i = 0, len = assignedTo.length; i < len; i++){
-				(function(i){
-					MemberData.get({id: assignedTo[i]}).$promise.then(function(member){
-			            $scope.assignedTos[i] = member;
+		var employeesTotal = managers.slice().concat(employees);
+		for(var i = 0, len = employeesTotal.length; i < len; i++){
+			if(managers.indexOf(employeesTotal[i].id) == -1 && employees.indexOf(employeesTotal[i].id) == -1){
+				(function(i) {
+					MemberData.get({id: employeesTotal[i]}).$promise.then(function(employee) {
+						$scope.allOtherEmployees[i] = employee;
 			        });
 				})(i);
 			}
-			
-			var employeesTotal = managers.slice().concat(employees);
-			for(var i = 0, len = employeesTotal.length; i < len; i++){
-				if(managers.indexOf(employeesTotal[i].id) == -1 && employees.indexOf(employeesTotal[i].id) == -1){
-					(function(i) {
-						MemberData.get({id: employeesTotal[i]}).$promise.then(function(employee) {
-							$scope.allOtherEmployees[i] = employee;
-				        });
-					})(i);
-				}
-			}
-		};
-		init();
+		}
 		
 		function getAssignedToIds(){
 			var assignedToIds = [];
@@ -84,6 +81,6 @@ ProjectManagerApp.controller('TaskAssignedToCtrl', ['$scope', '$modalInstance',
 			}else{
 				return false;
 			}
-		}
+		};
 }]);
 

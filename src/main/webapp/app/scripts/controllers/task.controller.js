@@ -16,23 +16,22 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state', '$
         if($stateParams.taskIndex == null){
         	$state.go("project",{projectId: $stateParams.projectId});
         }
-
-        $scope.taskId = $stateParams.taskIndex;
+        
+        $scope.task = $scope.project.tasks[$stateParams.taskIndex];
         
         $scope.createSubtask = function(){
-        	$scope.project.tasks[$scope.taskId].subtasks.push({});
+        	$scope.task.subtasks.push({});
         	ProjectData.update($scope.project, function(project){
         		$scope.project = project;
         	});
         };
         
         $scope.backToProject = function(){
-        	console.log($stateParams.projectId);
         	$state.go("project", {projectId: $stateParams.projectId});
         };
         
         $scope.removeSubtask = function removeSubtask(index){
-        	$scope.project.tasks[$scope.taskId].subtasks.splice(index, 1);
+        	$scope.task.subtasks.splice(index, 1);
         	ProjectData.update($scope.project, function(project){
         		$scope.project = project;
         	});
@@ -58,12 +57,12 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state', '$
                 		return $scope.project.managers;
                 	},
                 	comments: function () {
-                        return $scope.project.tasks[$scope.taskId].comments;
+                        return $scope.task.comments;
                     }
                 }
             });
             modalInstance.result.then(function(result) {
-            	$scope.project.tasks[$scope.taskId].comments = result.comments;
+            	$scope.task.comments = result.comments;
             	
             	ProjectData.update($scope.project, function(project){
            		    $scope.project = project;
@@ -78,7 +77,7 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state', '$
                 controller: 'TaskAssignedToCtrl',
                 resolve: {
                 	assignedTo: function(){
-                		return $scope.project.tasks[$scope.taskId].assignedTo;
+                		return $scope.task.assignedTo;
                 	},
                 	managers: function () {
                         return $scope.project.managers;
@@ -89,7 +88,7 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state', '$
                 }
             });
             modalInstance.result.then(function(result) {
-            	$scope.project.tasks[$scope.taskId].assignedTo = result.assignedTo;
+            	$scope.task.assignedTo = result.assignedTo;
             	ProjectData.update($scope.project, function(project){
            		    $scope.project = project;
             	});
@@ -97,7 +96,7 @@ ProjectManagerApp.controller('TaskCtrl', ['$scope', '$stateParams', '$state', '$
         };
         
         $scope.formatDate = function() {
-        	$scope.project.tasks[$scope.taskId].dateDue = Math.floor(new Date($scope.project.tasks[$scope.taskId].dateDue).getTime()); 
+        	$scope.task.dateDue = Math.floor(new Date($scope.task.dateDue).getTime()); 
         };
         
     }]);

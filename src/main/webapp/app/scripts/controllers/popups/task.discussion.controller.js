@@ -21,17 +21,14 @@ ProjectManagerApp.controller('TaskDiscussionCtrl',['$scope', '$modalInstance',
 		$scope.comments = comments;
 		$scope.authors = new Array(comments.length);
 		
-		var init = function(){
-			for(var i = 0, len = comments.length; i < len; i++){
-				(function(i){
-					MemberData.get({id: comments[i].author}).$promise.then(function(member) {
-			            $scope.authors[i] = member;
-			        });
-				})(i);
-			}
-		};
-		init();
-
+		for(var i = 0, len = comments.length; i < len; i++){
+			(function(i){
+				MemberData.get({id: comments[i].author}).$promise.then(function(member) {
+		            $scope.authors[i] = member;
+		        });
+			})(i);
+		}
+		
 		$scope.save = function(){
 			$modalInstance.close({comments: $scope.comments});
 		};

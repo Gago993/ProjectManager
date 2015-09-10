@@ -17,24 +17,21 @@ ProjectManagerApp.controller('ProjectMembersCtrl',['$scope', '$modalInstance',
 		$scope.managers = new Array(managers.length);
 		$scope.employees = new Array(employees.length);
 		
-		var init = function(){
-			for(var i = 0, len = managers.length; i < len; i++){
-				(function(i) {
-					MemberData.get({id: managers[i]}).$promise.then(function(manager) {
-			            $scope.managers[i] = manager;
-			        });
-				})(i);
-			}
-			
-			for(var i = 0, len = employees.length; i < len; i++){
-				(function(i) {
-					MemberData.get({id: employees[i]}).$promise.then(function(employee) {
-			            $scope.employees[i] = employee;
-			        });
-				})(i);
-			}
-		};
-		init();
+		for(var i = 0, len = managers.length; i < len; i++){
+			(function(i) {
+				MemberData.get({id: managers[i]}).$promise.then(function(manager) {
+		            $scope.managers[i] = manager;
+		        });
+			})(i);
+		}
+		
+		for(var i = 0, len = employees.length; i < len; i++){
+			(function(i) {
+				MemberData.get({id: employees[i]}).$promise.then(function(employee) {
+		            $scope.employees[i] = employee;
+		        });
+			})(i);
+		}
 		
 		function getManagersIds(){
 			var managersIds = [];
@@ -50,7 +47,6 @@ ProjectManagerApp.controller('ProjectMembersCtrl',['$scope', '$modalInstance',
 			var employeeIds = [];
 			
 			for(var i = 0, len = $scope.employees.length; i < len; i++){
-				console.log($scope.employees[i]);
 				employeeIds.push($scope.employees[i].id);
 			}
 			
