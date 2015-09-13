@@ -1,6 +1,5 @@
 div.discussion-comment-container {
 	margin: 0 auto;
-	display: inline-block;
 }
 
 div.discussion-comment {
@@ -14,14 +13,12 @@ div.discussion-comment {
 	border: 1px solid #bbb;
 	border-radius: 15px;
 	
-	float: left;
-	
+	/*float: left;*/
 }
 
 div.discussion-comment-me {
-	float:right;
+	/*float:right;*/
 }
-
 
 div.discussion-comment span.discussion-comment-author {
 	font-weight: bold !IMPORTANT;

@@ -4,7 +4,7 @@
 <div class="modal-body">
     <form class="form-horizontal" role="form">
         <div class="discussion-comment-container">
-        	<div class="discussion-comment" ng-class="{'discussion-comment-me' : (member.id != comment.author)}" ng-repeat="comment in comments track by $index">
+        	<div class="discussion-comment" ng-repeat="comment in comments track by $index">
         		<span class="discussion-comment-author">{{authors[$index].firstname + ' ' + authors[$index].lastname}}</span> says:<br /> <!-- Name -->
         		<p class="discussion-comment-body">{{comment.body}}</p> <!-- Body -->
         		<span class="discussion-comment-timestamp">{{printTimestamp(comment.timestamp)}}</span> <!-- Date -->
